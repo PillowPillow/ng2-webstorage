@@ -1,0 +1,45 @@
+{
+  "name": "ng2-webstorage",
+  "version": "0.0.0",
+  "description": "angular2 webstorage manager",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/compiler": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "es6-shim": "^0.35.1",
+    "es6-symbol": "^3.0.2",
+    "es7-reflect-metadata": "^1.6.0",
+    "rxjs": "^5.0.0-beta.8",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.10.2",
+    "tslint-loader": "^2.1.4",
+    "typescript": "^1.8.10",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "zone.js": "^0.6.12"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --content-base example --hot --progress -c --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PillowPillow/ng2-webstorage.git"
+  },
+  "keywords": [
+    "angular2",
+    "ng2",
+    "localstorage",
+    "sessionStorage"
+  ],
+  "author": "Nicolas Gaignoux <https://github.com/PillowPillow>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PillowPillow/ng2-webstorage/issues"
+  },
+  "homepage": "https://github.com/PillowPillow/ng2-webstorage#readme"
+}
