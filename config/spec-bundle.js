@@ -22,7 +22,7 @@ testing.setBaseTestProviders(
 
 Object.assign(global, testing);
 
-var context = require.context('../src', true, /\.spec\.ts/);
+var context = require.context('../lib', true, /\.spec\.ts/);
 
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);

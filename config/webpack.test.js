@@ -3,14 +3,14 @@ const common = require('./webpack.common');
 
 module.exports = wmerge(common, {
 	resolve: {
-		root: './src'
+		root: './lib'
 	},
 
 	module: {
 		postLoaders: [
 			{
 				test: /\.(js|ts)$/, loader: 'istanbul-instrumenter-loader',
-				include: './src',
+				include: './lib',
 				exclude: [
 					/\.(e2e|spec)\.ts$/,
 					/node_modules/

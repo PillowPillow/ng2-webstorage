@@ -3,16 +3,15 @@
   "version": "0.0.0",
   "description": "angular2 webstorage manager",
   "main": "index.js",
-  "dependencies": {
-    "ts-helpers": "^1.1.1",
-    "webpack-merge": "^0.13.0"
-  },
   "devDependencies": {
+    "ts-helpers": "^1.1.1",
+    "webpack-merge": "^0.13.0",
     "@angular/common": "^2.0.0-rc.1",
     "@angular/compiler": "^2.0.0-rc.1",
     "@angular/core": "^2.0.0-rc.1",
     "@angular/platform-browser": "2.0.0-rc.1",
     "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "compression-webpack-plugin": "^0.3.1",
     "es6-shim": "^0.35.1",
     "es6-symbol": "^3.0.2",
     "es7-reflect-metadata": "^1.6.0",
@@ -46,6 +45,7 @@
     "url": "git+https://github.com/PillowPillow/ng2-webstorage.git"
   },
   "keywords": [
+    "typescript",
     "angular2",
     "ng2",
     "localstorage",
