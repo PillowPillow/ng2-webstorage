@@ -8,6 +8,9 @@ export class KeyStorageHelper {
 	}
 
 	static genKey(raw:string):string {
+		if(typeof raw !== 'string')
+			throw Error('attempt to generate a storage key with a non string value');
+
 		return `${LIB_KEY}|${raw.toString().toLowerCase()}`;
 	}
 }
