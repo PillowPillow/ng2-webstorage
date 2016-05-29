@@ -32,6 +32,11 @@ describe('helper:keyStorage', () => {
 
 	describe('retrieveKeysFromStorage', () => {
 
+		beforeAll(() => {
+			sessionStorage.clear();
+			localStorage.clear();
+		});
+
 		it('should\'nt throw any error', () => {
 
 			expect(() => KeyStorageHelper.retrieveKeysFromStorage(sessionStorage)).not.toThrow();

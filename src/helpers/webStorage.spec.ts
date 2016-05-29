@@ -152,7 +152,7 @@ describe('helper:webStorage', () => {
 
 		});
 
-		it('should emit an event to the subscribers', () => {
+		it('should emit an event to the subscribers', (done) => {
 
 			let event = StorageObserverHelper.observe(STORAGE.local, key1),
 				result = null;
