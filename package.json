@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "description": "angular2 webstorage manager",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "ts-helpers": "^1.1.1",
+    "webpack-merge": "^0.13.0"
+  },
   "devDependencies": {
     "@angular/common": "^2.0.0-rc.1",
     "@angular/compiler": "^2.0.0-rc.1",
@@ -13,6 +16,16 @@
     "es6-shim": "^0.35.1",
     "es6-symbol": "^3.0.2",
     "es7-reflect-metadata": "^1.6.0",
+    "istanbul-instrumenter-loader": "^0.2.0",
+    "jasmine-core": "2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.0.3",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "remap-istanbul": "^0.6.4",
     "rxjs": "^5.0.0-beta.8",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
@@ -24,7 +37,9 @@
     "zone.js": "^0.6.12"
   },
   "scripts": {
-    "dev": "webpack-dev-server --content-base example --hot --progress -c --config webpack.config.js"
+    "dev": "webpack-dev-server --content-base example --hot --progress -c --config config/webpack.dev.js",
+    "test": "karma start",
+    "test:watch": "npm run test -- --auto-watch --no-single-run"
   },
   "repository": {
     "type": "git",
