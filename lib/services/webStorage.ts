@@ -11,12 +11,12 @@ export class WebStorage implements IStorage {
 		this.sType = sType;
 	}
 
-	public store(raw:string, value:string):void {
+	public store(raw:string, value:any):void {
 		let sKey = KeyStorageHelper.genKey(raw);
 		WebStorageHelper.store(this.sType, sKey, value);
 	}
 
-	public retrieve(raw:string):string {
+	public retrieve(raw:string):any {
 		let sKey = KeyStorageHelper.genKey(raw);
 		return WebStorageHelper.retrieve(this.sType, sKey);
 	}

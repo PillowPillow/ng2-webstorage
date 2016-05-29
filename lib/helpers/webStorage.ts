@@ -7,8 +7,8 @@ export class WebStorageHelper {
 
 	static cached = {[STORAGE.local]: {}, [STORAGE.session]: {}};
 
-	static store(sType:STORAGE, sKey:string, value:string):void {
-		this.getWStorage(sType).setItem(sKey, value);
+	static store(sType:STORAGE, sKey:string, value:any):void {
+		this.getWStorage(sType).setItem(sKey, JSON.stringify(value));
 		this.cached[sType][sKey] = value;
 		StorageObserverHelper.emit(sType, sKey, value);
 	}
@@ -16,7 +16,15 @@ export class WebStorageHelper {
 	static retrieve(sType:STORAGE, sKey:string):string {
 		if(sKey in this.cached[sType])
 			return this.cached[sType][sKey];
-		return this.cached[sType][sKey] = this.getWStorage(sType).getItem(sKey);
+
+		let data = null;
+		try {
+			data = JSON.parse(this.getWStorage(sType).getItem(sKey));
+		} catch(err) {
+			console.error(`invalid value for ${sKey}`);
+		}
+
+		return this.cached[sType][sKey] = data;
 	}
 
 	static clearAll(sType:STORAGE):void {

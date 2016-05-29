@@ -16,7 +16,7 @@ describe('helper:webStorage', () => {
 			let value = 'session value';
 
 			WebStorageHelper.store(STORAGE.session, 'webStorage:session:key', value);
-			expect(sessionStorage.getItem('webStorage:session:key')).toEqual(value)
+			expect(sessionStorage.getItem('webStorage:session:key')).toEqual(JSON.stringify(value))
 
 		});
 
@@ -25,7 +25,7 @@ describe('helper:webStorage', () => {
 			let value = 'local value';
 
 			WebStorageHelper.store(STORAGE.local, 'webStorage:local:key', value);
-			expect(localStorage.getItem('webStorage:local:key')).toEqual(value)
+			expect(localStorage.getItem('webStorage:local:key')).toEqual(JSON.stringify(value))
 
 		});
 
@@ -56,7 +56,7 @@ describe('helper:webStorage', () => {
 		it('should retrieve a value from the localStorage', () => {
 
 			let value = 'value', key = 'webStorage:local:key2';
-			localStorage.setItem(key, value);
+			localStorage.setItem(key, JSON.stringify(value));
 			expect(WebStorageHelper.retrieve(STORAGE.local, key)).toEqual(value);
 
 		});
@@ -64,7 +64,7 @@ describe('helper:webStorage', () => {
 		it('should retrieve a value from the sessionStorage', () => {
 
 			let value = 'value', key = 'webStorage:session:key2';
-			sessionStorage.setItem(key, value);
+			sessionStorage.setItem(key, JSON.stringify(value));
 			expect(WebStorageHelper.retrieve(STORAGE.session, key)).toEqual(value);
 
 		});
@@ -72,7 +72,7 @@ describe('helper:webStorage', () => {
 		it('should retrieve a value from the cache', () => {
 
 			let value = 'value', key = 'webStorage:session:key2';
-			sessionStorage.setItem(key, 'other value');
+			sessionStorage.setItem(key, JSON.stringify('other value'));
 			expect(WebStorageHelper.retrieve(STORAGE.session, key)).toEqual(value);
 
 		});
