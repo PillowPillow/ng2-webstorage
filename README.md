@@ -287,6 +287,8 @@ export class FooComponent {
 `npm install`
 
 *Start the unit tests:* `npm run test`
+
 *Start the unit tests:* `npm run test:watch`
+
 *Start the dev server:* `npm run dev` then go to *http://localhost:8080/webpack-dev-server/index.html*
 
