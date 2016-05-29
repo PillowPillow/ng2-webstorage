@@ -22,15 +22,13 @@ export class WebStorage implements IStorage {
 	}
 
 	public clear(raw?:string):void {
-		if(raw)
-			WebStorageHelper.clear(this.sType, KeyStorageHelper.genKey(raw));
-		else
-			WebStorageHelper.clearAll(this.sType);
+		if(raw) WebStorageHelper.clear(this.sType, KeyStorageHelper.genKey(raw));
+		else WebStorageHelper.clearAll(this.sType);
 	}
 
 	public observe(raw:string):EventEmitter {
 		let sKey = KeyStorageHelper.genKey(raw);
-		return StorageObserverHelper.observe(this.sType, sKey)
+		return StorageObserverHelper.observe(this.sType, sKey);
 	}
 
 }

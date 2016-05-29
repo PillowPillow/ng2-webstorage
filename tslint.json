@@ -32,9 +32,7 @@
 		"one-line": [
 			true,
 			"check-open-brace",
-			"check-catch",
-			"check-else",
-			"check-whitespace"
+			"check-catch"
 		],
 		"quotemark": [
 			true,
@@ -46,12 +44,6 @@
 			"allow-null-check"
 		],
 		"variable-name": false,
-		"whitespace": [
-			true,
-			"check-branch",
-			"check-decl",
-			"check-operator",
-			"check-separator"
-		]
+		"whitespace": [true]
 	}
 }

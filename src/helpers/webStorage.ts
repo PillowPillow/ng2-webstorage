@@ -36,16 +36,18 @@ export class WebStorageHelper {
 	}
 
 	static getWStorage(sType:STORAGE):IWebStorage {
+		let storage;
 		switch(sType) {
 			case STORAGE.local:
-				return localStorage;
+				storage = localStorage;
 				break;
 			case STORAGE.session:
-				return sessionStorage;
+				storage = sessionStorage;
 				break;
 			default:
 				throw Error('invalid storage type');
 		}
+		return storage;
 	}
 
 }
