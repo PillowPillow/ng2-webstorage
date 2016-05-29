@@ -4,8 +4,8 @@ import {StorageObserverHelper} from './storageObserver';
 import {KeyStorageHelper} from './keyStorage';
 
 export class WebStorageHelper {
-	
-	static cached = {[STORAGE.local]:{}, [STORAGE.session]:{}};
+
+	static cached = {[STORAGE.local]: {}, [STORAGE.session]: {}};
 
 	static store(sType:STORAGE, sKey:string, value:string):void {
 		this.getWStorage(sType).setItem(sKey, value);
@@ -32,6 +32,7 @@ export class WebStorageHelper {
 	static clear(sType:STORAGE, sKey:string):void {
 		this.getWStorage(sType).removeItem(sKey);
 		delete this.cached[sType][sKey];
+		StorageObserverHelper.emit(sType, sKey, null);
 	}
 
 	static getWStorage(sType:STORAGE):IWebStorage {
