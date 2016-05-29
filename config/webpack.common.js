@@ -1,21 +1,11 @@
-var webpack = require('webpack');
-var HMR = process.argv.join('').indexOf('hot') > -1;
+const webpack = require('webpack');
 
 module.exports = {
 	devtool: 'eval',
 	debug: false,
 	cache: true,
-	entry: [
-		'webpack/hot/dev-server',
-		'./example/app'
-	],
-	output: {
-		publicPath: '/',
-		filename: 'app.js',
-		chunkFilename: '[chunkhash].bundle.js'
-	},
 	resolve: {
-		extensions: ['', '.ts', '.async.ts', '.js']
+		extensions: ['', '.ts', '.js']
 	},
 	module: {
 		preLoaders: [
