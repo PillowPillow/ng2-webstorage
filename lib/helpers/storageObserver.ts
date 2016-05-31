@@ -5,7 +5,7 @@ export class StorageObserverHelper {
 
 	static observers:Object = {};
 
-	static observe(sType:STORAGE, sKey:string):EventEmitter {
+	static observe(sType:STORAGE, sKey:string):EventEmitter<any> {
 		let oKey = this.genObserverKey(sType, sKey);
 		if(oKey in this.observers)
 			return this.observers[oKey];

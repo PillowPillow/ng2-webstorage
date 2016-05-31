@@ -3,7 +3,7 @@ import {KeyStorageHelper, WebStorageHelper, StorageObserverHelper} from '../help
 import {IStorage} from '../interfaces';
 import {STORAGE} from '../enums/storage';
 
-export class WebStorage implements IStorage {
+export class WebStorageService implements IStorage {
 
 	private sType:STORAGE = null;
 
@@ -26,7 +26,7 @@ export class WebStorage implements IStorage {
 		else WebStorageHelper.clearAll(this.sType);
 	}
 
-	public observe(raw:string):EventEmitter {
+	public observe(raw:string):EventEmitter<any> {
 		let sKey = KeyStorageHelper.genKey(raw);
 		return StorageObserverHelper.observe(this.sType, sKey);
 	}
