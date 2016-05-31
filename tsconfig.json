@@ -9,13 +9,9 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true
 	},
-	"filesGlob": [
-		"./app/**/*.ts",
-		"!./node_modules/**/*.ts",
-		"./node_modules/@angular/**/*.d.ts"
-	],
-	"exclude": [
-		"node_modules"
+	"files": [
+		"node_modules/typescript/lib/lib.es6.d.ts",
+		"lib/app.ts"
 	],
 	"compileOnSave": false,
 	"buildOnSave": false,

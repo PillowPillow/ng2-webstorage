@@ -1,8 +1,7 @@
-import {LocalStorageService, SessionStorageService} from './services';
-
-export * from './decorators';
-export * from './interfaces';
-export * from './services';
+import {LocalStorageService, SessionStorageService} from './services/index';
+export * from './decorators/index';
+export * from './interfaces/index';
+export * from './services/index';
 
 export const NG2_WEBSTORAGE = [
 	SessionStorageService,

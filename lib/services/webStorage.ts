@@ -1,5 +1,5 @@
 import {EventEmitter} from '@angular/core';
-import {KeyStorageHelper, WebStorageHelper, StorageObserverHelper} from '../helpers';
+import {KeyStorageHelper, WebStorageHelper, StorageObserverHelper} from '../helpers/index';
 import {IStorage} from '../interfaces';
 import {STORAGE} from '../enums/storage';
 
