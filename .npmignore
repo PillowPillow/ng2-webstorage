@@ -15,6 +15,7 @@ tslint.json
 tsconfig.json
 index.ts
 lib
+dist/**/*.js.map
 
 .gitignore
 
