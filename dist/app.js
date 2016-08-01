@@ -5,6 +5,7 @@ function __export(m) {
 var index_1 = require('./services/index');
 __export(require('./decorators/index'));
 __export(require('./services/index'));
+__export(require('./helpers/keyStorage'));
 exports.NG2_WEBSTORAGE = [
     index_1.SessionStorageService,
     index_1.LocalStorageService
