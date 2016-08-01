@@ -165,7 +165,7 @@ export class FooComponent {
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService, localStorage} from 'ng2-webstorage';
+import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -202,7 +202,7 @@ export class FooComponent {
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService, localStorage} from 'ng2-webstorage';
+import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
 
 @Component({
 	selector: 'foo',
