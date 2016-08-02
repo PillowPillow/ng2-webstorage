@@ -15,6 +15,8 @@ It provides also two decorators to synchronize the component attributes and the 
 * [Decorators](#decorators):
 	* [@LocalStorage](#d_localstorage)
 	* [@SessionStorage](#d_sessionStorage)
+* [Helpers](#helpers):
+	* [@KeyStorageHelper](#h_keystorage)
 * [Modify and build](#modifBuild)
 
 ------------
@@ -278,6 +280,25 @@ export class FooComponent {
 	public randomName;
 
 }
+````
+
+### <a name="helpers">Helpers</a>
+--------------------
+
+###<a name="h_keystorage">`KeyStorageHelper`</a>
+
+#### setStorageKeyPrefix( key:`string` ):`void`
+> set the string used as prefix in the storage's item names
+
+##### Params:
+- **key**:     String.   prefix.
+
+##### Usage:
+````typescript
+
+import {KeyStorageHelper} from 'ng2-webstorage';
+KeyStorageHelper.setStorageKeyPrefix('foobar');
+
 ````
 
 
