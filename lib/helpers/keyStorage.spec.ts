@@ -5,6 +5,25 @@ import {LIB_KEY} from '../constants/lib';
 
 describe('helper:keyStorage', () => {
 
+	describe('setStorageKeyPrefix', () => {
+
+		it('should change the storage key prefix', () => {
+
+			let rawKey, newPrefix = 'foobar';
+			rawKey = 'key';
+			KeyStorageHelper.setStorageKeyPrefix(newPrefix);
+
+			expect(KeyStorageHelper.genKey(rawKey)).not.toEqual(`${LIB_KEY}|${rawKey}`);
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${newPrefix}|${rawKey}`);
+
+		});
+
+		afterAll(() => {
+			KeyStorageHelper.setStorageKeyPrefix(LIB_KEY);
+		})
+
+	});
+
 	describe('genKey', () => {
 
 		it('should return a storage key', () => {
