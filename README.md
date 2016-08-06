@@ -53,8 +53,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	@Component({
 		selector: 'foo',
-		template: `foobar`,
-		providers: [NG2_WEBSTORAGE]//can be [LocalStorageService]
+		template: `foobar`
 	})
 	export class FooComponent {
 
