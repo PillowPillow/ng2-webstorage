@@ -1,8 +1,4 @@
-import {beforeEachProviders, describe, inject, injectAsync, it} from '@angular/core/testing';
-import {EventEmitter} from '@angular/core';
-
 import {WebStorageHelper} from './webStorage';
-import {LIB_KEY} from '../constants/lib';
 import {STORAGE} from '../enums/storage';
 import {StorageObserverHelper} from './storageObserver';
 import {KeyStorageHelper} from './keyStorage';
@@ -16,7 +12,7 @@ describe('helper:webStorage', () => {
 			let value = 'session value';
 
 			WebStorageHelper.store(STORAGE.session, 'webStorage:session:key', value);
-			expect(sessionStorage.getItem('webStorage:session:key')).toEqual(JSON.stringify(value))
+			expect(sessionStorage.getItem('webStorage:session:key')).toEqual(JSON.stringify(value));
 
 		});
 
@@ -25,7 +21,7 @@ describe('helper:webStorage', () => {
 			let value = 'local value';
 
 			WebStorageHelper.store(STORAGE.local, 'webStorage:local:key', value);
-			expect(localStorage.getItem('webStorage:local:key')).toEqual(JSON.stringify(value))
+			expect(localStorage.getItem('webStorage:local:key')).toEqual(JSON.stringify(value));
 
 		});
 

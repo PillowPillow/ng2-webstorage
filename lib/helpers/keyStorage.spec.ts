@@ -1,5 +1,3 @@
-import {beforeEachProviders, describe, inject, injectAsync, it} from '@angular/core/testing';
-
 import {KeyStorageHelper} from './keyStorage';
 import {LIB_KEY} from '../constants/lib';
 
@@ -20,7 +18,7 @@ describe('helper:keyStorage', () => {
 
 		afterAll(() => {
 			KeyStorageHelper.setStorageKeyPrefix(LIB_KEY);
-		})
+		});
 
 	});
 

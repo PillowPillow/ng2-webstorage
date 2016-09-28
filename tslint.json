@@ -9,7 +9,7 @@
 		],
 		"max-line-length": [
 			true,
-			100
+			150
 		],
 		"member-ordering": [
 			true,

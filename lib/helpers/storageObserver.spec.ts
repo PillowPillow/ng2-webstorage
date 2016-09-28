@@ -1,4 +1,3 @@
-import {beforeEachProviders, describe, inject, injectAsync, it} from '@angular/core/testing';
 import {EventEmitter} from '@angular/core';
 
 import {StorageObserverHelper} from './storageObserver';
