@@ -1,8 +1,6 @@
 import './vendors';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {NG2_WEBSTORAGE, KeyStorageHelper} from '../index.js';
-import {App} from './components/app';
 
-//KeyStorageHelper.setStorageKeyPrefix('foobar');
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {AppModule} from './module';
 
-bootstrap(App, [NG2_WEBSTORAGE]);
+platformBrowserDynamic().bootstrapModule(AppModule);
