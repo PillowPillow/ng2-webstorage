@@ -1,14 +1,18 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {Ng2Webstorage, KeyStorageHelper} from '../lib/app';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
+import {Ng2Webstorage, KeyStorageHelper} from '../index';
+//import {Ng2Webstorage, KeyStorageHelper} from '../lib/app';
+
+//KeyStorageHelper.setStorageKeyPrefix('foobar');
+
 import {App} from './components/app';
 import {AppForm} from './components/appForm';
 import {AppView} from './components/appView';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-//import {Ng2Webstorage} from '../index';
 
-//KeyStorageHelper.setStorageKeyPrefix('foobar');
 @NgModule({
 	declarations: [App, AppView, AppForm],
 	imports: [

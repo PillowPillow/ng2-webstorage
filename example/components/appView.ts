@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SessionStorageService, SessionStorage, LocalStorage} from '../../lib/app';
+import {Component} from '@angular/core';
+import {SessionStorage, LocalStorage} from '../../index';
 
 @Component({
 	selector: 'app-view',

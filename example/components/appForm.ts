@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {SessionStorageService, SessionStorage, LocalStorage} from '../../lib/app';
+import {SessionStorageService, SessionStorage, LocalStorage} from '../../index';
 
 @Component({
 	selector: 'app-form',
