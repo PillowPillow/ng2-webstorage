@@ -24,25 +24,24 @@ It provides also two decorators to synchronize the component attributes and the 
 ### <a name="gstart">Getting Started</a>
 
 1. Download the library using npm `npm install --save ng2-webstorage`
-2. Register the library in your ng2 application (bootstrap or any component your want)
+2. Register the library in your module
 
 	```typescript
-	import {NG2_WEBSTORAGE} from 'ng2-webstorage';
-	import {bootstrap} from '@angular/platform-browser-dynamic';
+	import {NgModule} from '@angular/core';
+	import {BrowserModule} from '@angular/platform-browser';
+	import {Ng2Webstorage} from 'ng2-webstorage';
 
-	bootstrap(App, [ NG2_WEBSTORAGE ]);
-	```
-
-	```typescript
-	import {Component} from '@angular/core';
-	import {NG2_WEBSTORAGE} from 'ng2-webstorage';
-
-	@Component({
-		selector: 'foo',
-		template: `foobar`,
-		providers: [NG2_WEBSTORAGE]
+	@NgModule({
+		declarations: [...],
+		imports: [
+			BrowserModule,
+			Ng2Webstorage
+		],
+		bootstrap: [...]
 	})
-	export class FooComponent {}
+	export class AppModule {
+	}
+
 	```
 
 3. Inject the services you want in your components and/or use the available decorators

@@ -1,6 +1,6 @@
 {
   "name": "ng2-webstorage",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "angular2 webstorage manager",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -44,6 +44,7 @@
     "prebuild": "npm run clean",
     "build": "npm run tsc",
     "dev": "webpack-dev-server --content-base example --port=8080 --hot --progress -c --config config/webpack.dev.js",
+    "dev2": "webpack-dev-server --content-base example --port=8081 --host 0.0.0.0 --hot --progress -c --config config/webpack.dev.js",
     "test": "karma start",
     "test:watch": "npm run test -- --auto-watch --no-single-run"
   },
