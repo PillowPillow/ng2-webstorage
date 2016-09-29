@@ -1,6 +1,6 @@
 {
   "name": "ng2-webstorage",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "angular2 webstorage manager",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -36,7 +36,7 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.13.0",
-    "zone.js": "^0.6.12"
+    "zone.js": "^0.6.23"
   },
   "scripts": {
     "tsc": "node node_modules/typescript/bin/tsc -d --outDir dist --sourceMap",
@@ -65,7 +65,4 @@
     "url": "https://github.com/PillowPillow/ng2-webstorage/issues"
   },
   "homepage": "https://github.com/PillowPillow/ng2-webstorage#readme",
-  "dependencies": {
-    "zone.js": "^0.6.23"
-  }
 }
