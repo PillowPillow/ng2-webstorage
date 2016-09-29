@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {LocalStorageService, SessionStorageService} from './services/index';
 
 export * from './decorators/index';
@@ -10,7 +9,7 @@ export * from './helpers/keyStorage';
 @NgModule({
 	declarations: [],
 	providers: [SessionStorageService, LocalStorageService],
-	imports: [BrowserModule]
+	imports: []
 })
 export class Ng2Webstorage {
 }
