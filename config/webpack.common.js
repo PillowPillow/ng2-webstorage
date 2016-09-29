@@ -25,8 +25,7 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new webpack.NoErrorsPlugin(),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.NoErrorsPlugin()
 	],
 
 	tslint: {
