@@ -12,7 +12,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
 var index_1 = require('./services/index');
 __export(require('./decorators/index'));
 __export(require('./services/index'));
@@ -24,7 +23,7 @@ var Ng2Webstorage = (function () {
         core_1.NgModule({
             declarations: [],
             providers: [index_1.SessionStorageService, index_1.LocalStorageService],
-            imports: [platform_browser_1.BrowserModule]
+            imports: []
         }), 
         __metadata('design:paramtypes', [])
     ], Ng2Webstorage);
