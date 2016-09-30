@@ -16,7 +16,7 @@ It provides also two decorators to synchronize the component attributes and the 
 	* [@LocalStorage](#d_localstorage)
 	* [@SessionStorage](#d_sessionStorage)
 * [Helpers](#helpers):
-	* [@KeyStorageHelper](#h_keystorage)
+	* [KeyStorageHelper](#h_keystorage)
 * [Modify and build](#modifBuild)
 
 ------------
