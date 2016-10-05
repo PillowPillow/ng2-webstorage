@@ -1,5 +1,5 @@
 import {KeyStorageHelper} from './keyStorage';
-import {LIB_KEY} from '../constants/lib';
+import {LIB_KEY, LIB_KEY_SEPARATOR} from '../constants/lib';
 
 describe('helper:keyStorage', () => {
 
@@ -11,13 +11,32 @@ describe('helper:keyStorage', () => {
 			rawKey = 'key';
 			KeyStorageHelper.setStorageKeyPrefix(newPrefix);
 
-			expect(KeyStorageHelper.genKey(rawKey)).not.toEqual(`${LIB_KEY}|${rawKey}`);
-			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${newPrefix}|${rawKey}`);
+			expect(KeyStorageHelper.genKey(rawKey)).not.toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey}`);
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${newPrefix}${LIB_KEY_SEPARATOR}${rawKey}`);
 
 		});
 
 		afterAll(() => {
 			KeyStorageHelper.setStorageKeyPrefix(LIB_KEY);
+		});
+
+	});
+
+	describe('setStorageKeySeparator', () => {
+
+		it('should change the storage key separator', () => {
+
+			let rawKey, newSeparator = '.';
+			rawKey = 'key';
+			KeyStorageHelper.setStorageKeySeparator(newSeparator);
+
+			expect(KeyStorageHelper.genKey(rawKey)).not.toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey}`);
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}${newSeparator}${rawKey}`);
+
+		});
+
+		afterAll(() => {
+			KeyStorageHelper.setStorageKeySeparator(LIB_KEY_SEPARATOR);
 		});
 
 	});
@@ -29,7 +48,7 @@ describe('helper:keyStorage', () => {
 			let rawKey;
 
 			rawKey = 'key';
-			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}|${rawKey}`);
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey}`);
 
 		});
 

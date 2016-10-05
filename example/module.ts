@@ -7,6 +7,7 @@ import {Ng2Webstorage, KeyStorageHelper} from '../index';
 //import {Ng2Webstorage, KeyStorageHelper} from '../lib/app';
 
 //KeyStorageHelper.setStorageKeyPrefix('foobar');
+//KeyStorageHelper.setStorageKeySeparator('.');
 
 import {App} from './components/app';
 import {AppForm} from './components/appForm';

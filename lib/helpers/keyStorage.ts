@@ -1,6 +1,7 @@
 import {IWebStorage} from '../interfaces/webStorage';
-import {LIB_KEY} from '../constants/lib';
+import {LIB_KEY, LIB_KEY_SEPARATOR} from '../constants/lib';
 var CUSTOM_LIB_KEY = LIB_KEY;
+var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
 
 export class KeyStorageHelper {
 
@@ -11,10 +12,14 @@ export class KeyStorageHelper {
 	static genKey(raw:string):string {
 		if(typeof raw !== 'string')
 			throw Error('attempt to generate a storage key with a non string value');
-		return `${CUSTOM_LIB_KEY}|${raw.toString().toLowerCase()}`;
+		return `${CUSTOM_LIB_KEY}${CUSTOM_LIB_KEY_SEPARATOR}${raw.toString().toLowerCase()}`;
 	}
 
 	static setStorageKeyPrefix(key:string = LIB_KEY) {
 		CUSTOM_LIB_KEY = key;
+	}
+
+	static setStorageKeySeparator(separator:string = LIB_KEY_SEPARATOR) {
+		CUSTOM_LIB_KEY_SEPARATOR = separator;
 	}
 }

@@ -5,9 +5,7 @@ import {STORAGE} from '../enums/storage';
 
 export class WebStorageService implements IStorage {
 
-	private sType:STORAGE = null;
-
-	constructor(sType:STORAGE) {
+	constructor(private sType:STORAGE = null) {
 		this.sType = sType;
 	}
 

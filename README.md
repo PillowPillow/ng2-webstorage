@@ -286,16 +286,30 @@ export class FooComponent {
 ###<a name="h_keystorage">`KeyStorageHelper`</a>
 
 #### setStorageKeyPrefix( key:`string` ):`void`
-> set the string used as prefix in the storage's item names
+> set the string used as prefix in the storage's item names.
 
 ##### Params:
-- **key**:     String.   prefix.
+- **key**:     String.   prefix. default to 'ng2-webstorage'
 
 ##### Usage:
 ````typescript
 
 import {KeyStorageHelper} from 'ng2-webstorage';
 KeyStorageHelper.setStorageKeyPrefix('foobar');
+
+````
+
+#### setStorageKeySeparator( separator:`string` ):`void`
+> set the string used as separator in the storage's item names
+
+##### Params:
+- **key**:     String.   prefix. default to '|'
+
+##### Usage:
+````typescript
+
+import {KeyStorageHelper} from 'ng2-webstorage';
+KeyStorageHelper.setStorageKeySeparator('.');
 
 ````
 
