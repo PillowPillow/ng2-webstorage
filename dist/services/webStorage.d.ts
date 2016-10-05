@@ -3,7 +3,7 @@ import { IStorage } from '../interfaces';
 import { STORAGE } from '../enums/storage';
 export declare class WebStorageService implements IStorage {
     private sType;
-    constructor(sType: STORAGE);
+    constructor(sType?: STORAGE);
     store(raw: string, value: any): void;
     retrieve(raw: string): any;
     clear(raw?: string): void;

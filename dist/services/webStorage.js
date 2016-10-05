@@ -2,7 +2,8 @@
 var index_1 = require('../helpers/index');
 var WebStorageService = (function () {
     function WebStorageService(sType) {
-        this.sType = null;
+        if (sType === void 0) { sType = null; }
+        this.sType = sType;
         this.sType = sType;
     }
     WebStorageService.prototype.store = function (raw, value) {
