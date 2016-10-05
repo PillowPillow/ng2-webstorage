@@ -1,6 +1,6 @@
 {
   "name": "ng2-webstorage",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "angular2 webstorage manager",
   "main": "index.js",
   "typings": "index.d.ts",
