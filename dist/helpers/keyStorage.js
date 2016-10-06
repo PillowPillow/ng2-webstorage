@@ -1,0 +1,25 @@
+import { LIB_KEY, LIB_KEY_SEPARATOR } from '../constants/lib';
+var CUSTOM_LIB_KEY = LIB_KEY;
+var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
+export var KeyStorageHelper = (function () {
+    function KeyStorageHelper() {
+    }
+    KeyStorageHelper.retrieveKeysFromStorage = function (storage) {
+        return Object.keys(storage).filter(function (key) { return key.indexOf(CUSTOM_LIB_KEY) === 0; });
+    };
+    KeyStorageHelper.genKey = function (raw) {
+        if (typeof raw !== 'string')
+            throw Error('attempt to generate a storage key with a non string value');
+        return "" + CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR + raw.toString().toLowerCase();
+    };
+    KeyStorageHelper.setStorageKeyPrefix = function (key) {
+        if (key === void 0) { key = LIB_KEY; }
+        CUSTOM_LIB_KEY = key;
+    };
+    KeyStorageHelper.setStorageKeySeparator = function (separator) {
+        if (separator === void 0) { separator = LIB_KEY_SEPARATOR; }
+        CUSTOM_LIB_KEY_SEPARATOR = separator;
+    };
+    return KeyStorageHelper;
+}());
+//# sourceMappingURL=keyStorage.js.map
