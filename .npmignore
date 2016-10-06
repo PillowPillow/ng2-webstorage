@@ -13,7 +13,6 @@ config
 karma.conf.js
 tslint.json
 tsconfig.json
-index.ts
 lib
 
 .gitignore
