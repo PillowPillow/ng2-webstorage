@@ -3,9 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
-import {Ng2Webstorage, KeyStorageHelper} from '../index';
-//import {Ng2Webstorage, KeyStorageHelper} from '../lib/app';
+import {Ng2Webstorage} from './libwrapper';
 
+//import {Ng2Webstorage, KeyStorageHelper} from './libwrapper';
 //KeyStorageHelper.setStorageKeyPrefix('foobar');
 //KeyStorageHelper.setStorageKeySeparator('.');
 
