@@ -49,7 +49,7 @@ It provides also two decorators to synchronize the component attributes and the 
 		System.config({
 			map: { 
 				...,
-				ng2-webstorage': 'node_modules/ng2-webstorage'
+				'ng2-webstorage': 'node_modules/ng2-webstorage'
 			},
 			packages: {
 				...,
