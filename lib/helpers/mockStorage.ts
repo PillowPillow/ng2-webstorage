@@ -11,8 +11,6 @@ export class MockStorageHelper {
 	}
 
 	static getStorage(sType: STORAGE): IWebStorage {
-		let self = this;
-
 		if(!this.mockStorages[sType])
 			this.mockStorages[sType] = MockStorageHelper.generateStorage();
 

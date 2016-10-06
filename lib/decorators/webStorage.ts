@@ -1,6 +1,6 @@
 import {KeyStorageHelper} from '../helpers/index';
 import {STORAGE} from '../enums/storage';
-import {WebStorageHelper, StorageObserverHelper} from '../helpers/index';
+import {WebStorageHelper} from '../helpers/index';
 
 export function WebStorage(webSKey:string, sType:STORAGE) {
 	return (targetedClass:Object, raw:string) => {
