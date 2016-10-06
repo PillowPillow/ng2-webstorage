@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {SessionStorage, LocalStorage} from '../../index';
+import {SessionStorage, LocalStorage} from '../libwrapper';
 
 @Component({
 	selector: 'app-view',

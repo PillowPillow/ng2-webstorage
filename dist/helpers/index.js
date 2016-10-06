@@ -1,8 +1,4 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./keyStorage'));
-__export(require('./storageObserver'));
-__export(require('./webStorage'));
+export * from './keyStorage';
+export * from './storageObserver';
+export * from './webStorage';
 //# sourceMappingURL=index.js.map

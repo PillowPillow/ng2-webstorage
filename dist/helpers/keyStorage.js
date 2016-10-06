@@ -1,8 +1,7 @@
-"use strict";
-var lib_1 = require('../constants/lib');
-var CUSTOM_LIB_KEY = lib_1.LIB_KEY;
-var CUSTOM_LIB_KEY_SEPARATOR = lib_1.LIB_KEY_SEPARATOR;
-var KeyStorageHelper = (function () {
+import { LIB_KEY, LIB_KEY_SEPARATOR } from '../constants/lib';
+var CUSTOM_LIB_KEY = LIB_KEY;
+var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
+export var KeyStorageHelper = (function () {
     function KeyStorageHelper() {
     }
     KeyStorageHelper.retrieveKeysFromStorage = function (storage) {
@@ -14,14 +13,13 @@ var KeyStorageHelper = (function () {
         return "" + CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR + raw.toString().toLowerCase();
     };
     KeyStorageHelper.setStorageKeyPrefix = function (key) {
-        if (key === void 0) { key = lib_1.LIB_KEY; }
+        if (key === void 0) { key = LIB_KEY; }
         CUSTOM_LIB_KEY = key;
     };
     KeyStorageHelper.setStorageKeySeparator = function (separator) {
-        if (separator === void 0) { separator = lib_1.LIB_KEY_SEPARATOR; }
+        if (separator === void 0) { separator = LIB_KEY_SEPARATOR; }
         CUSTOM_LIB_KEY_SEPARATOR = separator;
     };
     return KeyStorageHelper;
 }());
-exports.KeyStorageHelper = KeyStorageHelper;
 //# sourceMappingURL=keyStorage.js.map

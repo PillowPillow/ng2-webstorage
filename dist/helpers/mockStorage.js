@@ -1,12 +1,10 @@
-"use strict";
-var MockStorageHelper = (function () {
+export var MockStorageHelper = (function () {
     function MockStorageHelper() {
     }
     MockStorageHelper.isSecuredField = function (field) {
         return !!~MockStorageHelper.securedFields.indexOf(field);
     };
     MockStorageHelper.getStorage = function (sType) {
-        var self = this;
         if (!this.mockStorages[sType])
             this.mockStorages[sType] = MockStorageHelper.generateStorage();
         return this.mockStorages[sType];
@@ -54,5 +52,4 @@ var MockStorageHelper = (function () {
     MockStorageHelper.mockStorages = {};
     return MockStorageHelper;
 }());
-exports.MockStorageHelper = MockStorageHelper;
 //# sourceMappingURL=mockStorage.js.map

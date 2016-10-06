@@ -43,6 +43,21 @@ It provides also two decorators to synchronize the component attributes and the 
 	}
 
 	```
+	
+	If you're using systemJS, you have to reference the umd version of the lib in your config.
+	```` typescript
+		System.config({
+			map: { 
+				...,
+				ng2-webstorage': 'node_modules/ng2-webstorage'
+			},
+			packages: {
+				...,
+				'ng2-webstorage': {main: 'bundles/core.umd.js', defaultExtension: 'js'}
+			}
+		});
+	````
+	
 
 3. Inject the services you want in your components and/or use the available decorators
 

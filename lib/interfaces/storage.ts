@@ -1,5 +1,4 @@
 import {EventEmitter} from '@angular/core';
-import {STORAGE} from '../enums/storage';
 
 export interface IStorage {
 	store(key:string, value:any):void;

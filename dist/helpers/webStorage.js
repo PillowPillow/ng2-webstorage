@@ -1,16 +1,15 @@
-"use strict";
-var storage_1 = require('../enums/storage');
-var storageObserver_1 = require('./storageObserver');
-var keyStorage_1 = require('./keyStorage');
-var mockStorage_1 = require('./mockStorage');
-var lib_1 = require('../constants/lib');
-var WebStorageHelper = (function () {
+import { STORAGE } from '../enums/storage';
+import { StorageObserverHelper } from './storageObserver';
+import { KeyStorageHelper } from './keyStorage';
+import { MockStorageHelper } from './mockStorage';
+import { STORAGE_NAMES } from '../constants/lib';
+export var WebStorageHelper = (function () {
     function WebStorageHelper() {
     }
     WebStorageHelper.store = function (sType, sKey, value) {
         this.getStorage(sType).setItem(sKey, JSON.stringify(value));
         this.cached[sType][sKey] = value;
-        storageObserver_1.StorageObserverHelper.emit(sType, sKey, value);
+        StorageObserverHelper.emit(sType, sKey, value);
     };
     WebStorageHelper.retrieve = function (sType, sKey) {
         if (this.cached[sType][sKey])
@@ -27,28 +26,28 @@ var WebStorageHelper = (function () {
     WebStorageHelper.clearAll = function (sType) {
         var _this = this;
         var storage = this.getStorage(sType);
-        keyStorage_1.KeyStorageHelper.retrieveKeysFromStorage(storage)
+        KeyStorageHelper.retrieveKeysFromStorage(storage)
             .forEach(function (sKey) {
             storage.removeItem(sKey);
             delete _this.cached[sType][sKey];
-            storageObserver_1.StorageObserverHelper.emit(sType, sKey, null);
+            StorageObserverHelper.emit(sType, sKey, null);
         });
     };
     WebStorageHelper.clear = function (sType, sKey) {
         this.getStorage(sType).removeItem(sKey);
         delete this.cached[sType][sKey];
-        storageObserver_1.StorageObserverHelper.emit(sType, sKey, null);
+        StorageObserverHelper.emit(sType, sKey, null);
     };
     WebStorageHelper.getStorage = function (sType) {
-        return this.isStorageAvailable(sType) ? this.getWStorage(sType) : mockStorage_1.MockStorageHelper.getStorage(sType);
+        return this.isStorageAvailable(sType) ? this.getWStorage(sType) : MockStorageHelper.getStorage(sType);
     };
     WebStorageHelper.getWStorage = function (sType) {
         var storage;
         switch (sType) {
-            case storage_1.STORAGE.local:
+            case STORAGE.local:
                 storage = localStorage;
                 break;
-            case storage_1.STORAGE.session:
+            case STORAGE.session:
                 storage = sessionStorage;
                 break;
             default:
@@ -72,13 +71,12 @@ var WebStorageHelper = (function () {
         else
             isAvailable = false;
         if (!isAvailable)
-            console.warn(lib_1.STORAGE_NAMES[sType] + " storage unavailable, Ng2Webstorage will use a fallback strategy instead");
+            console.warn(STORAGE_NAMES[sType] + " storage unavailable, Ng2Webstorage will use a fallback strategy instead");
         return this.storageAvailability[sType] = isAvailable;
     };
-    WebStorageHelper.cached = (_a = {}, _a[storage_1.STORAGE.local] = {}, _a[storage_1.STORAGE.session] = {}, _a);
-    WebStorageHelper.storageAvailability = (_b = {}, _b[storage_1.STORAGE.local] = null, _b[storage_1.STORAGE.session] = null, _b);
+    WebStorageHelper.cached = (_a = {}, _a[STORAGE.local] = {}, _a[STORAGE.session] = {}, _a);
+    WebStorageHelper.storageAvailability = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
     return WebStorageHelper;
     var _a, _b;
 }());
-exports.WebStorageHelper = WebStorageHelper;
 //# sourceMappingURL=webStorage.js.map
