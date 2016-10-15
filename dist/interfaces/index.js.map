@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../lib/interfaces/index.ts"],"names":[],"mappings":"AAAA,cAAc,cAAc,CAAC;AAC7B,cAAc,WAAW,CAAC","sourcesContent":["export * from './webStorage';\r\nexport * from './storage';\r\n"]}
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../lib/interfaces/index.ts"],"names":[],"mappings":"AAAA,cAAc,cAAc,CAAC;AAC7B,cAAc,WAAW,CAAC","sourcesContent":["export * from './webStorage';\r\nexport * from './storage';\r\n\ninterface DecoratorInvocation {\n  type: Function;\n  args?: any[];\n}\n"]}
