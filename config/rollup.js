@@ -1,5 +1,5 @@
 export default {
-  entry: 'index.js',
+  entry: 'dist/app.js',
   dest: 'bundles/core.umd.js',
   format: 'umd',
   sourceMap: 'inline',
