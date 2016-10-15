@@ -1,6 +1,5 @@
-import { KeyStorageHelper } from '../helpers/index';
-import { WebStorageHelper } from '../helpers/index';
-export function WebStorage(webSKey, sType) {
+import { KeyStorageHelper, WebStorageHelper } from '../helpers/index';
+export var WebStorage = function WebStorageDecorator(webSKey, sType) {
     return function (targetedClass, raw) {
         var key = webSKey || raw, sKey = KeyStorageHelper.genKey(key);
         Object.defineProperty(targetedClass, raw, {
@@ -13,5 +12,5 @@ export function WebStorage(webSKey, sType) {
             }
         });
     };
-}
+};
 //# sourceMappingURL=webStorage.js.map

@@ -1,1 +1,1 @@
-{"__symbolic":"module","version":1,"metadata":{"SessionStorage":{"__symbolic":"function","parameters":["webstorageKey"],"value":{"__symbolic":"call","expression":{"__symbolic":"reference","module":"./webStorage","name":"WebStorage"},"arguments":[{"__symbolic":"reference","name":"webstorageKey"},{"__symbolic":"select","expression":{"__symbolic":"reference","module":"../enums/storage","name":"STORAGE"},"member":"session"}]}}}}
+{"__symbolic":"module","version":1,"metadata":{"SessionStorage":{"__symbolic":"error","message":"Function call not supported","line":3,"character":30}}}

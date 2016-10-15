@@ -1,1 +1,1 @@
-export declare function SessionStorage(webstorageKey?: string): (targetedClass: Object, raw: string) => void;
+export declare const SessionStorage: (webstorageKey?: string) => (targetedClass: Object, raw: string) => void;
