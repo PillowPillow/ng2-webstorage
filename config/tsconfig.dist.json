@@ -18,14 +18,17 @@
 		"lib": [
 			"es2015",
 			"dom"
-		]
+		],
+		"rootDir": "../lib",
+		"outDir": "../dist"
 	},
 	"files": [
 		"../node_modules/typescript/lib/lib.es6.d.ts",
 		"../lib/app.ts"
 	],
 	"angularCompilerOptions": {
-		"strictMetadataEmit": true
+		"strictMetadataEmit": true,
+		"genDir": ".."
 	},
 	"exclude": [
 		"node_modules",
