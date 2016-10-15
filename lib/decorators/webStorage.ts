@@ -1,8 +1,7 @@
-import {KeyStorageHelper} from '../helpers/index';
+import {KeyStorageHelper, WebStorageHelper} from '../helpers/index';
 import {STORAGE} from '../enums/storage';
-import {WebStorageHelper} from '../helpers/index';
 
-export function WebStorage(webSKey:string, sType:STORAGE) {
+export const WebStorage = function WebStorageDecorator(webSKey:string, sType:STORAGE) {
 	return (targetedClass:Object, raw:string) => {
 		let key = webSKey || raw,
 			sKey = KeyStorageHelper.genKey(key);
@@ -16,4 +15,4 @@ export function WebStorage(webSKey:string, sType:STORAGE) {
 			}
 		});
 	};
-}
+};
