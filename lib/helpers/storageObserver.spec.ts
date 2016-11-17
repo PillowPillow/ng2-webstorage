@@ -1,7 +1,5 @@
 import {EventEmitter} from '@angular/core';
-
 import {StorageObserverHelper} from './storageObserver';
-import {LIB_KEY} from '../constants/lib';
 import {STORAGE} from '../enums/storage';
 
 describe('helper:storageObserver', () => {
@@ -39,7 +37,7 @@ describe('helper:storageObserver', () => {
 
 			let result = 'emitted';
 
-			let sub = event.subscribe((data) => {
+			event.subscribe((data) => {
 				expect(data).toEqual(result);
 				done();
 			});

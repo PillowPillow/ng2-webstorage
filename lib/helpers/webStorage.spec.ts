@@ -30,14 +30,13 @@ describe('helper:webStorage', () => {
 			let event = StorageObserverHelper.observe(STORAGE.local, 'webStorage:local:key'),
 				value = 'session value';
 
-			let sub = event.subscribe((data) => {
+			event.subscribe((data) => {
 				expect(data).toEqual(value);
 				done();
 			});
 
 			WebStorageHelper.store(STORAGE.local, 'webStorage:local:key', value);
 		});
-
 
 	});
 
@@ -113,7 +112,6 @@ describe('helper:webStorage', () => {
 
 		});
 
-
 	});
 
 	describe('clear', () => {
@@ -152,7 +150,7 @@ describe('helper:webStorage', () => {
 			let event = StorageObserverHelper.observe(STORAGE.local, key1),
 				result = null;
 
-			let sub = event.subscribe((data) => {
+			event.subscribe((data) => {
 				expect(data).toEqual(result);
 				done();
 			});
