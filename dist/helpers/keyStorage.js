@@ -4,6 +4,9 @@ var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
 export var KeyStorageHelper = (function () {
     function KeyStorageHelper() {
     }
+    KeyStorageHelper.isManagedKey = function (sKey) {
+        return sKey.indexOf(CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR) === 0;
+    };
     KeyStorageHelper.retrieveKeysFromStorage = function (storage) {
         return Object.keys(storage).filter(function (key) { return key.indexOf(CUSTOM_LIB_KEY) === 0; });
     };

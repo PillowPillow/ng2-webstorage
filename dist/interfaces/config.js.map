@@ -1,0 +1,1 @@
+{"version":3,"file":"config.js","sourceRoot":"","sources":["../../lib/interfaces/config.ts"],"names":[],"mappings":"","sourcesContent":["export interface ModuleConfig {\r\n\tprefix?: string,\r\n\tseparator?: string\r\n}\r\n\ninterface DecoratorInvocation {\n  type: Function;\n  args?: any[];\n}\n"]}

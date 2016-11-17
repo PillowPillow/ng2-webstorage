@@ -14,6 +14,9 @@ export var WebStorageHelper = (function () {
     WebStorageHelper.retrieve = function (sType, sKey) {
         if (this.cached[sType][sKey])
             return this.cached[sType][sKey];
+        return this.cached[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+    };
+    WebStorageHelper.retrieveFromStorage = function (sType, sKey) {
         var data = null;
         try {
             data = JSON.parse(this.getStorage(sType).getItem(sKey));
@@ -21,7 +24,16 @@ export var WebStorageHelper = (function () {
         catch (err) {
             console.warn("invalid value for " + sKey);
         }
-        return this.cached[sType][sKey] = data;
+        return data;
+    };
+    WebStorageHelper.refresh = function (sType, sKey) {
+        if (!KeyStorageHelper.isManagedKey(sKey))
+            return;
+        var value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+        if (value != null && value !== this.cached[sType][sKey]) {
+            this.cached[sType][sKey] = value;
+            StorageObserverHelper.emit(sType, sKey, value);
+        }
     };
     WebStorageHelper.clearAll = function (sType) {
         var _this = this;
