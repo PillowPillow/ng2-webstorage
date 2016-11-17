@@ -30,7 +30,7 @@ export class Ng2Webstorage {
 	private initStorageListener() {
 		if(window)
 			window.addEventListener('storage', (event:StorageEvent) => this.ngZone.run(() => {
-				let storage:STORAGE = sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
+				let storage:STORAGE = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
 				WebStorageHelper.refresh(storage, event.key);
 			}));
 	}
