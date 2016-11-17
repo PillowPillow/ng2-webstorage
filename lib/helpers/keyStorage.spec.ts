@@ -66,6 +66,17 @@ describe('helper:keyStorage', () => {
 
 	});
 
+	describe('isManagedKey', () => {
+
+		it('should determine the given key as managed by the lib', () => {
+
+			let sKey = KeyStorageHelper.genKey('key');
+			expect(KeyStorageHelper.isManagedKey(sKey)).toBeTruthy();
+
+		});
+
+	});
+
 	describe('retrieveKeysFromStorage', () => {
 
 		beforeAll(() => {
