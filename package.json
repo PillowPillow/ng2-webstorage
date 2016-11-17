@@ -71,9 +71,5 @@
   "bugs": {
     "url": "https://github.com/PillowPillow/ng2-webstorage/issues"
   },
-  "homepage": "https://github.com/PillowPillow/ng2-webstorage#readme",
-  "dependencies": {
-    "@angular/core": "^2.2.0",
-    "@angular/router": "^3.2.0"
-  }
+  "homepage": "https://github.com/PillowPillow/ng2-webstorage#readme"
 }
