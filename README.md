@@ -15,8 +15,6 @@ It provides also two decorators to synchronize the component attributes and the 
 * [Decorators](#decorators):
 	* [@LocalStorage](#d_localstorage)
 	* [@SessionStorage](#d_sessionStorage)
-* [Helpers](#helpers):
-	* [KeyStorageHelper](#h_keystorage)
 * [Modify and build](#modifBuild)
 
 ------------
@@ -35,7 +33,8 @@ It provides also two decorators to synchronize the component attributes and the 
 		declarations: [...],
 		imports: [
 			BrowserModule,
-			Ng2Webstorage
+			Ng2Webstorage,
+			//Ng2Webstorage.forRoot({ prefix: 'custom', separator: '.' }) The forRoot method allows to configure the prefix and the separator used by the library
 		],
 		bootstrap: [...]
 	})
@@ -294,40 +293,6 @@ export class FooComponent {
 
 }
 ````
-
-### <a name="helpers">Helpers</a>
---------------------
-
-###<a name="h_keystorage">`KeyStorageHelper`</a>
-
-#### setStorageKeyPrefix( key:`string` ):`void`
-> set the string used as prefix in the storage's item names.
-
-##### Params:
-- **key**:     String.   prefix. default to 'ng2-webstorage'
-
-##### Usage:
-````typescript
-
-import {KeyStorageHelper} from 'ng2-webstorage';
-KeyStorageHelper.setStorageKeyPrefix('foobar');
-
-````
-
-#### setStorageKeySeparator( separator:`string` ):`void`
-> set the string used as separator in the storage's item names
-
-##### Params:
-- **key**:     String.   prefix. default to '|'
-
-##### Usage:
-````typescript
-
-import {KeyStorageHelper} from 'ng2-webstorage';
-KeyStorageHelper.setStorageKeySeparator('.');
-
-````
-
 
 ### <a name="modifBuild">Modify and build</a>
 --------------------
