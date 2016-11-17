@@ -1,9 +1,8 @@
-import {NgModule, NgZone, ModuleWithProviders, OpaqueToken} from '@angular/core';
+import {NgModule, NgZone, ModuleWithProviders} from '@angular/core';
 import {LIB_KEY, LIB_KEY_SEPARATOR} from './constants/lib';
 import {STORAGE} from './enums/storage';
 import {LocalStorageService, SessionStorageService} from './services/index';
 import {WebStorageHelper} from './helpers/webStorage';
-import {StorageObserverHelper} from './helpers/storageObserver';
 import {ModuleConfig} from './interfaces/config';
 import {KeyStorageHelper} from './helpers/keyStorage';
 
@@ -18,14 +17,14 @@ export * from './services/index';
 })
 export class Ng2Webstorage {
 
-	constructor(private ngZone:NgZone) {
-		this.initStorageListener();
-	}
-
 	static forRoot({prefix, separator}:ModuleConfig = {prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR}):ModuleWithProviders {
 		KeyStorageHelper.setStorageKeyPrefix(prefix);
 		KeyStorageHelper.setStorageKeySeparator(separator);
 		return {ngModule: Ng2Webstorage, providers: []};
+	}
+
+	constructor(private ngZone:NgZone) {
+		this.initStorageListener();
 	}
 
 	private initStorageListener() {
