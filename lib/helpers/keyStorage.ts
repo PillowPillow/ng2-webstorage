@@ -5,6 +5,10 @@ var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
 
 export class KeyStorageHelper {
 
+	static isManagedKey(sKey:string):boolean {
+		return sKey.indexOf(CUSTOM_LIB_KEY+CUSTOM_LIB_KEY_SEPARATOR) === 0;
+	}
+
 	static retrieveKeysFromStorage(storage:IWebStorage):Array<string> {
 		return Object.keys(storage).filter((key) => key.indexOf(CUSTOM_LIB_KEY) === 0);
 	}
