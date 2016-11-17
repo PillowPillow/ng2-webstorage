@@ -10,27 +10,39 @@ export class WebStorageHelper {
 	static cached = {[STORAGE.local]: {}, [STORAGE.session]: {}};
 	static storageAvailability = {[STORAGE.local]: null, [STORAGE.session]: null};
 
-	static store(sType: STORAGE, sKey: string, value: any): void {
+	static store(sType:STORAGE, sKey:string, value:any):void {
 		this.getStorage(sType).setItem(sKey, JSON.stringify(value));
 		this.cached[sType][sKey] = value;
 		StorageObserverHelper.emit(sType, sKey, value);
 	}
 
-	static retrieve(sType: STORAGE, sKey: string): string {
+	static retrieve(sType:STORAGE, sKey:string):string {
 		if(this.cached[sType][sKey]) return this.cached[sType][sKey];
+		return this.cached[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+	}
 
+	static retrieveFromStorage(sType:STORAGE, sKey:string) {
 		let data = null;
+
 		try {
 			data = JSON.parse(this.getStorage(sType).getItem(sKey));
 		} catch(err) {
 			console.warn(`invalid value for ${sKey}`);
 		}
 
-		return this.cached[sType][sKey] = data;
+		return data;
 	}
 
-	static clearAll(sType: STORAGE): void {
-		let storage: IWebStorage = this.getStorage(sType);
+	static refresh(sType:STORAGE, sKey:string) {
+		let value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+		if(value != null) {
+			this.cached[sType][sKey] = value;
+			StorageObserverHelper.emit(sType, sKey, value);
+		}
+	}
+
+	static clearAll(sType:STORAGE):void {
+		let storage:IWebStorage = this.getStorage(sType);
 		KeyStorageHelper.retrieveKeysFromStorage(storage)
 		.forEach((sKey) => {
 			storage.removeItem(sKey);
@@ -39,17 +51,17 @@ export class WebStorageHelper {
 		});
 	}
 
-	static clear(sType: STORAGE, sKey: string): void {
+	static clear(sType:STORAGE, sKey:string):void {
 		this.getStorage(sType).removeItem(sKey);
 		delete this.cached[sType][sKey];
 		StorageObserverHelper.emit(sType, sKey, null);
 	}
 
-	static getStorage(sType: STORAGE): IWebStorage {
+	static getStorage(sType:STORAGE):IWebStorage {
 		return this.isStorageAvailable(sType) ? this.getWStorage(sType) : MockStorageHelper.getStorage(sType);
 	}
 
-	static getWStorage(sType: STORAGE): IWebStorage {
+	static getWStorage(sType:STORAGE):IWebStorage {
 		let storage;
 		switch(sType) {
 			case STORAGE.local:
@@ -64,7 +76,7 @@ export class WebStorageHelper {
 		return storage;
 	}
 
-	static isStorageAvailable(sType: STORAGE) {
+	static isStorageAvailable(sType:STORAGE) {
 		if(typeof this.storageAvailability[sType] === 'boolean')
 			return this.storageAvailability[sType];
 
