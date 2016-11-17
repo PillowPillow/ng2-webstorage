@@ -22,7 +22,7 @@ export var Ng2Webstorage = (function () {
         var _this = this;
         if (window)
             window.addEventListener('storage', function (event) { return _this.ngZone.run(function () {
-                var storage = sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
+                var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
                 WebStorageHelper.refresh(storage, event.key);
             }); });
     };
