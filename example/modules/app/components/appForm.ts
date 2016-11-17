@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {SessionStorageService, SessionStorage, LocalStorage} from '../libwrapper';
+import {SessionStorageService, SessionStorage, LocalStorage} from '../../../libwrapper';
 
 @Component({
 	selector: 'app-form',
@@ -23,23 +23,22 @@ export class AppForm implements OnInit {
 	@LocalStorage('variable')
 	public localBind;
 
-	constructor(private fb: FormBuilder, private localS: SessionStorageService) {}
+	constructor(private fb: FormBuilder, private sessionS: SessionStorageService) {}
 
 	ngOnInit() {
 		this.form = this.fb.group({
-			text: this.fb.control(this.localS.retrieve('variable'), Validators.required)
+			text: this.fb.control(this.sessionS.retrieve('variable'), Validators.required)
 		});
-		this.localS.observe('variable')
-		.subscribe((data) => console.log(data));
+		this.sessionS.observe('variable')
+		.subscribe((data) => console.log('data: ', data));
 	}
 
 	submit(value, valid) {
-		console.log(valid, value);
-		this.localS.store('variable', value.text);
+		this.sessionS.store('variable', value.text);
 	}
 
 	clear() {
-		this.localS.clear();
+		this.sessionS.clear();
 	}
 
 }
