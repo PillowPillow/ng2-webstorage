@@ -2,7 +2,7 @@
 
 ### Features 
 
-* **listener:** Now listen the changes made from other windows (Localstorage only) and devtool's panel [#23](https://github.com/PillowPillow/ng2-webstorage/issues/23)
+* **listener:** Now listen the changes made from other windows (Localstorage only) and devtool panel [#23](https://github.com/PillowPillow/ng2-webstorage/issues/23)
 
 ### PEER-DEPENDENCY UPDATES ###
 
