@@ -10,7 +10,7 @@
 
 ### BREAKING CHANGES 
 
-* KeyStorageHelper: - This service is not exposed anymore. Use the module's method `for Root` instead to configure the web storage options;
+* KeyStorageHelper: - This service is not exposed anymore. Use the module's method `forRoot` instead to configure the web storage options.
 - Example:
   * Before: 
   ```typescript
@@ -18,7 +18,7 @@
 		KeyStorageHelper.setStorageKeySeparator('.');
   ```
   * After: 
-	```typescript
+  ```typescript
 		@NgModule({
 			imports: [
 				Ng2Webstorage.forRoot({
