@@ -5,7 +5,11 @@ export var KeyStorageHelper = (function () {
     function KeyStorageHelper() {
     }
     KeyStorageHelper.isManagedKey = function (sKey) {
-        return sKey.indexOf(CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR) === 0;
+        if(skey){
+            return sKey.indexOf(CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR) === 0;
+        }else{
+            return false;
+        }
     };
     KeyStorageHelper.retrieveKeysFromStorage = function (storage) {
         return Object.keys(storage).filter(function (key) { return key.indexOf(CUSTOM_LIB_KEY) === 0; });
