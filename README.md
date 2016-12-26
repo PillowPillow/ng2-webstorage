@@ -43,7 +43,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	```
 	
-	Because of the decorators needs, you can't use *for Root* to configure the library with AoT compilations, an exposed function named *configure* is available to handle this case.
+	Because of the decorators needs, you can't use `forRoot` to configure the library with AoT compilations, an exposed function named `configure` is available to handle this case.
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
