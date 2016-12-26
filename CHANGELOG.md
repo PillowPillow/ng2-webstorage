@@ -1,3 +1,51 @@
+<a name="1.4.3">v1.4.3</a>
+
+### Features 
+
+* **AoT compilation:** Add *configure* method replacing the forRoot one for the AoT compilations [#27](https://github.com/PillowPillow/ng2-webstorage/issues/27)
+- Example:
+  * Before: 
+  ```typescript
+		import {Ng2Webstorage} from 'ng2-webstorage';
+
+		@NgModule({
+			imports: [
+				Ng2Webstorage.forRoot({
+					separator: '.',
+					prefix: 'custom'
+				})
+			],
+		})
+		export class AppModule {}
+  ```
+  * After: 
+  ```typescript
+		import {Ng2Webstorage, configure:WebstorageConfigure} from 'ng2-webstorage';
+
+		WebstorageConfigure({
+			separator: '.',
+			prefix: 'custom'
+		});
+		
+		@NgModule({
+			imports: [Ng2Webstorage],
+		})
+		export class AppModule {}
+    ```
+
+
+### PEER-DEPENDENCY UPDATES ###
+
+* **angular**: @angular/...2.4.1
+
+
+<a name="1.4.2">v1.4.2</a>
+
+### Fix 
+
+* **source map:** temporarily remove source map from umd version [source-map-loader issue](for webpack/source-map-loader#21)
+
+
 <a name="1.4.0">v1.4.0</a>
 
 ### Features 

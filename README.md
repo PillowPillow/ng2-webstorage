@@ -43,6 +43,30 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	```
 	
+	Because of the decorators needs, you can't use *for Root* to configure the library with AoT compilations, an exposed function named *configure* is available to handle this case.
+	```typescript
+	import {NgModule} from '@angular/core';
+	import {BrowserModule} from '@angular/platform-browser';
+	import {Ng2Webstorage, configure} from 'ng2-webstorage';
+
+	configure({ prefix: 'custom', separator: '.' });
+
+	// import {Ng2Webstorage, configure: WebstorageConfigure} from 'ng2-webstorage'; // Don't forget you can make an alias if the configure key is already in use
+	// WebstorageConfigure({ prefix: 'custom', separator: '.' });
+
+	@NgModule({
+		declarations: [...],
+		imports: [
+			BrowserModule,
+			Ng2Webstorage,
+		],
+		bootstrap: [...]
+	})
+	export class AppModule {
+	}
+
+	```
+	
 	If you're using systemJS, you have to reference the umd version of the lib in your config.
 	```` typescript
 		System.config({
