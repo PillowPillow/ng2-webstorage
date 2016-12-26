@@ -9,3 +9,4 @@ export declare class Ng2Webstorage {
     constructor(ngZone: NgZone);
     private initStorageListener();
 }
+export declare function configure({prefix, separator}?: ModuleConfig): void;

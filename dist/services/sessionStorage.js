@@ -15,7 +15,7 @@ export var SessionStorageService = (function (_super) {
         { type: Injectable },
     ];
     /** @nocollapse */
-    SessionStorageService.ctorParameters = [];
+    SessionStorageService.ctorParameters = function () { return []; };
     return SessionStorageService;
 }(WebStorageService));
 //# sourceMappingURL=sessionStorage.js.map

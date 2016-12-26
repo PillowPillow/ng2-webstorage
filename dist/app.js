@@ -34,9 +34,14 @@ export var Ng2Webstorage = (function () {
                 },] },
     ];
     /** @nocollapse */
-    Ng2Webstorage.ctorParameters = [
+    Ng2Webstorage.ctorParameters = function () { return [
         { type: NgZone, },
-    ];
+    ]; };
     return Ng2Webstorage;
 }());
+export function configure(_a) {
+    var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
+    KeyStorageHelper.setStorageKeyPrefix(prefix);
+    KeyStorageHelper.setStorageKeySeparator(separator);
+}
 //# sourceMappingURL=app.js.map

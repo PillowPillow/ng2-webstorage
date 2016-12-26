@@ -252,7 +252,7 @@ var LocalStorageService = (function (_super) {
         { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
-    LocalStorageService.ctorParameters = [];
+    LocalStorageService.ctorParameters = function () { return []; };
     return LocalStorageService;
 }(WebStorageService));
 
@@ -270,7 +270,7 @@ var SessionStorageService = (function (_super) {
         { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
-    SessionStorageService.ctorParameters = [];
+    SessionStorageService.ctorParameters = function () { return []; };
     return SessionStorageService;
 }(WebStorageService));
 
@@ -326,13 +326,19 @@ var Ng2Webstorage = (function () {
                 },] },
     ];
     /** @nocollapse */
-    Ng2Webstorage.ctorParameters = [
+    Ng2Webstorage.ctorParameters = function () { return [
         { type: _angular_core.NgZone, },
-    ];
+    ]; };
     return Ng2Webstorage;
 }());
+function configure(_a) {
+    var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
+    KeyStorageHelper.setStorageKeyPrefix(prefix);
+    KeyStorageHelper.setStorageKeySeparator(separator);
+}
 
 exports.Ng2Webstorage = Ng2Webstorage;
+exports.configure = configure;
 exports.LocalStorage = LocalStorage;
 exports.SessionStorage = SessionStorage;
 exports.WebStorage = WebStorage;

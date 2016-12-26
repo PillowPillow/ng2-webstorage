@@ -15,7 +15,7 @@ export var LocalStorageService = (function (_super) {
         { type: Injectable },
     ];
     /** @nocollapse */
-    LocalStorageService.ctorParameters = [];
+    LocalStorageService.ctorParameters = function () { return []; };
     return LocalStorageService;
 }(WebStorageService));
 //# sourceMappingURL=localStorage.js.map
