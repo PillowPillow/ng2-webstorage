@@ -43,7 +43,7 @@
 
 ### Fix 
 
-* **source map:** temporarily remove source map from umd version [source-map-loader issue](for webpack/source-map-loader#21)
+* **source map:** temporarily remove source map from umd version [source-map-loader issue](https://github.com/webpack/source-map-loader/pull/21)
 
 
 <a name="1.4.0">v1.4.0</a>
