@@ -36,3 +36,8 @@ export class Ng2Webstorage {
 	}
 
 }
+
+export function configure({prefix, separator}:ModuleConfig = {prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR}) {
+	KeyStorageHelper.setStorageKeyPrefix(prefix);
+	KeyStorageHelper.setStorageKeySeparator(separator);
+}
