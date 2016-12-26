@@ -50,8 +50,8 @@ It provides also two decorators to synchronize the component attributes and the 
 	import {Ng2Webstorage, configure} from 'ng2-webstorage';
 
 	configure({ prefix: 'custom', separator: '.' });
-
-	// import {Ng2Webstorage, configure: WebstorageConfigure} from 'ng2-webstorage'; // Don't forget you can make an alias if the configure key is already in use
+	
+	// import {Ng2Webstorage, configure as WebstorageConfigure} from 'ng2-webstorage'; // Don't forget you can make an alias if the configure key is already in use
 	// WebstorageConfigure({ prefix: 'custom', separator: '.' });
 
 	@NgModule({
@@ -264,7 +264,7 @@ export class FooComponent {
 ````
 
 
-###<a name="s_sessionStorage">`SessionStorageService`</a>
+###<a name="s_sessionstorage">`SessionStorageService`</a>
 > The api is identical as the LocalStorageService's
 
 ### <a name="decorators">Decorators</a>
