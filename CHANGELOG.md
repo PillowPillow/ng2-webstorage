@@ -20,7 +20,7 @@
   ```
   * After: 
   ```typescript
-		import {Ng2Webstorage, configure:WebstorageConfigure} from 'ng2-webstorage';
+		import {Ng2Webstorage, configure as WebstorageConfigure} from 'ng2-webstorage';
 
 		WebstorageConfigure({
 			separator: '.',
