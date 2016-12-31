@@ -1,1 +1,1 @@
-export declare const LocalStorage: (webstorageKey?: string) => (targetedClass: Object, raw: string) => void;
+export declare function LocalStorage(webSKey?: string): (targetedClass: Object, raw: string) => void;

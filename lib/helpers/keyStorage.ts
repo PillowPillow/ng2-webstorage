@@ -1,5 +1,6 @@
 import {IWebStorage} from '../interfaces/webStorage';
 import {LIB_KEY, LIB_KEY_SEPARATOR} from '../constants/lib';
+
 var CUSTOM_LIB_KEY = LIB_KEY;
 var CUSTOM_LIB_KEY_SEPARATOR = LIB_KEY_SEPARATOR;
 

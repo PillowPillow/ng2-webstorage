@@ -1,6 +1,9 @@
-import { WebStorage } from './webStorage';
+import { WebStorageDecorator } from './webStorage';
 import { STORAGE } from '../enums/storage';
-export var LocalStorage = function LocalStorageDecorator(webstorageKey) {
-    return WebStorage(webstorageKey, STORAGE.local);
-};
+export function LocalStorage(webSKey) {
+    return function (targetedClass, raw) {
+        WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw);
+    };
+}
+;
 //# sourceMappingURL=localStorage.js.map

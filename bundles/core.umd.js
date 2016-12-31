@@ -274,49 +274,89 @@ var SessionStorageService = (function (_super) {
     return SessionStorageService;
 }(WebStorageService));
 
-var WebStorage = function WebStorageDecorator(webSKey, sType) {
+var WebstorageConfig = (function () {
+    function WebstorageConfig(config) {
+        this.prefix = LIB_KEY;
+        this.separator = LIB_KEY_SEPARATOR;
+        if (config && config.prefix !== undefined) {
+            this.prefix = config.prefix;
+        }
+        if (config && config.separator !== undefined) {
+            this.separator = config.separator;
+        }
+    }
+    return WebstorageConfig;
+}());
+
+function WebStorage(webSKey, sType) {
     return function (targetedClass, raw) {
-        var key = webSKey || raw;
-        Object.defineProperty(targetedClass, raw, {
-            get: function () {
-                var sKey = KeyStorageHelper.genKey(key);
-                return WebStorageHelper.retrieve(sType, sKey);
-            },
-            set: function (value) {
-                var sKey = KeyStorageHelper.genKey(key);
-                this[sKey] = value;
-                WebStorageHelper.store(sType, sKey, value);
-            }
-        });
+        WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw);
     };
-};
+}
 
-var LocalStorage = function LocalStorageDecorator(webstorageKey) {
-    return WebStorage(webstorageKey, STORAGE.local);
-};
+function WebStorageDecorator(webSKey, sType, targetedClass, raw) {
+    var key = webSKey || raw;
+    Object.defineProperty(targetedClass, raw, {
+        get: function () {
+            var sKey = KeyStorageHelper.genKey(key);
+            return WebStorageHelper.retrieve(sType, sKey);
+        },
+        set: function (value) {
+            var sKey = KeyStorageHelper.genKey(key);
+            this[sKey] = value;
+            WebStorageHelper.store(sType, sKey, value);
+        }
+    });
+}
 
-var SessionStorage = function SessionStorageDecorator(webstorageKey) {
-    return WebStorage(webstorageKey, STORAGE.session);
-};
+function LocalStorage(webSKey) {
+    return function (targetedClass, raw) {
+        WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw);
+    };
+}
 
+function SessionStorage(webSKey) {
+    return function (targetedClass, raw) {
+        WebStorageDecorator(webSKey, STORAGE.session, targetedClass, raw);
+    };
+}
+
+var WEBSTORAGE_CONFIG = new _angular_core.OpaqueToken('WEBSTORAGE_CONFIG');
 var Ng2Webstorage = (function () {
-    function Ng2Webstorage(ngZone) {
+    function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
+        if (config) {
+            KeyStorageHelper.setStorageKeyPrefix(config.prefix);
+            KeyStorageHelper.setStorageKeySeparator(config.separator);
+        }
         this.initStorageListener();
     }
-    Ng2Webstorage.forRoot = function (_a) {
-        var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
-        KeyStorageHelper.setStorageKeyPrefix(prefix);
-        KeyStorageHelper.setStorageKeySeparator(separator);
-        return { ngModule: Ng2Webstorage, providers: [] };
+    Ng2Webstorage.forRoot = function (config) {
+        return {
+            ngModule: Ng2Webstorage,
+            providers: [
+                {
+                    provide: WEBSTORAGE_CONFIG,
+                    useValue: config
+                },
+                {
+                    provide: WebstorageConfig,
+                    useFactory: provideConfig,
+                    deps: [
+                        WEBSTORAGE_CONFIG
+                    ]
+                }
+            ]
+        };
     };
     Ng2Webstorage.prototype.initStorageListener = function () {
         var _this = this;
-        if (window)
+        if (window) {
             window.addEventListener('storage', function (event) { return _this.ngZone.run(function () {
                 var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
                 WebStorageHelper.refresh(storage, event.key);
             }); });
+        }
     };
     Ng2Webstorage.decorators = [
         { type: _angular_core.NgModule, args: [{
@@ -328,20 +368,30 @@ var Ng2Webstorage = (function () {
     /** @nocollapse */
     Ng2Webstorage.ctorParameters = function () { return [
         { type: _angular_core.NgZone, },
+        { type: WebstorageConfig, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [WebstorageConfig,] },] },
     ]; };
     return Ng2Webstorage;
 }());
+function provideConfig(config) {
+    return new WebstorageConfig(config);
+}
 function configure(_a) {
     var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
+    /*@Deprecation*/
+    console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
     KeyStorageHelper.setStorageKeyPrefix(prefix);
     KeyStorageHelper.setStorageKeySeparator(separator);
 }
 
+exports.WEBSTORAGE_CONFIG = WEBSTORAGE_CONFIG;
 exports.Ng2Webstorage = Ng2Webstorage;
+exports.provideConfig = provideConfig;
 exports.configure = configure;
+exports.WebstorageConfig = WebstorageConfig;
 exports.LocalStorage = LocalStorage;
 exports.SessionStorage = SessionStorage;
 exports.WebStorage = WebStorage;
+exports.WebStorageDecorator = WebStorageDecorator;
 exports.WebStorageService = WebStorageService;
 exports.LocalStorageService = LocalStorageService;
 exports.SessionStorageService = SessionStorageService;
