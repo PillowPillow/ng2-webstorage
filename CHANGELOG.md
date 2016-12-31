@@ -1,3 +1,39 @@
+<a name="1.5.0">v1.5.0</a>
+
+### Deprecation 
+
+* **AoT compilation:** Fixed forRoot method to be compliant with AoT compilations
+- Example:
+  * Before: 
+  ```typescript
+		import {Ng2Webstorage, configure as WebstorageConfigure} from 'ng2-webstorage';
+
+		WebstorageConfigure({
+			separator: '.',
+			prefix: 'custom'
+		});
+		
+		@NgModule({
+			imports: [Ng2Webstorage],
+		})
+		export class AppModule {}
+	```
+
+  * After: 
+  ```typescript
+		import {Ng2Webstorage} from 'ng2-webstorage';
+
+		@NgModule({
+			imports: [
+				Ng2Webstorage.forRoot({
+					separator: '.',
+					prefix: 'custom'
+				})
+			],
+		})
+		export class AppModule {}
+  ```
+
 <a name="1.4.3">v1.4.3</a>
 
 ### Features 
