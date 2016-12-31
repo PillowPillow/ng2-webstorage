@@ -1,15 +1,15 @@
 import {LIB_KEY, LIB_KEY_SEPARATOR} from '../constants/lib';
 
-export interface WebstorageConfigInterface {
-	prefix?: string,
-	separator?: string
+export interface IWebstorageConfig {
+	prefix?: string;
+	separator?: string;
 }
 
-export class WebstorageConfig implements WebstorageConfigInterface {
+export class WebstorageConfig implements IWebstorageConfig {
 	prefix: string = LIB_KEY;
 	separator: string = LIB_KEY_SEPARATOR;
 
-	constructor(config?: WebstorageConfigInterface) {
+	constructor(config?: IWebstorageConfig) {
 		if (config && config.prefix !== undefined) {
 			this.prefix = config.prefix;
 		}

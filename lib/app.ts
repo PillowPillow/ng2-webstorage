@@ -3,7 +3,7 @@ import {LIB_KEY, LIB_KEY_SEPARATOR} from './constants/lib';
 import {STORAGE} from './enums/storage';
 import {LocalStorageService, SessionStorageService} from './services/index';
 import {WebStorageHelper} from './helpers/webStorage';
-import {WebstorageConfig, WebstorageConfigInterface} from './interfaces/config';
+import {WebstorageConfig, IWebstorageConfig} from './interfaces/config';
 import {KeyStorageHelper} from './helpers/keyStorage';
 
 export * from './interfaces/index';
@@ -19,7 +19,7 @@ export const WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
 })
 export class Ng2Webstorage {
 
-	static forRoot(config?: WebstorageConfigInterface):ModuleWithProviders {
+	static forRoot(config?: IWebstorageConfig):ModuleWithProviders {
 		return {
 			ngModule: Ng2Webstorage,
 			providers: [
@@ -39,12 +39,12 @@ export class Ng2Webstorage {
 	}
 
 	constructor(private ngZone:NgZone, @Optional() @Inject(WebstorageConfig) config:WebstorageConfig) {
-		this.initStorageListener();
-
 		if(config) {
 			KeyStorageHelper.setStorageKeyPrefix(config.prefix);
 			KeyStorageHelper.setStorageKeySeparator(config.separator);
 		}
+
+		this.initStorageListener();
 	}
 
 	private initStorageListener() {
@@ -57,12 +57,14 @@ export class Ng2Webstorage {
 	}
 }
 
-export function provideConfig(config: WebstorageConfigInterface): WebstorageConfig {
+export function provideConfig(config: IWebstorageConfig): WebstorageConfig {
 	return new WebstorageConfig(config);
 }
 
-// This is for backwards compatibility only
-export function configure({prefix, separator}:WebstorageConfigInterface = {prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR}) {
+export function configure({prefix, separator}:IWebstorageConfig = {prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR}) {
+	/*@Deprecation*/
+	console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
+
 	KeyStorageHelper.setStorageKeyPrefix(prefix);
 	KeyStorageHelper.setStorageKeySeparator(separator);
 }
