@@ -1,9 +1,9 @@
-export interface WebstorageConfigInterface {
+export interface IWebstorageConfig {
     prefix?: string;
     separator?: string;
 }
-export declare class WebstorageConfig implements WebstorageConfigInterface {
+export declare class WebstorageConfig implements IWebstorageConfig {
     prefix: string;
     separator: string;
-    constructor(config?: WebstorageConfigInterface);
+    constructor(config?: IWebstorageConfig);
 }

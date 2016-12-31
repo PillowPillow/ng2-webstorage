@@ -12,11 +12,11 @@ export var WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
 export var Ng2Webstorage = (function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
-        this.initStorageListener();
         if (config) {
             KeyStorageHelper.setStorageKeyPrefix(config.prefix);
             KeyStorageHelper.setStorageKeySeparator(config.separator);
         }
+        this.initStorageListener();
     }
     Ng2Webstorage.forRoot = function (config) {
         return {
@@ -62,9 +62,10 @@ export var Ng2Webstorage = (function () {
 export function provideConfig(config) {
     return new WebstorageConfig(config);
 }
-// This is for backwards compatibility only
 export function configure(_a) {
     var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
+    /*@Deprecation*/
+    console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
     KeyStorageHelper.setStorageKeyPrefix(prefix);
     KeyStorageHelper.setStorageKeySeparator(separator);
 }
