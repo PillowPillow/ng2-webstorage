@@ -8,6 +8,7 @@ import { KeyStorageHelper } from './helpers/keyStorage';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
+export * from './helpers/index';
 export var WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
 export var Ng2Webstorage = (function () {
     function Ng2Webstorage(ngZone, config) {

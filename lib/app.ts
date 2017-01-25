@@ -9,6 +9,8 @@ import {KeyStorageHelper} from './helpers/keyStorage';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
+export * from './helpers/index';
+
 
 export const WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
 
