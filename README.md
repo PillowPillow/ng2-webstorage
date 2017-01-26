@@ -294,6 +294,24 @@ export class FooComponent {
 }
 ````
 
+### <a name="helpers">Helpers</a>
+--------------------
+
+###<a name="d_keyStorageHelper">`@KeyStorageHelper`</a>
+> Allows to dynamically change storage key prefix and separator 
+> and get list of storage keys
+
+````typescript
+import {KeyStorageHelper} from 'ng2-webstorage';
+import {LocalStorage} from 'ng2-webstorage';
+
+KeyStorageHelper.setStorageKeyPrefix('new-prefix-');
+KeyStorageHelper.setStorageKeySeparator('-');
+let list = KeyStorageHelper.retrieveKeysFromStorage(LocalStorage);
+
+````
+
+
 ### <a name="modifBuild">Modify and build</a>
 --------------------
 

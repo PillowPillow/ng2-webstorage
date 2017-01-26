@@ -3,6 +3,7 @@ import { WebstorageConfig, IWebstorageConfig } from './interfaces/config';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
+export * from './helpers/keyStorage';
 export declare const WEBSTORAGE_CONFIG: OpaqueToken;
 export declare class Ng2Webstorage {
     private ngZone;
