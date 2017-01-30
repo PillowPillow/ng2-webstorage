@@ -15,6 +15,7 @@ It provides also two decorators to synchronize the component attributes and the 
 * [Decorators](#decorators):
 	* [@LocalStorage](#d_localstorage)
 	* [@SessionStorage](#d_sessionStorage)
+* [Known issues](#knownissues)
 * [Modify and build](#modifBuild)
 
 ------------
@@ -294,6 +295,32 @@ export class FooComponent {
 }
 ````
 
+### <a name="knownissues">Known issues</a>
+--------------------
+
+- *Serialization doesn't work for objects:* 
+
+Ng2Webstorage's decorators are based upon accessors so the update trigger only on assignation. 
+Consequence, if you change the value of a bound object's property the new model will not be store properly. The same thing will happen with a push into a bound array. 
+To handle this cases you have to trigger manually the accessor.
+
+````typescript
+import {LocalStorage} from 'ng2-webstorage';
+
+class FooBar {
+
+    @LocalStorage('prop')
+    myArray;
+
+    updateValue() {
+        this.myArray.push('foobar');
+        this.myArray = this.myArray; //does the trick
+    }
+
+}
+````
+
+
 ### <a name="modifBuild">Modify and build</a>
 --------------------
 
@@ -304,4 +331,3 @@ export class FooComponent {
 *Start the unit tests:* `npm run test:watch`
 
 *Start the dev server:* `npm run dev` then go to *http://localhost:8080/webpack-dev-server/index.html*
-
