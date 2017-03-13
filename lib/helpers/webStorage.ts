@@ -37,7 +37,11 @@ export class WebStorageHelper {
 		if(!KeyStorageHelper.isManagedKey(sKey)) return;
 
 		let value = WebStorageHelper.retrieveFromStorage(sType, sKey);
-		if(value != null && value !== this.cached[sType][sKey]) {
+		if(value === null) {
+			delete this.cached[sType][sKey];
+			StorageObserverHelper.emit(sType, sKey, null);
+		}
+		else if(value !== this.cached[sType][sKey]) {
 			this.cached[sType][sKey] = value;
 			StorageObserverHelper.emit(sType, sKey, value);
 		}
