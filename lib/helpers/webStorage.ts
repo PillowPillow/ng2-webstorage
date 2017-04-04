@@ -86,17 +86,18 @@ export class WebStorageHelper {
 		if(typeof this.storageAvailability[sType] === 'boolean')
 			return this.storageAvailability[sType];
 
-		let isAvailable = true, storage = this.getWStorage(sType);
+		let isAvailable = true;
 
-		if(typeof storage === 'object') {
-			try {
-				storage.setItem('test-storage', 'foobar');
-				storage.removeItem('test-storage');
-			} catch(e) {
+		try {
+			var storage = this.getWStorage(sType);
+			if (typeof storage === 'object') {
 				isAvailable = false;
 			}
+			storage.setItem('test-storage', 'foobar');
+			storage.removeItem('test-storage');
+		} catch(e) {
+			isAvailable = false;
 		}
-		else isAvailable = false;
 
 		if(!isAvailable) console.warn(`${STORAGE_NAMES[sType]} storage unavailable, Ng2Webstorage will use a fallback strategy instead`);
 		return this.storageAvailability[sType] = isAvailable;
