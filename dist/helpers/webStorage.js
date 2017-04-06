@@ -3,18 +3,20 @@ import { StorageObserverHelper } from './storageObserver';
 import { KeyStorageHelper } from './keyStorage';
 import { MockStorageHelper } from './mockStorage';
 import { STORAGE_NAMES } from '../constants/lib';
-export var WebStorageHelper = (function () {
+var CACHED = (_a = {}, _a[STORAGE.local] = {}, _a[STORAGE.session] = {}, _a);
+var STORAGEAVAILABILITY = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
+var WebStorageHelper = (function () {
     function WebStorageHelper() {
     }
     WebStorageHelper.store = function (sType, sKey, value) {
         this.getStorage(sType).setItem(sKey, JSON.stringify(value));
-        this.cached[sType][sKey] = value;
+        CACHED[sType][sKey] = value;
         StorageObserverHelper.emit(sType, sKey, value);
     };
     WebStorageHelper.retrieve = function (sType, sKey) {
-        if (this.cached[sType][sKey])
-            return this.cached[sType][sKey];
-        return this.cached[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+        if (CACHED[sType][sKey])
+            return CACHED[sType][sKey];
+        return CACHED[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
     };
     WebStorageHelper.retrieveFromStorage = function (sType, sKey) {
         var data = null;
@@ -31,31 +33,33 @@ export var WebStorageHelper = (function () {
             return;
         var value = WebStorageHelper.retrieveFromStorage(sType, sKey);
         if (value === null) {
-            delete this.cached[sType][sKey];
+            delete CACHED[sType][sKey];
             StorageObserverHelper.emit(sType, sKey, null);
         }
-        else if (value !== this.cached[sType][sKey]) {
-            this.cached[sType][sKey] = value;
+        else if (value !== CACHED[sType][sKey]) {
+            CACHED[sType][sKey] = value;
             StorageObserverHelper.emit(sType, sKey, value);
         }
     };
     WebStorageHelper.clearAll = function (sType) {
-        var _this = this;
         var storage = this.getStorage(sType);
         KeyStorageHelper.retrieveKeysFromStorage(storage)
             .forEach(function (sKey) {
             storage.removeItem(sKey);
-            delete _this.cached[sType][sKey];
+            delete CACHED[sType][sKey];
             StorageObserverHelper.emit(sType, sKey, null);
         });
     };
     WebStorageHelper.clear = function (sType, sKey) {
         this.getStorage(sType).removeItem(sKey);
-        delete this.cached[sType][sKey];
+        delete CACHED[sType][sKey];
         StorageObserverHelper.emit(sType, sKey, null);
     };
     WebStorageHelper.getStorage = function (sType) {
-        return this.isStorageAvailable(sType) ? this.getWStorage(sType) : MockStorageHelper.getStorage(sType);
+        if (this.isStorageAvailable(sType))
+            return this.getWStorage(sType);
+        else
+            MockStorageHelper.getStorage(sType);
     };
     WebStorageHelper.getWStorage = function (sType) {
         var storage;
@@ -72,8 +76,8 @@ export var WebStorageHelper = (function () {
         return storage;
     };
     WebStorageHelper.isStorageAvailable = function (sType) {
-        if (typeof this.storageAvailability[sType] === 'boolean')
-            return this.storageAvailability[sType];
+        if (typeof STORAGEAVAILABILITY[sType] === 'boolean')
+            return STORAGEAVAILABILITY[sType];
         var isAvailable = true, storage = this.getWStorage(sType);
         if (typeof storage === 'object') {
             try {
@@ -88,11 +92,10 @@ export var WebStorageHelper = (function () {
             isAvailable = false;
         if (!isAvailable)
             console.warn(STORAGE_NAMES[sType] + " storage unavailable, Ng2Webstorage will use a fallback strategy instead");
-        return this.storageAvailability[sType] = isAvailable;
+        return STORAGEAVAILABILITY[sType] = isAvailable;
     };
-    WebStorageHelper.cached = (_a = {}, _a[STORAGE.local] = {}, _a[STORAGE.session] = {}, _a);
-    WebStorageHelper.storageAvailability = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
     return WebStorageHelper;
-    var _a, _b;
 }());
+export { WebStorageHelper };
+var _a, _b;
 //# sourceMappingURL=webStorage.js.map

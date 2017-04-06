@@ -9,7 +9,7 @@ export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
 export var WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
-export var Ng2Webstorage = (function () {
+var Ng2Webstorage = (function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
         if (config) {
@@ -45,20 +45,21 @@ export var Ng2Webstorage = (function () {
             }); });
         }
     };
-    Ng2Webstorage.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [],
-                    providers: [SessionStorageService, LocalStorageService],
-                    imports: []
-                },] },
-    ];
-    /** @nocollapse */
-    Ng2Webstorage.ctorParameters = function () { return [
-        { type: NgZone, },
-        { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
-    ]; };
     return Ng2Webstorage;
 }());
+export { Ng2Webstorage };
+Ng2Webstorage.decorators = [
+    { type: NgModule, args: [{
+                declarations: [],
+                providers: [SessionStorageService, LocalStorageService],
+                imports: []
+            },] },
+];
+/** @nocollapse */
+Ng2Webstorage.ctorParameters = function () { return [
+    { type: NgZone, },
+    { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
+]; };
 export function provideConfig(config) {
     return new WebstorageConfig(config);
 }

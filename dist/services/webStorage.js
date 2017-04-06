@@ -1,5 +1,5 @@
 import { KeyStorageHelper, WebStorageHelper, StorageObserverHelper } from '../helpers/index';
-export var WebStorageService = (function () {
+var WebStorageService = (function () {
     function WebStorageService(sType) {
         if (sType === void 0) { sType = null; }
         this.sType = sType;
@@ -25,4 +25,5 @@ export var WebStorageService = (function () {
     };
     return WebStorageService;
 }());
+export { WebStorageService };
 //# sourceMappingURL=webStorage.js.map

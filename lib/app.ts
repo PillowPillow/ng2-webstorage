@@ -19,7 +19,7 @@ export const WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
 })
 export class Ng2Webstorage {
 
-	static forRoot(config?: IWebstorageConfig):ModuleWithProviders {
+	static forRoot(config?:IWebstorageConfig):ModuleWithProviders {
 		return {
 			ngModule: Ng2Webstorage,
 			providers: [
@@ -57,7 +57,7 @@ export class Ng2Webstorage {
 	}
 }
 
-export function provideConfig(config: IWebstorageConfig): WebstorageConfig {
+export function provideConfig(config:IWebstorageConfig):WebstorageConfig {
 	return new WebstorageConfig(config);
 }
 

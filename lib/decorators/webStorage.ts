@@ -5,7 +5,7 @@ export function WebStorage(webSKey:string, sType:STORAGE) {
 	return function(targetedClass:Object, raw:string) {
 		WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw);
 	};
-};
+}
 
 export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass:Object, raw:string) {
 	let key = webSKey || raw;
@@ -20,4 +20,4 @@ export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass
 			WebStorageHelper.store(sType, sKey, value);
 		}
 	});
-};
+}

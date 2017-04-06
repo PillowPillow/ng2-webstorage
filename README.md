@@ -1,5 +1,5 @@
 # ng2-webstorage
-###Local and session storage - angular2 service (*typescript*)
+###Local and session storage - angular4 service
 =======================
 
 This library provides an easy to use service to manage the web storages (local and session) from your ng2 application.

@@ -1,3 +1,13 @@
+<a name="1.6.0">v1.6.0</a>
+
+### Features 
+
+* **ANGULAR 4 Compliant:** The library is now compliant with the ng4 compiler [#23](https://github.com/PillowPillow/ng2-webstorage/issues/23)
+
+### PEER-DEPENDENCY UPDATES ###
+
+* **angular**: @angular/...4.0.1
+
 <a name="1.5.0">v1.5.0</a>
 
 ### Deprecation 

@@ -18,7 +18,7 @@ export class StorageObserverHelper {
 	}
 
 	static genObserverKey(sType:STORAGE, sKey:string):string {
-		return `${sType}|${sKey}`;
+		return sType + '|' + sKey;
 	}
 
 }

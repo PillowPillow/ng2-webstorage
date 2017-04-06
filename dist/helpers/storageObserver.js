@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-export var StorageObserverHelper = (function () {
+var StorageObserverHelper = (function () {
     function StorageObserverHelper() {
     }
     StorageObserverHelper.observe = function (sType, sKey) {
@@ -14,9 +14,10 @@ export var StorageObserverHelper = (function () {
             this.observers[oKey].emit(value);
     };
     StorageObserverHelper.genObserverKey = function (sType, sKey) {
-        return sType + "|" + sKey;
+        return sType + '|' + sKey;
     };
-    StorageObserverHelper.observers = {};
     return StorageObserverHelper;
 }());
+export { StorageObserverHelper };
+StorageObserverHelper.observers = {};
 //# sourceMappingURL=storageObserver.js.map

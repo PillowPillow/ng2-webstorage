@@ -5,20 +5,20 @@ import {KeyStorageHelper} from './keyStorage';
 import {MockStorageHelper} from './mockStorage';
 import {STORAGE_NAMES} from '../constants/lib';
 
-export class WebStorageHelper {
+const CACHED = {[STORAGE.local]: {}, [STORAGE.session]: {}};
+const STORAGEAVAILABILITY = {[STORAGE.local]: null, [STORAGE.session]: null};
 
-	static cached = {[STORAGE.local]: {}, [STORAGE.session]: {}};
-	static storageAvailability = {[STORAGE.local]: null, [STORAGE.session]: null};
+export class WebStorageHelper {
 
 	static store(sType:STORAGE, sKey:string, value:any):void {
 		this.getStorage(sType).setItem(sKey, JSON.stringify(value));
-		this.cached[sType][sKey] = value;
+		CACHED[sType][sKey] = value;
 		StorageObserverHelper.emit(sType, sKey, value);
 	}
 
 	static retrieve(sType:STORAGE, sKey:string):string {
-		if(this.cached[sType][sKey]) return this.cached[sType][sKey];
-		return this.cached[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+		if(CACHED[sType][sKey]) return CACHED[sType][sKey];
+		return CACHED[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
 	}
 
 	static retrieveFromStorage(sType:STORAGE, sKey:string) {
@@ -38,11 +38,11 @@ export class WebStorageHelper {
 
 		let value = WebStorageHelper.retrieveFromStorage(sType, sKey);
 		if(value === null) {
-			delete this.cached[sType][sKey];
+			delete CACHED[sType][sKey];
 			StorageObserverHelper.emit(sType, sKey, null);
 		}
-		else if(value !== this.cached[sType][sKey]) {
-			this.cached[sType][sKey] = value;
+		else if(value !== CACHED[sType][sKey]) {
+			CACHED[sType][sKey] = value;
 			StorageObserverHelper.emit(sType, sKey, value);
 		}
 	}
@@ -52,19 +52,21 @@ export class WebStorageHelper {
 		KeyStorageHelper.retrieveKeysFromStorage(storage)
 		.forEach((sKey) => {
 			storage.removeItem(sKey);
-			delete this.cached[sType][sKey];
+			delete CACHED[sType][sKey];
 			StorageObserverHelper.emit(sType, sKey, null);
 		});
 	}
 
 	static clear(sType:STORAGE, sKey:string):void {
 		this.getStorage(sType).removeItem(sKey);
-		delete this.cached[sType][sKey];
+		delete CACHED[sType][sKey];
 		StorageObserverHelper.emit(sType, sKey, null);
 	}
 
 	static getStorage(sType:STORAGE):IWebStorage {
-		return this.isStorageAvailable(sType) ? this.getWStorage(sType) : MockStorageHelper.getStorage(sType);
+		if(this.isStorageAvailable(sType))
+			return this.getWStorage(sType);
+		else MockStorageHelper.getStorage(sType);
 	}
 
 	static getWStorage(sType:STORAGE):IWebStorage {
@@ -83,8 +85,8 @@ export class WebStorageHelper {
 	}
 
 	static isStorageAvailable(sType:STORAGE) {
-		if(typeof this.storageAvailability[sType] === 'boolean')
-			return this.storageAvailability[sType];
+		if(typeof STORAGEAVAILABILITY[sType] === 'boolean')
+			return STORAGEAVAILABILITY[sType];
 
 		let isAvailable = true, storage = this.getWStorage(sType);
 
@@ -99,7 +101,7 @@ export class WebStorageHelper {
 		else isAvailable = false;
 
 		if(!isAvailable) console.warn(`${STORAGE_NAMES[sType]} storage unavailable, Ng2Webstorage will use a fallback strategy instead`);
-		return this.storageAvailability[sType] = isAvailable;
+		return STORAGEAVAILABILITY[sType] = isAvailable;
 	}
 
 }

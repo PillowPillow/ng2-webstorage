@@ -1,4 +1,4 @@
-export var MockStorageHelper = (function () {
+var MockStorageHelper = (function () {
     function MockStorageHelper() {
     }
     MockStorageHelper.isSecuredField = function (field) {
@@ -48,8 +48,9 @@ export var MockStorageHelper = (function () {
         });
         return storage;
     };
-    MockStorageHelper.securedFields = ['setItem', 'getItem', 'removeItem', 'length'];
-    MockStorageHelper.mockStorages = {};
     return MockStorageHelper;
 }());
+export { MockStorageHelper };
+MockStorageHelper.securedFields = ['setItem', 'getItem', 'removeItem', 'length'];
+MockStorageHelper.mockStorages = {};
 //# sourceMappingURL=mockStorage.js.map
