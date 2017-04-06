@@ -66,7 +66,8 @@ export class WebStorageHelper {
 	static getStorage(sType:STORAGE):IWebStorage {
 		if(this.isStorageAvailable(sType))
 			return this.getWStorage(sType);
-		else MockStorageHelper.getStorage(sType);
+		else
+			return MockStorageHelper.getStorage(sType);
 	}
 
 	static getWStorage(sType:STORAGE):IWebStorage {
