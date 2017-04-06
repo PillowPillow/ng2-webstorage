@@ -50,11 +50,11 @@ export class WebStorageHelper {
 	static clearAll(sType:STORAGE):void {
 		let storage:IWebStorage = this.getStorage(sType);
 		KeyStorageHelper.retrieveKeysFromStorage(storage)
-		.forEach((sKey) => {
-			storage.removeItem(sKey);
-			delete CACHED[sType][sKey];
-			StorageObserverHelper.emit(sType, sKey, null);
-		});
+			.forEach((sKey) => {
+				storage.removeItem(sKey);
+				delete CACHED[sType][sKey];
+				StorageObserverHelper.emit(sType, sKey, null);
+			});
 	}
 
 	static clear(sType:STORAGE, sKey:string):void {
@@ -88,15 +88,14 @@ export class WebStorageHelper {
 		if(typeof STORAGEAVAILABILITY[sType] === 'boolean')
 			return STORAGEAVAILABILITY[sType];
 
-		let isAvailable = true;
-
+		let isAvailable = true, storage;
 		try {
-			var storage = this.getWStorage(sType);
-			if (typeof storage === 'object') {
-				isAvailable = false;
+			storage = this.getWStorage(sType);
+			if(typeof storage === 'object') {
+				storage.setItem('test-storage', 'foobar');
+				storage.removeItem('test-storage');
 			}
-			storage.setItem('test-storage', 'foobar');
-			storage.removeItem('test-storage');
+			else isAvailable = false;
 		} catch(e) {
 			isAvailable = false;
 		}
