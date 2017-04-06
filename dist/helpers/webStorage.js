@@ -59,7 +59,7 @@ var WebStorageHelper = (function () {
         if (this.isStorageAvailable(sType))
             return this.getWStorage(sType);
         else
-            MockStorageHelper.getStorage(sType);
+            return MockStorageHelper.getStorage(sType);
     };
     WebStorageHelper.getWStorage = function (sType) {
         var storage;
