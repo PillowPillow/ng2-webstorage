@@ -5,7 +5,6 @@ export function WebStorage(webSKey, sType) {
         WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw);
     };
 }
-;
 export function WebStorageDecorator(webSKey, sType, targetedClass, raw) {
     var key = webSKey || raw;
     Object.defineProperty(targetedClass, raw, {
@@ -20,5 +19,4 @@ export function WebStorageDecorator(webSKey, sType, targetedClass, raw) {
         }
     });
 }
-;
 //# sourceMappingURL=webStorage.js.map

@@ -1,5 +1,5 @@
 import { LIB_KEY, LIB_KEY_SEPARATOR } from '../constants/lib';
-export var WebstorageConfig = (function () {
+var WebstorageConfig = (function () {
     function WebstorageConfig(config) {
         this.prefix = LIB_KEY;
         this.separator = LIB_KEY_SEPARATOR;
@@ -12,4 +12,5 @@ export var WebstorageConfig = (function () {
     }
     return WebstorageConfig;
 }());
+export { WebstorageConfig };
 //# sourceMappingURL=config.js.map
