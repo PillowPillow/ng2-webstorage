@@ -1,3 +1,56 @@
+<a name="1.7.0">v1.7.0</a>
+
+### Features 
+
+* **Options:** The library offers a new options *caseSensitive* [#42](https://github.com/PillowPillow/ng2-webstorage/issues/42)
+- Example:
+  * Before: 
+  ```typescript
+		import {Ng2Webstorage, LocalStorage} from 'ng2-webstorage';
+
+		@NgModule({
+			imports: [
+				Ng2Webstorage.forRoot({
+					caseSensitive: true
+				})
+			],
+		})
+		export class AppModule {}
+
+		@Component({...})
+		class FooComponent {
+			@LocalStorage('foobar') foobar; 
+			@LocalStorage('Foobar') Foobar; 
+			// Before 1.7 the two binding above had the same value
+		}
+	```
+
+  * After: 
+  ```typescript
+		import {Ng2Webstorage, LocalStorage} from 'ng2-webstorage';
+
+		@NgModule({
+			imports: [
+				Ng2Webstorage.forRoot({
+					caseSensitive: true
+				})
+			],
+		})
+		export class AppModule {}
+
+		@Component({...})
+		class FooComponent {
+			@LocalStorage('foobar') foobar = 2; 
+			@LocalStorage('Foobar') Foobar = 3;
+	
+	 		show() {
+				console.log(this.foobar); // 2		
+				console.log(this.Foobar); // 3
+			} 
+		}
+  ```
+
+
 <a name="1.6.0">v1.6.0</a>
 
 ### Features 
