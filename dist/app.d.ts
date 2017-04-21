@@ -11,4 +11,4 @@ export declare class Ng2Webstorage {
     private initStorageListener();
 }
 export declare function provideConfig(config: IWebstorageConfig): WebstorageConfig;
-export declare function configure({prefix, separator}?: IWebstorageConfig): void;
+export declare function configure({prefix, separator, caseSensitive}?: IWebstorageConfig): void;

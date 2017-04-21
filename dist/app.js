@@ -1,5 +1,5 @@
 import { NgModule, NgZone, OpaqueToken, Inject, Optional } from '@angular/core';
-import { LIB_KEY, LIB_KEY_SEPARATOR } from './constants/lib';
+import { LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE } from './constants/lib';
 import { STORAGE } from './enums/storage';
 import { LocalStorageService, SessionStorageService } from './services/index';
 import { WebStorageHelper } from './helpers/webStorage';
@@ -15,6 +15,7 @@ var Ng2Webstorage = (function () {
         if (config) {
             KeyStorageHelper.setStorageKeyPrefix(config.prefix);
             KeyStorageHelper.setStorageKeySeparator(config.separator);
+            KeyStorageHelper.setCaseSensitivity(config.caseSensitive);
         }
         this.initStorageListener();
     }
@@ -38,7 +39,7 @@ var Ng2Webstorage = (function () {
     };
     Ng2Webstorage.prototype.initStorageListener = function () {
         var _this = this;
-        if (window) {
+        if (typeof window !== 'undefined') {
             window.addEventListener('storage', function (event) { return _this.ngZone.run(function () {
                 var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
                 WebStorageHelper.refresh(storage, event.key);
@@ -64,10 +65,15 @@ export function provideConfig(config) {
     return new WebstorageConfig(config);
 }
 export function configure(_a) {
-    var _b = _a === void 0 ? { prefix: LIB_KEY, separator: LIB_KEY_SEPARATOR } : _a, prefix = _b.prefix, separator = _b.separator;
+    var _b = _a === void 0 ? {
+        caseSensitive: LIB_KEY_CASE_SENSITIVE,
+        prefix: LIB_KEY,
+        separator: LIB_KEY_SEPARATOR
+    } : _a, prefix = _b.prefix, separator = _b.separator, caseSensitive = _b.caseSensitive;
     /*@Deprecation*/
     console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
     KeyStorageHelper.setStorageKeyPrefix(prefix);
     KeyStorageHelper.setStorageKeySeparator(separator);
+    KeyStorageHelper.setCaseSensitivity(caseSensitive);
 }
 //# sourceMappingURL=app.js.map
