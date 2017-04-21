@@ -1,3 +1,35 @@
+<a name="1.8.0">v1.8.0</a>
+
+### Features 
+
+* **Decorators:** The decorators now handle a default value [#43](https://github.com/PillowPillow/ng2-webstorage/issues/43)
+- Example:
+  * Before: 
+  ```typescript
+		import {LocalStorage} from 'ng2-webstorage';
+
+		@Component({...})
+		class FooComponent implements OnInit {
+			@LocalStorage('foobar') foobar; 
+	
+			ngOnInit() {
+				let storedValue = this.storage.retrieve('foobar');
+				if(!storedValue) this.foobar = 'default value';
+			}
+		}
+	```
+
+  * After: 
+  ```typescript
+		import {LocalStorage} from 'ng2-webstorage';
+
+		@Component({...})
+		class FooComponent implements OnInit {
+			@LocalStorage('foobar', 'default value') foobar; 
+		}
+  ```
+ 
+
 <a name="1.7.0">v1.7.0</a>
 
 ### Features 
