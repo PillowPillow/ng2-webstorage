@@ -20,7 +20,7 @@ export class AppForm implements OnInit {
 
 	@SessionStorage('variable')
 	public sessionBind;
-	@LocalStorage('variable')
+	@LocalStorage('variable', 'default value')
 	public localBind;
 
 	constructor(private fb: FormBuilder, private sessionS: SessionStorageService) {}
