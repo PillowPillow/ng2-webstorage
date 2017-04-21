@@ -47,8 +47,8 @@ describe('helper:keyStorage', () => {
 
 			let rawKey;
 
-			rawKey = 'key';
-			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey}`);
+			rawKey = 'Key';
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey.toLowerCase()}`);
 
 		});
 
@@ -64,6 +64,17 @@ describe('helper:keyStorage', () => {
 
 		});
 
+	});
+
+	describe('setCaseSensitivity', () => {
+		it('should disable the key transformation', () => {
+
+			let rawKey;
+			KeyStorageHelper.setCaseSensitivity(true);
+			rawKey = 'Key';
+			expect(KeyStorageHelper.genKey(rawKey)).toEqual(`${LIB_KEY}${LIB_KEY_SEPARATOR}${rawKey}`);
+			KeyStorageHelper.setCaseSensitivity(false);
+		});
 	});
 
 	describe('isManagedKey', () => {
@@ -114,7 +125,6 @@ describe('helper:keyStorage', () => {
 
 			generatedKeys.forEach((key) => sessionStorage.setItem(key, key));
 			generatedKeys.forEach((key) => localStorage.setItem(key, key));
-
 
 			sKeys = KeyStorageHelper.retrieveKeysFromStorage(localStorage);
 			expect(sKeys.length).toEqual(generatedKeys.length);
