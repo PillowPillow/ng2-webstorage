@@ -1,5 +1,5 @@
 {
-  "name": "ng2-webstorage",
+  "name": "ngx-webstorage",
   "version": "1.8.0",
   "description": "angular2 webstorage manager",
   "main": "bundles/core.umd.js",

@@ -1,4 +1,4 @@
-# ng2-webstorage
+# ngx-webstorage
 ###Local and session storage - angular4 service
 =======================
 
@@ -22,7 +22,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 ### <a name="gstart">Getting Started</a>
 
-1. Download the library using npm `npm install --save ng2-webstorage`
+1. Download the library using npm `npm install --save ngx-webstorage`
 2. Register the library in your module
 
 	```typescript
