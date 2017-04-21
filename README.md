@@ -28,7 +28,7 @@ It provides also two decorators to synchronize the component attributes and the 
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
-	import {Ng2Webstorage} from 'ng2-webstorage';
+	import {Ng2Webstorage} from 'ngx-webstorage';
 
 	@NgModule({
 		declarations: [...],
@@ -38,7 +38,7 @@ It provides also two decorators to synchronize the component attributes and the 
 			//Ng2Webstorage.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
 			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
-			// prefix: "ng2-webstorage"
+			// prefix: "ngx-webstorage"
 			// separator: "|"
 			// caseSensitive: false
 		],
@@ -54,11 +54,11 @@ It provides also two decorators to synchronize the component attributes and the 
 		System.config({
 			map: { 
 				...,
-				'ng2-webstorage': 'node_modules/ng2-webstorage'
+				'ngx-webstorage': 'node_modules/ngx-webstorage'
 			},
 			packages: {
 				...,
-				'ng2-webstorage': {main: 'bundles/core.umd.js', defaultExtension: 'js'}
+				'ngx-webstorage': {main: 'bundles/core.umd.js', defaultExtension: 'js'}
 			}
 		});
 	````
@@ -68,7 +68,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	```typescript
 	import {Component} from '@angular/core';
-	import {LocalStorageService, SessionStorageService} from 'ng2-webstorage';
+	import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
 	@Component({
 		selector: 'foo',
@@ -88,7 +88,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	```typescript
 	import {Component} from '@angular/core';
-	import {LocalStorage, SessionStorage} from 'ng2-webstorage';
+	import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 	@Component({
 		selector: 'foo',
@@ -117,7 +117,7 @@ It provides also two decorators to synchronize the component attributes and the 
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService} from 'ng2-webstorage';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -153,7 +153,7 @@ export class FooComponent {
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService} from 'ng2-webstorage';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -185,7 +185,7 @@ export class FooComponent {
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
+import {LocalStorageService, LocalStorage} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -222,7 +222,7 @@ export class FooComponent {
 ##### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
+import {LocalStorageService, LocalStorage} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -262,7 +262,7 @@ export class FooComponent {
 #### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorage, SessionStorage} from 'ng2-webstorage';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -288,7 +288,7 @@ export class FooComponent {
 #### Usage:
 ````typescript
 import {Component} from '@angular/core';
-import {LocalStorage, SessionStorage} from 'ng2-webstorage';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
 	selector: 'foo',
@@ -312,7 +312,7 @@ Consequence, if you change the value of a bound object's property the new model 
 To handle this cases you have to trigger manually the accessor.
 
 ````typescript
-import {LocalStorage} from 'ng2-webstorage';
+import {LocalStorage} from 'ngx-webstorage';
 
 class FooBar {
 
