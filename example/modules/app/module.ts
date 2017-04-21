@@ -16,7 +16,8 @@ import {AppView} from './components/appView';
 		ReactiveFormsModule,
 		//Ng2Webstorage.forRoot({
 		//	separator: '.',
-		//	prefix: 'foobar'
+		//	prefix: 'foobar',
+		//	caseSensitive: true
 		//}),
 		Ng2Webstorage
 	],
