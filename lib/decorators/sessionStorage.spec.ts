@@ -16,6 +16,9 @@ class TestComponent {
 	@SessionStorage('session_key2')
 	key;
 
+	@SessionStorage('session_key3', 'default value')
+	default_value_key;
+
 }
 
 describe('decorator:sessionStorage', () => {
@@ -33,6 +36,15 @@ describe('decorator:sessionStorage', () => {
 		let fixture = TestBed.createComponent(TestComponent);
 		component = fixture.componentInstance;
 		sessionS = fixture.debugElement.injector.get(SessionStorageService);
+	});
+
+	it('should handle the default value', () => {
+		expect(component.default_value_key).toEqual('default value');
+	});
+
+	it('should override the default value', () => {
+		component.default_value_key = 'another value';
+		expect(component.default_value_key).toEqual('another value');
 	});
 
 

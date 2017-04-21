@@ -15,6 +15,9 @@ class TestComponent {
 	@LocalStorage('local_key2')
 	key;
 
+	@LocalStorage('local_key3', 'default value')
+	default_value_key;
+
 }
 
 describe('decorator:localStorage', () => {
@@ -33,6 +36,16 @@ describe('decorator:localStorage', () => {
 		component = fixture.componentInstance;
 		localS = fixture.debugElement.injector.get(LocalStorageService);
 	});
+
+	it('should handle the default value', () => {
+		expect(component.default_value_key).toEqual('default value');
+	});
+
+	it('should override the default value', () => {
+		component.default_value_key = 'another value';
+		expect(component.default_value_key).toEqual('another value');
+	});
+
 
 	it('should keep the default value', () => {
 		expect(component.local_key1).toEqual('default value');
