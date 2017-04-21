@@ -257,6 +257,7 @@ export class FooComponent {
 
 #### Params:
  - **storage key**: *(Optional)*    String.   localStorage key, by default the decorator will take the attribute name.
+ - **default value**: *(Optional)*    Serializable.   Default value
 
 #### Usage:
 ````typescript
@@ -282,6 +283,7 @@ export class FooComponent {
 
 #### Params:
  - **storage key**: *(Optional)*    String.   SessionStorage key, by default the decorator will take the attribute name.
+ - **default value**: *(Optional)*    Serializable.   Default value
 
 #### Usage:
 ````typescript
