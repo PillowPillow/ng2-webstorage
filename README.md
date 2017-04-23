@@ -38,7 +38,7 @@ It provides also two decorators to synchronize the component attributes and the 
 			//Ng2Webstorage.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
 			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
-			// prefix: "ngx-webstorage"
+			// prefix: "ng2-webstorage"
 			// separator: "|"
 			// caseSensitive: false
 		],
