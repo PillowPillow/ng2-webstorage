@@ -1,7 +1,5 @@
 # ngx-webstorage
-###Local and session storage - angular4 service
-=======================
-
+### Local and session storage - angular4 service
 This library provides an easy to use service to manage the web storages (local and session) from your ng2 application.
 It provides also two decorators to synchronize the component attributes and the web storages.
 
@@ -105,7 +103,7 @@ It provides also two decorators to synchronize the component attributes and the 
 ### <a name="services">Services</a>
 --------------------
 
-###<a name="s_localstorage">`LocalStorageService`</a>
+### <a name="s_localstorage">`LocalStorageService`</a>
 
 #### Store( key:`string`, value:`any` ):`void`
 > create or update an item in the local storage
@@ -214,7 +212,7 @@ export class FooComponent {
 #### Observe( key?:`string` ):`EventEmitter`
 
 ##### Params:
-- **key**:     String.   localStorage key.
+- **key**: *(Optional)*     localStorage key.
 
 ##### Result:
 - Observable; instance of EventEmitter
@@ -246,13 +244,13 @@ export class FooComponent {
 ````
 
 
-###<a name="s_sessionstorage">`SessionStorageService`</a>
+### <a name="s_sessionstorage">`SessionStorageService`</a>
 > The api is identical as the LocalStorageService's
 
 ### <a name="decorators">Decorators</a>
 --------------------
 
-###<a name="d_localstorage">`@LocalStorage`</a>
+### <a name="d_localstorage">`@LocalStorage`</a>
 > Synchronize the decorated attribute with a given value in the localStorage
 
 #### Params:
@@ -278,7 +276,7 @@ export class FooComponent {
 
 ------------
 
-###<a name="d_sessionStorage">`@SessionStorage`</a>
+### <a name="d_sessionStorage">`@SessionStorage`</a>
 > Synchronize the decorated attribute with a given value in the sessionStorage
 
 #### Params:
