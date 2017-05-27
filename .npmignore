@@ -14,6 +14,7 @@ karma.conf.js
 tslint.json
 tsconfig.json
 lib
+dist/**/*.js.map
 
 .gitignore
 
