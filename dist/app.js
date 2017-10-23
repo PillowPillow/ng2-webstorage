@@ -1,4 +1,4 @@
-import { NgModule, NgZone, OpaqueToken, Inject, Optional } from '@angular/core';
+import { NgModule, NgZone, Inject, Optional, InjectionToken } from '@angular/core';
 import { LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE } from './constants/lib';
 import { STORAGE } from './enums/storage';
 import { LocalStorageService, SessionStorageService } from './services/index';
@@ -8,7 +8,7 @@ import { KeyStorageHelper } from './helpers/keyStorage';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
-export var WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
+export var WEBSTORAGE_CONFIG = new InjectionToken('WEBSTORAGE_CONFIG');
 var Ng2Webstorage = (function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
