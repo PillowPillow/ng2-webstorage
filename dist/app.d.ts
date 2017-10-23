@@ -1,9 +1,9 @@
-import { NgZone, ModuleWithProviders, OpaqueToken } from '@angular/core';
+import { NgZone, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { WebstorageConfig, IWebstorageConfig } from './interfaces/config';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
-export declare const WEBSTORAGE_CONFIG: OpaqueToken;
+export declare const WEBSTORAGE_CONFIG: InjectionToken<string>;
 export declare class Ng2Webstorage {
     private ngZone;
     static forRoot(config?: IWebstorageConfig): ModuleWithProviders;
