@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 import { Injectable } from '@angular/core';
 import { STORAGE } from '../enums/storage';
 import { WebStorageService } from './webStorage';
-var LocalStorageService = (function (_super) {
+var LocalStorageService = /** @class */ (function (_super) {
     __extends(LocalStorageService, _super);
     function LocalStorageService() {
         return _super.call(this, STORAGE.local) || this;
@@ -19,9 +19,4 @@ var LocalStorageService = (function (_super) {
     return LocalStorageService;
 }(WebStorageService));
 export { LocalStorageService };
-LocalStorageService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-LocalStorageService.ctorParameters = function () { return []; };
 //# sourceMappingURL=localStorage.js.map

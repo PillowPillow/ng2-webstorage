@@ -1,4 +1,4 @@
-import { NgModule, NgZone, OpaqueToken, Inject, Optional } from '@angular/core';
+import { NgModule, NgZone, InjectionToken, Inject, Optional } from '@angular/core';
 import { LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE } from './constants/lib';
 import { STORAGE } from './enums/storage';
 import { LocalStorageService, SessionStorageService } from './services/index';
@@ -8,8 +8,8 @@ import { KeyStorageHelper } from './helpers/keyStorage';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
-export var WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
-var Ng2Webstorage = (function () {
+export var WEBSTORAGE_CONFIG = new InjectionToken('WEBSTORAGE_CONFIG');
+var Ng2Webstorage = /** @class */ (function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
         if (config) {
@@ -40,27 +40,17 @@ var Ng2Webstorage = (function () {
     Ng2Webstorage.prototype.initStorageListener = function () {
         var _this = this;
         if (typeof window !== 'undefined') {
-            window.addEventListener('storage', function (event) { return _this.ngZone.run(function () {
-                var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
-                WebStorageHelper.refresh(storage, event.key);
-            }); });
+            window.addEventListener('storage', function (event) {
+                return _this.ngZone.run(function () {
+                    var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
+                    WebStorageHelper.refresh(storage, event.key);
+                });
+            });
         }
     };
     return Ng2Webstorage;
 }());
 export { Ng2Webstorage };
-Ng2Webstorage.decorators = [
-    { type: NgModule, args: [{
-                declarations: [],
-                providers: [SessionStorageService, LocalStorageService],
-                imports: []
-            },] },
-];
-/** @nocollapse */
-Ng2Webstorage.ctorParameters = function () { return [
-    { type: NgZone, },
-    { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
-]; };
 export function provideConfig(config) {
     return new WebstorageConfig(config);
 }
