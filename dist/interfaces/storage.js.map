@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"storage.js","sourceRoot":"","sourcesContent":[]}
+{"version":3,"file":"storage.js","sourceRoot":"","sources":["../../lib/interfaces/storage.ts"],"names":[],"mappings":"","sourcesContent":["import {EventEmitter} from '@angular/core';\n\nexport interface IStorage {\n\tstore(key:string, value:any):void;\n\tretrieve(key:string):any;\n\tclear(key?:string):void;\n\tobserve(key:string): EventEmitter<any>;\n}\n"]}
