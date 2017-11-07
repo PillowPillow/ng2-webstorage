@@ -1,9 +1,12 @@
 import {STORAGE} from '../enums/storage';
 import {EventEmitter} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 export class StorageObserverHelper {
 
 	static observers:Object = {};
+	static storageInitStream:EventEmitter<boolean> = new EventEmitter();
+	static storageInit$:Observable<boolean> = StorageObserverHelper.storageInitStream.asObservable();
 
 	static observe(sType:STORAGE, sKey:string):EventEmitter<any> {
 		let oKey = this.genObserverKey(sType, sKey);
@@ -19,6 +22,10 @@ export class StorageObserverHelper {
 
 	static genObserverKey(sType:STORAGE, sKey:string):string {
 		return sType + '|' + sKey;
+	}
+
+	static initStorage() {
+		StorageObserverHelper.storageInitStream.emit(true);
 	}
 
 }

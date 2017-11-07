@@ -5,6 +5,7 @@ import {LocalStorageService, SessionStorageService} from './services/index';
 import {WebStorageHelper} from './helpers/webStorage';
 import {IWebstorageConfig, WebstorageConfig} from './interfaces/config';
 import {KeyStorageHelper} from './helpers/keyStorage';
+import {StorageObserverHelper} from './helpers/storageObserver';
 
 export * from './interfaces/index';
 export * from './decorators/index';
@@ -39,6 +40,7 @@ export class Ng2Webstorage {
 	}
 
 	constructor(private ngZone:NgZone, @Optional() @Inject(WebstorageConfig) config:WebstorageConfig) {
+		console.log('constructor');
 		if(config) {
 			KeyStorageHelper.setStorageKeyPrefix(config.prefix);
 			KeyStorageHelper.setStorageKeySeparator(config.separator);
@@ -46,6 +48,7 @@ export class Ng2Webstorage {
 		}
 
 		this.initStorageListener();
+		StorageObserverHelper.initStorage();
 	}
 
 	private initStorageListener() {

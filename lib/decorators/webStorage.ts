@@ -1,5 +1,6 @@
 import {KeyStorageHelper, WebStorageHelper} from '../helpers/index';
 import {STORAGE} from '../enums/storage';
+import {StorageObserverHelper} from '../helpers/storageObserver';
 
 export function WebStorage(webSKey:string, sType:STORAGE, defaultValue:any = null) {
 	return function(targetedClass:Object, raw:string) {
@@ -7,7 +8,7 @@ export function WebStorage(webSKey:string, sType:STORAGE, defaultValue:any = nul
 	};
 }
 
-export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass:Object, raw:string, defaultValue:any = null) {
+export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass:Object, raw:string, defaultValue?:any) {
 	let key = webSKey || raw;
 	Object.defineProperty(targetedClass, raw, {
 		get: function() {
@@ -16,11 +17,19 @@ export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass
 		},
 		set: function(value) {
 			let sKey = KeyStorageHelper.genKey(key);
+			console.log(sType, sKey, value);
 			this[sKey] = value;
 			WebStorageHelper.store(sType, sKey, value);
 		}
 	});
 
-	if(targetedClass[raw] === null)
-		targetedClass[raw] = defaultValue;
+
+	if(targetedClass[raw] === null && defaultValue !== undefined) {
+		let sub = StorageObserverHelper.storageInit$.subscribe(() => {
+			targetedClass[raw] = defaultValue;
+			console.log('passage', defaultValue);
+			sub.unsubscribe();
+		});
+	}
+
 }
