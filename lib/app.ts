@@ -40,7 +40,6 @@ export class Ng2Webstorage {
 	}
 
 	constructor(private ngZone:NgZone, @Optional() @Inject(WebstorageConfig) config:WebstorageConfig) {
-		console.log('constructor');
 		if(config) {
 			KeyStorageHelper.setStorageKeyPrefix(config.prefix);
 			KeyStorageHelper.setStorageKeySeparator(config.separator);

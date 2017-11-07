@@ -22,7 +22,6 @@ export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass
 		}
 	});
 
-
 	if(targetedClass[raw] === null && defaultValue !== undefined) {
 		let sub = StorageObserverHelper.storageInit$.subscribe(() => {
 			targetedClass[raw] = defaultValue;
