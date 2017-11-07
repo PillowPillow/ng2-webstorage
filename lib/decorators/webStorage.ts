@@ -17,7 +17,6 @@ export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass
 		},
 		set: function(value) {
 			let sKey = KeyStorageHelper.genKey(key);
-			console.log(sType, sKey, value);
 			this[sKey] = value;
 			WebStorageHelper.store(sType, sKey, value);
 		}
@@ -27,7 +26,6 @@ export function WebStorageDecorator(webSKey:string, sType:STORAGE, targetedClass
 	if(targetedClass[raw] === null && defaultValue !== undefined) {
 		let sub = StorageObserverHelper.storageInit$.subscribe(() => {
 			targetedClass[raw] = defaultValue;
-			console.log('passage', defaultValue);
 			sub.unsubscribe();
 		});
 	}

@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {SessionStorage} from './sessionStorage';
 import {SessionStorageService} from '../services/sessionStorage';
+import {StorageObserverHelper} from '../helpers/storageObserver';
 
 
 @Component({
@@ -35,6 +36,7 @@ describe('decorator:sessionStorage', () => {
 
 		let fixture = TestBed.createComponent(TestComponent);
 		component = fixture.componentInstance;
+		StorageObserverHelper.initStorage();
 		sessionS = fixture.debugElement.injector.get(SessionStorageService);
 	});
 

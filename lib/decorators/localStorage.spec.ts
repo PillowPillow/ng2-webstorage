@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {LocalStorage} from './localStorage';
 import {LocalStorageService} from '../services/localStorage';
+import {StorageObserverHelper} from '../helpers/storageObserver';
 
 @Component({
 	selector: 'test',
@@ -34,6 +35,7 @@ describe('decorator:localStorage', () => {
 
 		let fixture = TestBed.createComponent(TestComponent);
 		component = fixture.componentInstance;
+		StorageObserverHelper.initStorage();
 		localS = fixture.debugElement.injector.get(LocalStorageService);
 	});
 
