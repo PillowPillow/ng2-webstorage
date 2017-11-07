@@ -1,4 +1,4 @@
-import {NgModule, NgZone, ModuleWithProviders, OpaqueToken, Inject, Optional} from '@angular/core';
+import {NgModule, NgZone, ModuleWithProviders, Inject, Optional, InjectionToken} from '@angular/core';
 import {LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE} from './constants/lib';
 import {STORAGE} from './enums/storage';
 import {LocalStorageService, SessionStorageService} from './services/index';
@@ -10,7 +10,7 @@ export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
 
-export const WEBSTORAGE_CONFIG = new OpaqueToken('WEBSTORAGE_CONFIG');
+export const WEBSTORAGE_CONFIG = new InjectionToken('WEBSTORAGE_CONFIG');
 
 @NgModule({
 	declarations: [],
