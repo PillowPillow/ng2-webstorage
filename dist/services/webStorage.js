@@ -23,6 +23,9 @@ var WebStorageService = (function () {
         var sKey = KeyStorageHelper.genKey(raw);
         return StorageObserverHelper.observe(this.sType, sKey);
     };
+    WebStorageService.prototype.isStorageAvailable = function () {
+        return WebStorageHelper.isStorageAvailable(this.sType);
+    };
     return WebStorageService;
 }());
 export { WebStorageService };

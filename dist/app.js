@@ -4,6 +4,7 @@ import { LocalStorageService, SessionStorageService } from './services/index';
 import { WebStorageHelper } from './helpers/webStorage';
 import { WebstorageConfig } from './interfaces/config';
 import { KeyStorageHelper } from './helpers/keyStorage';
+import { StorageObserverHelper } from './helpers/storageObserver';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
@@ -17,6 +18,7 @@ var Ng2Webstorage = (function () {
             KeyStorageHelper.setCaseSensitivity(config.caseSensitive);
         }
         this.initStorageListener();
+        StorageObserverHelper.initStorage();
     }
     Ng2Webstorage.forRoot = function (config) {
         return {

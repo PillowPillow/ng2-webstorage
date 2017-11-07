@@ -16,7 +16,12 @@ var StorageObserverHelper = (function () {
     StorageObserverHelper.genObserverKey = function (sType, sKey) {
         return sType + '|' + sKey;
     };
+    StorageObserverHelper.initStorage = function () {
+        StorageObserverHelper.storageInitStream.emit(true);
+    };
     StorageObserverHelper.observers = {};
+    StorageObserverHelper.storageInitStream = new EventEmitter();
+    StorageObserverHelper.storageInit$ = StorageObserverHelper.storageInitStream.asObservable();
     return StorageObserverHelper;
 }());
 export { StorageObserverHelper };

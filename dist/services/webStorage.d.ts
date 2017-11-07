@@ -8,4 +8,5 @@ export declare class WebStorageService implements IStorage {
     retrieve(raw: string): any;
     clear(raw?: string): void;
     observe(raw: string): EventEmitter<any>;
+    isStorageAvailable(): boolean;
 }
