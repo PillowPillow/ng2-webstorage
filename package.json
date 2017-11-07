@@ -1,7 +1,7 @@
 {
 	"name": "ngx-webstorage",
-	"version": "1.9.0",
-	"description": "angular2 webstorage manager",
+	"version": "2.0.0-beta.0",
+	"description": "Angular webstorage manager",
 	"main": "bundles/core.umd.js",
 	"module": "dist/app.js",
 	"typings": "dist/app.d.ts",
@@ -31,7 +31,7 @@
 		"rimraf": "^2.5.2",
 		"rollup": "^0.36.1",
 		"rxjs": "^5.4.1",
-		"source-map-loader": "^0.1.5",
+		"source-map-loader": "^0.2.3",
 		"ts-helpers": "^1.1.2",
 		"ts-loader": "^3.1.1",
 		"tslint": "^5.8.0",

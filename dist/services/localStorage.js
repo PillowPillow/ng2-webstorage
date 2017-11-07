@@ -16,12 +16,12 @@ var LocalStorageService = (function (_super) {
     function LocalStorageService() {
         return _super.call(this, STORAGE.local) || this;
     }
+    LocalStorageService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    LocalStorageService.ctorParameters = function () { return []; };
     return LocalStorageService;
 }(WebStorageService));
 export { LocalStorageService };
-LocalStorageService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-LocalStorageService.ctorParameters = function () { return []; };
 //# sourceMappingURL=localStorage.js.map

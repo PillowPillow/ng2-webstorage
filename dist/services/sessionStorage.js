@@ -16,12 +16,12 @@ var SessionStorageService = (function (_super) {
     function SessionStorageService() {
         return _super.call(this, STORAGE.session) || this;
     }
+    SessionStorageService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    SessionStorageService.ctorParameters = function () { return []; };
     return SessionStorageService;
 }(WebStorageService));
 export { SessionStorageService };
-SessionStorageService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-SessionStorageService.ctorParameters = function () { return []; };
 //# sourceMappingURL=sessionStorage.js.map

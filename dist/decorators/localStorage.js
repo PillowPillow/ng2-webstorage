@@ -6,5 +6,4 @@ export function LocalStorage(webSKey, defaultValue) {
         WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw, defaultValue);
     };
 }
-;
 //# sourceMappingURL=localStorage.js.map

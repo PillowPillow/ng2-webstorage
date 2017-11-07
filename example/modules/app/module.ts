@@ -16,12 +16,12 @@ import {CommonModule} from '@angular/common';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
-		//Ng2Webstorage.forRoot({
-		//	separator: '.',
-		//	prefix: 'foobar',
-		//	caseSensitive: true
-		//}),
-		Ng2Webstorage
+		Ng2Webstorage.forRoot({
+			separator: '.',
+			prefix: 'ahah',
+			caseSensitive: true
+		}),
+		//Ng2Webstorage
 	],
 	bootstrap: [App],
 })

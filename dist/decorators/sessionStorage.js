@@ -6,5 +6,4 @@ export function SessionStorage(webSKey, defaultValue) {
         WebStorageDecorator(webSKey, STORAGE.session, targetedClass, raw, defaultValue);
     };
 }
-;
 //# sourceMappingURL=sessionStorage.js.map

@@ -1,5 +1,5 @@
-import { NgZone, ModuleWithProviders, InjectionToken } from '@angular/core';
-import { WebstorageConfig, IWebstorageConfig } from './interfaces/config';
+import { InjectionToken, ModuleWithProviders, NgZone } from '@angular/core';
+import { IWebstorageConfig, WebstorageConfig } from './interfaces/config';
 export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
@@ -11,4 +11,3 @@ export declare class Ng2Webstorage {
     private initStorageListener();
 }
 export declare function provideConfig(config: IWebstorageConfig): WebstorageConfig;
-export declare function configure({prefix, separator, caseSensitive}?: IWebstorageConfig): void;

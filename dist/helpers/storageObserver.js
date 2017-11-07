@@ -16,8 +16,8 @@ var StorageObserverHelper = (function () {
     StorageObserverHelper.genObserverKey = function (sType, sKey) {
         return sType + '|' + sKey;
     };
+    StorageObserverHelper.observers = {};
     return StorageObserverHelper;
 }());
 export { StorageObserverHelper };
-StorageObserverHelper.observers = {};
 //# sourceMappingURL=storageObserver.js.map

@@ -1,5 +1,4 @@
-import { NgModule, NgZone, Inject, Optional, InjectionToken } from '@angular/core';
-import { LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE } from './constants/lib';
+import { Inject, InjectionToken, NgModule, NgZone, Optional } from '@angular/core';
 import { STORAGE } from './enums/storage';
 import { LocalStorageService, SessionStorageService } from './services/index';
 import { WebStorageHelper } from './helpers/webStorage';
@@ -40,40 +39,30 @@ var Ng2Webstorage = (function () {
     Ng2Webstorage.prototype.initStorageListener = function () {
         var _this = this;
         if (typeof window !== 'undefined') {
-            window.addEventListener('storage', function (event) { return _this.ngZone.run(function () {
-                var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
-                WebStorageHelper.refresh(storage, event.key);
-            }); });
+            window.addEventListener('storage', function (event) {
+                return _this.ngZone.run(function () {
+                    var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
+                    WebStorageHelper.refresh(storage, event.key);
+                });
+            });
         }
     };
+    Ng2Webstorage.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [],
+                    providers: [SessionStorageService, LocalStorageService],
+                    imports: []
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2Webstorage.ctorParameters = function () { return [
+        { type: NgZone, },
+        { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
+    ]; };
     return Ng2Webstorage;
 }());
 export { Ng2Webstorage };
-Ng2Webstorage.decorators = [
-    { type: NgModule, args: [{
-                declarations: [],
-                providers: [SessionStorageService, LocalStorageService],
-                imports: []
-            },] },
-];
-/** @nocollapse */
-Ng2Webstorage.ctorParameters = function () { return [
-    { type: NgZone, },
-    { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
-]; };
 export function provideConfig(config) {
     return new WebstorageConfig(config);
-}
-export function configure(_a) {
-    var _b = _a === void 0 ? {
-        caseSensitive: LIB_KEY_CASE_SENSITIVE,
-        prefix: LIB_KEY,
-        separator: LIB_KEY_SEPARATOR
-    } : _a, prefix = _b.prefix, separator = _b.separator, caseSensitive = _b.caseSensitive;
-    /*@Deprecation*/
-    console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
-    KeyStorageHelper.setStorageKeyPrefix(prefix);
-    KeyStorageHelper.setStorageKeySeparator(separator);
-    KeyStorageHelper.setCaseSensitivity(caseSensitive);
 }
 //# sourceMappingURL=app.js.map
