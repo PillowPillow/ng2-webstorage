@@ -23,7 +23,7 @@ class TestComponent {
 
 describe('decorator:sessionStorage', () => {
 
-	var component, sessionS;
+	let component, sessionS;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({

@@ -1,9 +1,9 @@
-import {NgModule, NgZone, ModuleWithProviders, Inject, Optional, InjectionToken} from '@angular/core';
-import {LIB_KEY, LIB_KEY_SEPARATOR, LIB_KEY_CASE_SENSITIVE} from './constants/lib';
+import {Inject, InjectionToken, ModuleWithProviders, NgModule, NgZone, Optional} from '@angular/core';
+import {LIB_KEY, LIB_KEY_CASE_SENSITIVE, LIB_KEY_SEPARATOR} from './constants/lib';
 import {STORAGE} from './enums/storage';
 import {LocalStorageService, SessionStorageService} from './services/index';
 import {WebStorageHelper} from './helpers/webStorage';
-import {WebstorageConfig, IWebstorageConfig} from './interfaces/config';
+import {IWebstorageConfig, WebstorageConfig} from './interfaces/config';
 import {KeyStorageHelper} from './helpers/keyStorage';
 
 export * from './interfaces/index';
@@ -60,17 +60,4 @@ export class Ng2Webstorage {
 
 export function provideConfig(config:IWebstorageConfig):WebstorageConfig {
 	return new WebstorageConfig(config);
-}
-
-export function configure({prefix, separator, caseSensitive}:IWebstorageConfig = {
-	caseSensitive: LIB_KEY_CASE_SENSITIVE,
-	prefix: LIB_KEY,
-	separator: LIB_KEY_SEPARATOR
-}) {
-	/*@Deprecation*/
-	console.warn('[ng2-webstorage:deprecation] The configure method is deprecated since the v1.5.0, consider to use forRoot instead');
-
-	KeyStorageHelper.setStorageKeyPrefix(prefix);
-	KeyStorageHelper.setStorageKeySeparator(separator);
-	KeyStorageHelper.setCaseSensitivity(caseSensitive);
 }

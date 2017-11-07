@@ -1,6 +1,4 @@
-import 'es6-shim';
-import * as symbol from 'es6-symbol';
-global.Symbol = symbol;
-import 'es7-reflect-metadata';
-import 'zone.js/dist/zone';
 import 'rxjs';
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';

@@ -22,7 +22,7 @@ class TestComponent {
 
 describe('decorator:localStorage', () => {
 
-	var component, localS;
+	let component, localS;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
