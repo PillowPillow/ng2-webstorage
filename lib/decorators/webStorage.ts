@@ -4,7 +4,7 @@ import {StorageObserverHelper} from '../helpers/storageObserver';
 
 export function WebStorage(webSKey:string, sType:STORAGE, defaultValue:any = null) {
 	return function(targetedClass:Object, raw:string) {
-		WebStorageDecorator(webSKey, STORAGE.local, targetedClass, raw, defaultValue);
+		WebStorageDecorator(webSKey, sType, targetedClass, raw, defaultValue);
 	};
 }
 
