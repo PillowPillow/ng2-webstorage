@@ -1,6 +1,6 @@
 {
 	"name": "ngx-webstorage",
-	"version": "2.0.0-beta.0",
+	"version": "2.0.0",
 	"description": "Angular webstorage manager",
 	"main": "bundles/core.umd.js",
 	"module": "dist/app.js",
