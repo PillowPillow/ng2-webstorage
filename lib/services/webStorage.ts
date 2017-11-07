@@ -29,4 +29,8 @@ export class WebStorageService implements IStorage {
 		return StorageObserverHelper.observe(this.sType, sKey);
 	}
 
+	public isStorageAvailable():boolean {
+		return WebStorageHelper.isStorageAvailable(this.sType);
+	}
+
 }
