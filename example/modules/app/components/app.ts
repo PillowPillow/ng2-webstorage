@@ -1,4 +1,11 @@
 import {Component} from '@angular/core';
+import {WebStorageConfig} from '../../../libwrapper';
+
+@WebStorageConfig({
+	separator: '.',
+	prefix: 'foobar',
+	caseSensitive: true
+})
 
 @Component({
 	selector: 'app',
