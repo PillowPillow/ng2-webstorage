@@ -44,7 +44,10 @@ var Ng2Webstorage = (function () {
             window.addEventListener('storage', function (event) {
                 return _this.ngZone.run(function () {
                     var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
-                    WebStorageHelper.refresh(storage, event.key);
+                    if (event.key === null)
+                        WebStorageHelper.refreshAll(storage);
+                    else
+                        WebStorageHelper.refresh(storage, event.key);
                 });
             });
         }

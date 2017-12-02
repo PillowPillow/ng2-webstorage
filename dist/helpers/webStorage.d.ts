@@ -5,6 +5,7 @@ export declare class WebStorageHelper {
     static retrieve(sType: STORAGE, sKey: string): string;
     static retrieveFromStorage(sType: STORAGE, sKey: string): any;
     static refresh(sType: STORAGE, sKey: string): void;
+    static refreshAll(sType: STORAGE): void;
     static clearAll(sType: STORAGE): void;
     static clear(sType: STORAGE, sKey: string): void;
     static getStorage(sType: STORAGE): IWebStorage;

@@ -4,7 +4,7 @@ import { KeyStorageHelper } from './keyStorage';
 import { MockStorageHelper } from './mockStorage';
 import { STORAGE_NAMES } from '../constants/lib';
 var CACHED = (_a = {}, _a[STORAGE.local] = {}, _a[STORAGE.session] = {}, _a);
-var STORAGEAVAILABILITY = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
+var STORAGE_AVAILABILITY = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
 var WebStorageHelper = (function () {
     function WebStorageHelper() {
     }
@@ -14,9 +14,12 @@ var WebStorageHelper = (function () {
         StorageObserverHelper.emit(sType, sKey, value);
     };
     WebStorageHelper.retrieve = function (sType, sKey) {
-        if (CACHED[sType][sKey])
+        if (sKey in CACHED[sType])
             return CACHED[sType][sKey];
-        return CACHED[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+        var value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+        if (value !== null)
+            CACHED[sType][sKey] = value;
+        return value;
     };
     WebStorageHelper.retrieveFromStorage = function (sType, sKey) {
         var data = null;
@@ -40,6 +43,9 @@ var WebStorageHelper = (function () {
             CACHED[sType][sKey] = value;
             StorageObserverHelper.emit(sType, sKey, value);
         }
+    };
+    WebStorageHelper.refreshAll = function (sType) {
+        Object.keys(CACHED[sType]).forEach(function (sKey) { return WebStorageHelper.refresh(sType, sKey); });
     };
     WebStorageHelper.clearAll = function (sType) {
         var storage = this.getStorage(sType);
@@ -76,8 +82,8 @@ var WebStorageHelper = (function () {
         return storage;
     };
     WebStorageHelper.isStorageAvailable = function (sType) {
-        if (typeof STORAGEAVAILABILITY[sType] === 'boolean')
-            return STORAGEAVAILABILITY[sType];
+        if (typeof STORAGE_AVAILABILITY[sType] === 'boolean')
+            return STORAGE_AVAILABILITY[sType];
         var isAvailable = true, storage;
         try {
             storage = this.getWStorage(sType);
@@ -93,7 +99,7 @@ var WebStorageHelper = (function () {
         }
         if (!isAvailable)
             console.warn(STORAGE_NAMES[sType] + " storage unavailable, Ng2Webstorage will use a fallback strategy instead");
-        return STORAGEAVAILABILITY[sType] = isAvailable;
+        return STORAGE_AVAILABILITY[sType] = isAvailable;
     };
     return WebStorageHelper;
 }());
