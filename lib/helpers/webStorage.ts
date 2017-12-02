@@ -6,7 +6,7 @@ import {MockStorageHelper} from './mockStorage';
 import {STORAGE_NAMES} from '../constants/lib';
 
 const CACHED = {[STORAGE.local]: {}, [STORAGE.session]: {}};
-const STORAGEAVAILABILITY = {[STORAGE.local]: null, [STORAGE.session]: null};
+const STORAGE_AVAILABILITY = {[STORAGE.local]: null, [STORAGE.session]: null};
 
 export class WebStorageHelper {
 
@@ -17,8 +17,10 @@ export class WebStorageHelper {
 	}
 
 	static retrieve(sType:STORAGE, sKey:string):string {
-		if(CACHED[sType][sKey]) return CACHED[sType][sKey];
-		return CACHED[sType][sKey] = WebStorageHelper.retrieveFromStorage(sType, sKey);
+		if(sKey in CACHED[sType]) return CACHED[sType][sKey];
+		let value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+		if(value !== null) CACHED[sType][sKey] = value;
+		return value;
 	}
 
 	static retrieveFromStorage(sType:STORAGE, sKey:string) {
@@ -45,6 +47,10 @@ export class WebStorageHelper {
 			CACHED[sType][sKey] = value;
 			StorageObserverHelper.emit(sType, sKey, value);
 		}
+	}
+
+	static refreshAll(sType:STORAGE):void {
+		Object.keys(CACHED[sType]).forEach((sKey) => WebStorageHelper.refresh(sType, sKey));
 	}
 
 	static clearAll(sType:STORAGE):void {
@@ -86,8 +92,8 @@ export class WebStorageHelper {
 	}
 
 	static isStorageAvailable(sType:STORAGE) {
-		if(typeof STORAGEAVAILABILITY[sType] === 'boolean')
-			return STORAGEAVAILABILITY[sType];
+		if(typeof STORAGE_AVAILABILITY[sType] === 'boolean')
+			return STORAGE_AVAILABILITY[sType];
 
 		let isAvailable = true, storage;
 		try {
@@ -102,7 +108,7 @@ export class WebStorageHelper {
 		}
 
 		if(!isAvailable) console.warn(`${STORAGE_NAMES[sType]} storage unavailable, Ng2Webstorage will use a fallback strategy instead`);
-		return STORAGEAVAILABILITY[sType] = isAvailable;
+		return STORAGE_AVAILABILITY[sType] = isAvailable;
 	}
 
 }
