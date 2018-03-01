@@ -1,41 +1,82 @@
-import { Inject, InjectionToken, NgModule, NgZone, Optional } from '@angular/core';
-import { STORAGE } from './enums/storage';
-import { LocalStorageService, SessionStorageService } from './services/index';
-import { WebStorageHelper } from './helpers/webStorage';
-import { WebstorageConfig } from './interfaces/config';
-import { KeyStorageHelper } from './helpers/keyStorage';
-import { StorageObserverHelper } from './helpers/storageObserver';
-export * from './interfaces/index';
-export * from './decorators/index';
-export * from './services/index';
-export var WEBSTORAGE_CONFIG = new InjectionToken('WEBSTORAGE_CONFIG');
-var Ng2Webstorage = (function () {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Ng2Webstorage = exports.WEBSTORAGE_CONFIG = undefined;
+
+var _index = require('./interfaces/index');
+
+Object.keys(_index).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _index[key];
+        }
+    });
+});
+
+var _index2 = require('./decorators/index');
+
+Object.keys(_index2).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _index2[key];
+        }
+    });
+});
+
+var _index3 = require('./services/index');
+
+Object.keys(_index3).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _index3[key];
+        }
+    });
+});
+exports.provideConfig = provideConfig;
+
+var _core = require('@angular/core');
+
+var _storage = require('./enums/storage');
+
+var _webStorage = require('./helpers/webStorage');
+
+var _config = require('./interfaces/config');
+
+var _keyStorage = require('./helpers/keyStorage');
+
+var _storageObserver = require('./helpers/storageObserver');
+
+var WEBSTORAGE_CONFIG = exports.WEBSTORAGE_CONFIG = new _core.InjectionToken('WEBSTORAGE_CONFIG');
+var Ng2Webstorage = function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
         if (config) {
-            KeyStorageHelper.setStorageKeyPrefix(config.prefix);
-            KeyStorageHelper.setStorageKeySeparator(config.separator);
-            KeyStorageHelper.setCaseSensitivity(config.caseSensitive);
+            _keyStorage.KeyStorageHelper.setStorageKeyPrefix(config.prefix);
+            _keyStorage.KeyStorageHelper.setStorageKeySeparator(config.separator);
+            _keyStorage.KeyStorageHelper.setCaseSensitivity(config.caseSensitive);
         }
         this.initStorageListener();
-        StorageObserverHelper.initStorage();
+        _storageObserver.StorageObserverHelper.initStorage();
     }
     Ng2Webstorage.forRoot = function (config) {
         return {
             ngModule: Ng2Webstorage,
-            providers: [
-                {
-                    provide: WEBSTORAGE_CONFIG,
-                    useValue: config
-                },
-                {
-                    provide: WebstorageConfig,
-                    useFactory: provideConfig,
-                    deps: [
-                        WEBSTORAGE_CONFIG
-                    ]
-                }
-            ]
+            providers: [{
+                provide: WEBSTORAGE_CONFIG,
+                useValue: config
+            }, {
+                provide: _config.WebstorageConfig,
+                useFactory: provideConfig,
+                deps: [WEBSTORAGE_CONFIG]
+            }]
         };
     };
     Ng2Webstorage.prototype.initStorageListener = function () {
@@ -43,31 +84,25 @@ var Ng2Webstorage = (function () {
         if (typeof window !== 'undefined') {
             window.addEventListener('storage', function (event) {
                 return _this.ngZone.run(function () {
-                    var storage = window.sessionStorage === event.storageArea ? STORAGE.session : STORAGE.local;
-                    if (event.key === null)
-                        WebStorageHelper.refreshAll(storage);
-                    else
-                        WebStorageHelper.refresh(storage, event.key);
+                    var storage = window.sessionStorage === event.storageArea ? _storage.STORAGE.session : _storage.STORAGE.local;
+                    if (event.key === null) _webStorage.WebStorageHelper.refreshAll(storage);else _webStorage.WebStorageHelper.refresh(storage, event.key);
                 });
             });
         }
     };
-    Ng2Webstorage.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [],
-                    providers: [SessionStorageService, LocalStorageService],
-                    imports: []
-                },] },
-    ];
+    Ng2Webstorage.decorators = [{ type: _core.NgModule, args: [{
+            declarations: [],
+            providers: [_index3.SessionStorageService, _index3.LocalStorageService],
+            imports: []
+        }] }];
     /** @nocollapse */
-    Ng2Webstorage.ctorParameters = function () { return [
-        { type: NgZone, },
-        { type: WebstorageConfig, decorators: [{ type: Optional }, { type: Inject, args: [WebstorageConfig,] },] },
-    ]; };
+    Ng2Webstorage.ctorParameters = function () {
+        return [{ type: _core.NgZone }, { type: _config.WebstorageConfig, decorators: [{ type: _core.Optional }, { type: _core.Inject, args: [_config.WebstorageConfig] }] }];
+    };
     return Ng2Webstorage;
-}());
-export { Ng2Webstorage };
-export function provideConfig(config) {
-    return new WebstorageConfig(config);
+}();
+exports.Ng2Webstorage = Ng2Webstorage;
+function provideConfig(config) {
+    return new _config.WebstorageConfig(config);
 }
 //# sourceMappingURL=app.js.map

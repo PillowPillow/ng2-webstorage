@@ -1,9 +1,17 @@
-import { LIB_KEY, LIB_KEY_CASE_SENSITIVE, LIB_KEY_SEPARATOR } from '../constants/lib';
-var WebstorageConfig = (function () {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.WebstorageConfig = undefined;
+
+var _lib = require('../constants/lib');
+
+var WebstorageConfig = function () {
     function WebstorageConfig(config) {
-        this.prefix = LIB_KEY;
-        this.separator = LIB_KEY_SEPARATOR;
-        this.caseSensitive = LIB_KEY_CASE_SENSITIVE;
+        this.prefix = _lib.LIB_KEY;
+        this.separator = _lib.LIB_KEY_SEPARATOR;
+        this.caseSensitive = _lib.LIB_KEY_CASE_SENSITIVE;
         if (config && config.prefix !== undefined) {
             this.prefix = config.prefix;
         }
@@ -15,6 +23,6 @@ var WebstorageConfig = (function () {
         }
     }
     return WebstorageConfig;
-}());
-export { WebstorageConfig };
+}();
+exports.WebstorageConfig = WebstorageConfig;
 //# sourceMappingURL=config.js.map

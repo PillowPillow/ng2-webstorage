@@ -1,32 +1,39 @@
-import { KeyStorageHelper, WebStorageHelper, StorageObserverHelper } from '../helpers/index';
-var WebStorageService = (function () {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.WebStorageService = undefined;
+
+var _index = require('../helpers/index');
+
+var WebStorageService = function () {
     function WebStorageService(sType) {
-        if (sType === void 0) { sType = null; }
+        if (sType === void 0) {
+            sType = null;
+        }
         this.sType = sType;
         this.sType = sType;
     }
     WebStorageService.prototype.store = function (raw, value) {
-        var sKey = KeyStorageHelper.genKey(raw);
-        WebStorageHelper.store(this.sType, sKey, value);
+        var sKey = _index.KeyStorageHelper.genKey(raw);
+        _index.WebStorageHelper.store(this.sType, sKey, value);
     };
     WebStorageService.prototype.retrieve = function (raw) {
-        var sKey = KeyStorageHelper.genKey(raw);
-        return WebStorageHelper.retrieve(this.sType, sKey);
+        var sKey = _index.KeyStorageHelper.genKey(raw);
+        return _index.WebStorageHelper.retrieve(this.sType, sKey);
     };
     WebStorageService.prototype.clear = function (raw) {
-        if (raw)
-            WebStorageHelper.clear(this.sType, KeyStorageHelper.genKey(raw));
-        else
-            WebStorageHelper.clearAll(this.sType);
+        if (raw) _index.WebStorageHelper.clear(this.sType, _index.KeyStorageHelper.genKey(raw));else _index.WebStorageHelper.clearAll(this.sType);
     };
     WebStorageService.prototype.observe = function (raw) {
-        var sKey = KeyStorageHelper.genKey(raw);
-        return StorageObserverHelper.observe(this.sType, sKey);
+        var sKey = _index.KeyStorageHelper.genKey(raw);
+        return _index.StorageObserverHelper.observe(this.sType, sKey);
     };
     WebStorageService.prototype.isStorageAvailable = function () {
-        return WebStorageHelper.isStorageAvailable(this.sType);
+        return _index.WebStorageHelper.isStorageAvailable(this.sType);
     };
     return WebStorageService;
-}());
-export { WebStorageService };
+}();
+exports.WebStorageService = WebStorageService;
 //# sourceMappingURL=webStorage.js.map
