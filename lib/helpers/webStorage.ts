@@ -24,14 +24,12 @@ export class WebStorageHelper {
 	}
 
 	static retrieveFromStorage(sType:STORAGE, sKey:string) {
-		let data = null;
-
+		let data = this.getStorage(sType).getItem(sKey);
 		try {
-			data = JSON.parse(this.getStorage(sType).getItem(sKey));
+			data = JSON.parse(data);
 		} catch(err) {
 			console.warn(`invalid value for ${sKey}`);
 		}
-
 		return data;
 	}
 

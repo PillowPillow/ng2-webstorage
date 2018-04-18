@@ -22,9 +22,9 @@ var WebStorageHelper = (function () {
         return value;
     };
     WebStorageHelper.retrieveFromStorage = function (sType, sKey) {
-        var data = null;
+        var data = this.getStorage(sType).getItem(sKey);
         try {
-            data = JSON.parse(this.getStorage(sType).getItem(sKey));
+            data = JSON.parse(data);
         }
         catch (err) {
             console.warn("invalid value for " + sKey);
