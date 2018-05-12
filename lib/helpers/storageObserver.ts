@@ -1,6 +1,6 @@
 import {STORAGE} from '../enums/storage';
 import {EventEmitter} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 export class StorageObserverHelper {
 

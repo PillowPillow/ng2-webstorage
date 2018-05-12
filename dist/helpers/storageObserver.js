@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-var StorageObserverHelper = (function () {
+var StorageObserverHelper = /** @class */ (function () {
     function StorageObserverHelper() {
     }
     StorageObserverHelper.observe = function (sType, sKey) {

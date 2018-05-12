@@ -1,4 +1,4 @@
-var MockStorageHelper = (function () {
+var MockStorageHelper = /** @class */ (function () {
     function MockStorageHelper() {
     }
     MockStorageHelper.isSecuredField = function (field) {

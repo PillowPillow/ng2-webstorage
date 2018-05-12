@@ -5,7 +5,7 @@ import { MockStorageHelper } from './mockStorage';
 import { STORAGE_NAMES } from '../constants/lib';
 var CACHED = (_a = {}, _a[STORAGE.local] = {}, _a[STORAGE.session] = {}, _a);
 var STORAGE_AVAILABILITY = (_b = {}, _b[STORAGE.local] = null, _b[STORAGE.session] = null, _b);
-var WebStorageHelper = (function () {
+var WebStorageHelper = /** @class */ (function () {
     function WebStorageHelper() {
     }
     WebStorageHelper.store = function (sType, sKey, value) {

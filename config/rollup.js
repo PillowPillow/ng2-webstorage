@@ -1,5 +1,8 @@
 export default {
   entry: 'dist/app.js',
+  external: [
+    '@angular/core'
+  ],
   dest: 'bundles/core.umd.js',
   format: 'umd',
   sourceMap: 'inline',

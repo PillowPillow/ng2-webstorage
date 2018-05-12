@@ -5,7 +5,7 @@ var CUSTOM_LIB_KEY_CASE_SENSITIVE = LIB_KEY_CASE_SENSITIVE;
 export function isManagedKey(sKey) {
     return sKey.indexOf(CUSTOM_LIB_KEY + CUSTOM_LIB_KEY_SEPARATOR) === 0;
 }
-var KeyStorageHelper = (function () {
+var KeyStorageHelper = /** @class */ (function () {
     function KeyStorageHelper() {
     }
     KeyStorageHelper.isManagedKey = function (sKey) {

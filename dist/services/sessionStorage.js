@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 import { Injectable } from '@angular/core';
 import { STORAGE } from '../enums/storage';
 import { WebStorageService } from './webStorage';
-var SessionStorageService = (function (_super) {
+var SessionStorageService = /** @class */ (function (_super) {
     __extends(SessionStorageService, _super);
     function SessionStorageService() {
         return _super.call(this, STORAGE.session) || this;

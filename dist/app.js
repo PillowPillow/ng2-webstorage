@@ -9,7 +9,7 @@ export * from './interfaces/index';
 export * from './decorators/index';
 export * from './services/index';
 export var WEBSTORAGE_CONFIG = new InjectionToken('WEBSTORAGE_CONFIG');
-var Ng2Webstorage = (function () {
+var Ng2Webstorage = /** @class */ (function () {
     function Ng2Webstorage(ngZone, config) {
         this.ngZone = ngZone;
         if (config) {
