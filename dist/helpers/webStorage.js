@@ -16,7 +16,7 @@ var WebStorageHelper = (function () {
     WebStorageHelper.retrieve = function (sType, sKey) {
         if (sKey in CACHED[sType])
             return CACHED[sType][sKey];
-        var value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+        var value = this.retrieveFromStorage(sType, sKey);
         if (value !== null)
             CACHED[sType][sKey] = value;
         return value;
@@ -24,10 +24,13 @@ var WebStorageHelper = (function () {
     WebStorageHelper.retrieveFromStorage = function (sType, sKey) {
         var data = this.getStorage(sType).getItem(sKey);
         try {
-            data = JSON.parse(data);
+            var parsedData = JSON.parse(data);
+            if (parsedData && typeof parsedData === "object") {
+                return parsedData;
+            }
         }
         catch (err) {
-            console.warn("invalid value for " + sKey);
+            return data;
         }
         return data;
     };

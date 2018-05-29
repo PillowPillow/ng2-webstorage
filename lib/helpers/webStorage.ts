@@ -18,7 +18,7 @@ export class WebStorageHelper {
 
 	static retrieve(sType:STORAGE, sKey:string):string {
 		if(sKey in CACHED[sType]) return CACHED[sType][sKey];
-		let value = WebStorageHelper.retrieveFromStorage(sType, sKey);
+		let value = this.retrieveFromStorage(sType, sKey);
 		if(value !== null) CACHED[sType][sKey] = value;
 		return value;
 	}
@@ -26,9 +26,12 @@ export class WebStorageHelper {
 	static retrieveFromStorage(sType:STORAGE, sKey:string) {
 		let data = this.getStorage(sType).getItem(sKey);
 		try {
-			data = JSON.parse(data);
+			let parsedData = JSON.parse(data);
+			if(parsedData && typeof parsedData === "object"){
+				return parsedData;
+			}
 		} catch(err) {
-			console.warn(`invalid value for ${sKey}`);
+			return data;
 		}
 		return data;
 	}
