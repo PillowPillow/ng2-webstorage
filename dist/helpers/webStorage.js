@@ -9,10 +9,11 @@ var WebStorageHelper = (function () {
     function WebStorageHelper() {
     }
     WebStorageHelper.store = function (sType, sKey, value) {
+        var serializedValue = value;
         if (typeof value === "object") {
-            value = JSON.stringify(value);
+            serializedValue = JSON.stringify(value);
         }
-        this.getStorage(sType).setItem(sKey, value);
+        this.getStorage(sType).setItem(sKey, serializedValue);
         CACHED[sType][sKey] = value;
         StorageObserverHelper.emit(sType, sKey, value);
     };

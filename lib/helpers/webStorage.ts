@@ -11,10 +11,11 @@ const STORAGE_AVAILABILITY = {[STORAGE.local]: null, [STORAGE.session]: null};
 export class WebStorageHelper {
 
 	static store(sType:STORAGE, sKey:string, value:any):void {
+		let serializedValue = value;
 		if(typeof value === "object"){
-			value = JSON.stringify(value);
+			serializedValue = JSON.stringify(value);
 		}
-		this.getStorage(sType).setItem(sKey, value);
+		this.getStorage(sType).setItem(sKey, serializedValue);
 		CACHED[sType][sKey] = value;
 		StorageObserverHelper.emit(sType, sKey, value);
 	}
