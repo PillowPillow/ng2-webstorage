@@ -18,6 +18,13 @@ It provides also two decorators to synchronize the component attributes and the 
 
 ------------
 
+### Migrate from v2.x to the v3
+
+1. Update your project to Angular 7+
+2. Rename the module usages by <b>NgxWebstorageModule</b> *(before: Ng2Webstorage)*
+
+------------
+
 ### <a name="gstart">Getting Started</a>
 
 1. Download the library using npm `npm install --save ngx-webstorage`
