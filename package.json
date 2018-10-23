@@ -1,6 +1,6 @@
 {
-	"name": "ngx-webstorage",
-	"version": "3.0.0-beta.1",
+	"name": "ngx-webstorage-env",
+	"version": "1.0.0",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
