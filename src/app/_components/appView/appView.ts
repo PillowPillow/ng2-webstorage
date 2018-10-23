@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LocalStorage, SessionStorage} from 'ngx-webstorage';
+import {LocalStorage, SessionStorage} from '../../lib';
 
 @Component({
 	selector: 'app-view',

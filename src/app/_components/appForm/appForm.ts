@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LocalStorage, SessionStorage, SessionStorageService} from 'ngx-webstorage';
+import {LocalStorage, SessionStorage, SessionStorageService} from '../../lib';
 
 @Component({
 	selector: 'app-form',
