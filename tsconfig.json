@@ -16,6 +16,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-webstorage/*": [
+        "dist/ngx-webstorage/*"
+      ]
+    }
   }
 }
