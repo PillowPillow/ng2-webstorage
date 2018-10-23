@@ -4,7 +4,7 @@ import {RootComponent} from './_components/root/root';
 import {Components} from './_components';
 import {SharedModule} from './shared/module';
 
-import {NgxWebstorageModule} from '../../dist/ngx-webstorage';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
 	declarations: [
