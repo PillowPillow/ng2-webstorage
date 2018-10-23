@@ -26,17 +26,17 @@ It provides also two decorators to synchronize the component attributes and the 
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
-	import {Ng2Webstorage} from 'ngx-webstorage';
+	import {NgxWebstorageModule} from 'ngx-webstorage';
 
 	@NgModule({
 		declarations: [...],
 		imports: [
 			BrowserModule,
-			Ng2Webstorage,
-			//Ng2Webstorage.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
+			NgxWebstorageModule,
+			//NgxWebstorageModule.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
 			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
-			// prefix: "ng2-webstorage"
+			// prefix: "ngx-webstorage"
 			// separator: "|"
 			// caseSensitive: false
 		],
@@ -46,21 +46,6 @@ It provides also two decorators to synchronize the component attributes and the 
 	}
 
 	```
-		
-	If you're using systemJS, you have to reference the umd version of the lib in your config.
-	```` typescript
-		System.config({
-			map: { 
-				...,
-				'ngx-webstorage': 'node_modules/ngx-webstorage'
-			},
-			packages: {
-				...,
-				'ngx-webstorage': {main: 'bundles/core.umd.js', defaultExtension: 'js'}
-			}
-		});
-	````
-	
 
 3. Inject the services you want in your components and/or use the available decorators
 
@@ -332,7 +317,7 @@ export class FooComponent {
 
 - *Serialization doesn't work for objects:* 
 
-Ng2Webstorage's decorators are based upon accessors so the update trigger only on assignation. 
+NgxWebstorage's decorators are based upon accessors so the update trigger only on assignation. 
 Consequence, if you change the value of a bound object's property the new model will not be store properly. The same thing will happen with a push into a bound array. 
 To handle this cases you have to trigger manually the accessor.
 
