@@ -54,7 +54,7 @@ describe('Decorators', () => {
 			}
 		));
 		
-		afterEach(() => StrategyIndex.del());
+		afterEach(() => StrategyIndex.clear());
 		
 		it('should bind a prop to the local strategy', () => {
 			
@@ -144,7 +144,7 @@ describe('Decorators', () => {
 			}
 		));
 		
-		afterEach(() => StrategyIndex.del());
+		afterEach(() => StrategyIndex.clear());
 		
 		it('should bind a prop to the session strategy', () => {
 			

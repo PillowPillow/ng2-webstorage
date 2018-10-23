@@ -21,14 +21,15 @@ It provides also two decorators to synchronize the component attributes and the 
 ### Migrate from v2.x to the v3
 
 1. Update your project to Angular 7+
-2. Rename the module usages by <b>NgxWebstorageModule</b> *(before: Ng2Webstorage)*
+2. Rename the module usages by <b>NgxWebstorageModule.forRoot()</b> *(before: Ng2Webstorage)*
+> The forRoot is now mandatory in the root module even if you don't need to configure the library
 
 ------------
 
 ### <a name="gstart">Getting Started</a>
 
 1. Download the library using npm `npm install --save ngx-webstorage`
-2. Register the library in your module
+2. Declare the library in your main module
 
 	```typescript
 	import {NgModule} from '@angular/core';
@@ -39,7 +40,7 @@ It provides also two decorators to synchronize the component attributes and the 
 		declarations: [...],
 		imports: [
 			BrowserModule,
-			NgxWebstorageModule,
+			NgxWebstorageModule.forRoot(),
 			//NgxWebstorageModule.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
 			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:

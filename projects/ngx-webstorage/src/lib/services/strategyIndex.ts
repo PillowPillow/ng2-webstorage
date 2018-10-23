@@ -1,6 +1,6 @@
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Subject} from 'rxjs';
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {STORAGE_STRATEGIES} from '../strategies';
 import {StorageStrategyType} from '../constants/strategy';
 
@@ -9,13 +9,15 @@ export const InvalidStrategyError = 'invalid_strategy';
 
 @Injectable({providedIn: 'root'})
 export class StrategyIndex {
-	
+
 	static index: { [name: string]: StorageStrategy<any> } = {};
 	readonly registration$: Subject<string> = new Subject();
-	
-	constructor(@Inject(STORAGE_STRATEGIES) protected strategies: StorageStrategy<any>[]) {
+	protected indexed: boolean = false;
+
+	constructor(@Optional() @Inject(STORAGE_STRATEGIES) protected strategies: StorageStrategy<any>[]) {
+		if(!this.strategies) this.strategies = [];
 	}
-	
+
 	static get(name: string): StorageStrategy<any> {
 		if (!this.isStrategyRegistered(name)) throw Error(InvalidStrategyError);
 		let strategy: StorageStrategy<any> = StrategyIndex.index[name];
@@ -24,30 +26,36 @@ export class StrategyIndex {
 		}
 		return strategy;
 	}
-	
+
 	static set(name: string, strategy): void {
 		StrategyIndex.index[name] = strategy;
 	}
-	
-	static del(name?: string): void {
+
+	static clear(name?: string): void {
 		if (name !== undefined) delete StrategyIndex.index[name];
 		else StrategyIndex.index = {};
 	}
-	
+
 	static isStrategyRegistered(name: string): boolean {
 		return name in StrategyIndex.index;
 	}
-	
+
+	static hasRegistredStrategies(): boolean {
+		return Object.keys(StrategyIndex.index).length > 0;
+	}
+
 	public getStrategy(name: string): StorageStrategy<any> {
 		return StrategyIndex.get(name);
 	}
-	
-	public indexStrategies() {
+
+	public indexStrategies(force?: boolean) {
+		if (this.indexed && force !== true) return;
+		this.indexed = true;
 		this.strategies.forEach((strategy: StorageStrategy<any>) =>
 			this.register(strategy.name, strategy)
 		);
 	}
-	
+
 	public register(name: string, strategy: StorageStrategy<any>, throwIfExists: boolean = true) {
 		if (!StrategyIndex.isStrategyRegistered(name)) {
 			StrategyIndex.set(name, strategy);
@@ -56,6 +64,6 @@ export class StrategyIndex {
 			throw Error(StrategyAlreadyRegiteredError);
 		}
 	}
-	
+
 }
 

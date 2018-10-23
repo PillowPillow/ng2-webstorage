@@ -28,7 +28,7 @@ describe('Strategies : InMemory', () => {
 	}));
 	
 	afterEach(() => {
-		StrategyIndex.del();
+		StrategyIndex.clear();
 		strategyCache.clear(StorageStrategyType.InMemory);
 	});
 	

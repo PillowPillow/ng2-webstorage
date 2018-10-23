@@ -26,7 +26,7 @@ describe('Services : SessionStorageService', () => {
 	);
 	
 	afterEach(() => {
-		StrategyIndex.del();
+		StrategyIndex.clear();
 	});
 	
 	it('should provide the sessionStorageService', inject(

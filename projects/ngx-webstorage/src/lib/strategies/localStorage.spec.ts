@@ -33,7 +33,7 @@ describe('Strategies : LocalStorage', () => {
 	}));
 	
 	afterEach(() => {
-		StrategyIndex.del();
+		StrategyIndex.clear();
 		strategyCache.clear(StorageStrategyType.Local);
 	});
 	

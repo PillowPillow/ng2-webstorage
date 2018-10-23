@@ -33,7 +33,7 @@ describe('Strategies : SessionStorage', () => {
 	}));
 	
 	afterEach(() => {
-		StrategyIndex.del();
+		StrategyIndex.clear();
 		strategyCache.clear(StorageStrategyType.Session);
 	});
 	

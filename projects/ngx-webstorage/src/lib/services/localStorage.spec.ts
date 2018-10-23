@@ -26,7 +26,7 @@ describe('Services : LocalStorageService', () => {
 	);
 	
 	afterEach(() => {
-		StrategyIndex.del();
+		StrategyIndex.clear();
 	});
 	
 	it('should provide the localStorageService', inject(

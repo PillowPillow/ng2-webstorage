@@ -10,13 +10,14 @@ export const LIB_CONFIG: InjectionToken<Storage> = new InjectionToken<Storage>('
 
 @NgModule({})
 export class NgxWebstorageModule {
-	
+
 	constructor(index: StrategyIndex, @Optional() @Inject(LIB_CONFIG) config: NgxWebstorageConfiguration) {
 		if (config) StorageKeyManager.consumeConfiguration(config);
+		else console.error('NgxWebstorage : Possible misconfiguration (The forRoot method usage is mandatory since the 3.0.0)');
 		index.indexStrategies();
 	}
-	
-	static forRoot(config?: NgxWebstorageConfiguration): ModuleWithProviders {
+
+	static forRoot(config: NgxWebstorageConfiguration = {}): ModuleWithProviders {
 		return {
 			ngModule: NgxWebstorageModule,
 			providers: [
@@ -31,4 +32,5 @@ export class NgxWebstorageModule {
 			]
 		};
 	}
+
 }

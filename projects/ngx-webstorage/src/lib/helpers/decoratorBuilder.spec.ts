@@ -12,7 +12,7 @@ describe('Helpers : DecoratorBuilder', () => {
 	});
 	
 	afterEach(() => {
-		StrategyIndex.del(storageStrategy.name);
+		StrategyIndex.clear(storageStrategy.name);
 	});
 	
 	it('should add Get/Set accessors for the given propName', () => {
