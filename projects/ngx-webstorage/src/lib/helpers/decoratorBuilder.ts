@@ -5,7 +5,7 @@ import {noop} from './noop';
 
 export class DecoratorBuilder {
 	
-	static buildSyncStrategyDecorator(strategyName: string | StorageStrategyType, prototype, propName: string, key: string, defaultValue: any = null) {
+	static buildSyncStrategyDecorator(strategyName: string | StorageStrategyType, prototype, propName: string, key?: string, defaultValue: any = null) {
 		const rawKey: string = key || propName;
 		let storageKey: string;
 		

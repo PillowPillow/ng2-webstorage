@@ -10,8 +10,8 @@ export class SyncStorage implements StorageService {
 	}
 	
 	retrieve(key: string): any {
-		let value: any = null;
-		this.strategy.get(StorageKeyManager.normalize(key)).subscribe((result) => value = result);
+		let value: any;
+		this.strategy.get(StorageKeyManager.normalize(key)).subscribe((result) => value = result || null);
 		return value;
 	}
 	

@@ -9,6 +9,8 @@ export class InMemoryStorageStrategy implements StorageStrategy<any> {
 	isAvailable: boolean = true;
 	readonly name: string = StorageStrategyType.InMemory;
 	
+	constructor(@Inject(StrategyCacheService) protected cache: StrategyCacheService) {}
+	
 	get(key: string): Observable<any> {
 		return of(this.cache.get(this.name, key));
 	}
@@ -30,7 +32,5 @@ export class InMemoryStorageStrategy implements StorageStrategy<any> {
 		this.keyChanges.next(null);
 		return of(null);
 	}
-	
-	constructor(@Inject(StrategyCacheService) protected cache: StrategyCacheService) {}
 	
 }

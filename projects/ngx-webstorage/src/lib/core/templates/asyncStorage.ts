@@ -2,7 +2,7 @@ import {StorageStrategy} from '../interfaces/storageStrategy';
 import {Observable} from 'rxjs';
 import {StorageService} from '../interfaces/storageService';
 import {StorageKeyManager} from '../../helpers/storageKeyManager';
-import {distinctUntilChanged, filter, shareReplay, switchMap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, shareReplay, switchMap} from 'rxjs/operators';
 
 export class AsyncStorage implements StorageService {
 	
@@ -10,7 +10,9 @@ export class AsyncStorage implements StorageService {
 	}
 	
 	retrieve(key: string): Observable<any> {
-		return this.strategy.get(StorageKeyManager.normalize(key));
+		return this.strategy.get(StorageKeyManager.normalize(key)).pipe(
+			map((value:any) => value || null)
+		);
 	}
 	
 	store(key: string, value: any): Observable<any> {

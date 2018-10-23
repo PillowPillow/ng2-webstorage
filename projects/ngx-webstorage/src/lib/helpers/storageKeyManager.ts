@@ -16,15 +16,15 @@ export class StorageKeyManager {
 		return key.indexOf(StorageKeyManager.prefix + StorageKeyManager.separator) === 0;
 	}
 	
-	static setPrefix(prefix: string = DefaultPrefix) {
+	static setPrefix(prefix: string) {
 		StorageKeyManager.prefix = prefix;
 	}
 	
-	static setSeparator(separator: string = DefaultSeparator) {
+	static setSeparator(separator: string) {
 		StorageKeyManager.separator = separator;
 	}
 	
-	static setCaseSensitive(enable: boolean = DefaultIsCaseSensitive) {
+	static setCaseSensitive(enable: boolean) {
 		StorageKeyManager.isCaseSensitive = enable;
 	}
 	

@@ -13,12 +13,10 @@ export class LocalStorageStrategy extends BaseSyncStorageStrategy {
 	            @Inject(PLATFORM_ID) protected platformId: any,
 	            protected zone: NgZone) {
 		super(storage, cache);
-		this.listenExternalChanges();
+		if (isPlatformBrowser(this.platformId)) this.listenExternalChanges();
 	}
 	
 	protected listenExternalChanges() {
-		if (!isPlatformBrowser(this.platformId)) return;
-		
 		window.addEventListener('storage', (event: StorageEvent) => this.zone.run(() => {
 			if (event.storageArea !== this.storage) return;
 			if (event.key !== null) this.cache.del(this.name, event.key);
