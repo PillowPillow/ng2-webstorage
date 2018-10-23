@@ -44,8 +44,6 @@ describe('Services : StrategyIndex', () => {
 			expect(() => index.getStrategy(StorageStrategyType.InMemory)).toThrowError(InvalidStrategyError);
 
 			index.indexStrategies();
-			expect(() => index.indexStrategies()).not.toThrowError();
-			expect(() => index.indexStrategies(true)).toThrowError();
 
 			let strategy: StorageStrategy<any> = index.getStrategy(StorageStrategyStubName);
 			expect(strategy).toBeDefined();

@@ -50,10 +50,11 @@ export class StrategyIndex {
 
 	public indexStrategies(force?: boolean) {
 		if (this.indexed && force !== true) return;
-		this.indexed = true;
+		StrategyIndex.clear();
 		this.strategies.forEach((strategy: StorageStrategy<any>) =>
 			this.register(strategy.name, strategy)
 		);
+		this.indexed = true;
 	}
 
 	public register(name: string, strategy: StorageStrategy<any>, throwIfExists: boolean = true) {

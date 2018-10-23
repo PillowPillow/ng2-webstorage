@@ -7,7 +7,7 @@ import {STORAGE_STRATEGIES} from '../strategies';
 import {StrategyIndex} from './strategyIndex';
 
 describe('Services : LocalStorageService', () => {
-	
+
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
@@ -17,18 +17,18 @@ describe('Services : LocalStorageService', () => {
 			]
 		});
 	});
-	
+
 	beforeEach(inject(
 		[StrategyIndex],
 		(index: StrategyIndex) => {
 			index.indexStrategies();
 		})
 	);
-	
+
 	afterEach(() => {
 		StrategyIndex.clear();
 	});
-	
+
 	it('should provide the localStorageService', inject(
 		[LocalStorageService],
 		(storage: LocalStorageService) => {
@@ -36,6 +36,6 @@ describe('Services : LocalStorageService', () => {
 			expect(storage.getStrategyName()).toEqual(StorageStrategyType.Local);
 		})
 	);
-	
+
 });
 
