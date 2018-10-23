@@ -4,5 +4,22 @@
 	"peerDependencies": {
 		"@angular/common": "^7.0.0",
 		"@angular/core": "^7.0.0"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/PillowPillow/ng2-webstorage.git"
+	},
+	"keywords": [
+		"typescript",
+		"angular2",
+		"ng2",
+		"localstorage",
+		"sessionStorage"
+	],
+	"author": "Nicolas Gaignoux <https://github.com/PillowPillow>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/PillowPillow/ng2-webstorage/issues"
+	},
+	"homepage": "https://github.com/PillowPillow/ng2-webstorage#readme"
 }
