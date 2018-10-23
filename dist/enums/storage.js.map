@@ -1,1 +1,0 @@
-{"version":3,"file":"storage.js","sourceRoot":"","sources":["../../lib/enums/storage.ts"],"names":[],"mappings":"AAAA,MAAM,CAAN,IAAY,OAEX;AAFD,WAAY,OAAO;IAClB,uCAAK,CAAA;IAAE,2CAAO,CAAA;GADH,OAAO,KAAP,OAAO,QAElB","sourcesContent":["export enum STORAGE {\r\n\tlocal, session\r\n}\r\n"]}

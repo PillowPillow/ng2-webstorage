@@ -1,1 +1,0 @@
-{"version":3,"file":"webStorage.js","sourceRoot":"","sources":["../../lib/interfaces/webStorage.ts"],"names":[],"mappings":"","sourcesContent":["export interface IWebStorage {\r\n\tgetItem:(key:string) => string;\r\n\tsetItem:(key:string, value:string) => void;\r\n\tremoveItem:(key:string) => void;\r\n}\r\n"]}

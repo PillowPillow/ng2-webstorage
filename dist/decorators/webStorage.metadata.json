@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{"WebStorage":{"__symbolic":"function","parameters":["webSKey","sType","defaultValue"],"value":{"__symbolic":"error","message":"Function call not supported","line":5,"character":8},"defaults":[null,null,null]},"WebStorageDecorator":{"__symbolic":"function"}}}]

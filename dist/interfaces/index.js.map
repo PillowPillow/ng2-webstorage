@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../lib/interfaces/index.ts"],"names":[],"mappings":"AAEA,cAAc,UAAU,CAAC","sourcesContent":["export * from './webStorage';\r\nexport * from './storage';\r\nexport * from './config';\r\n"]}

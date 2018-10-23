@@ -1,18 +1,26 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"module": "commonjs",
-		"declaration": false,
-		"noImplicitAny": false,
-		"removeComments": true,
-		"noLib": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true
-	},
-	"files": [
-		"node_modules/typescript/lib/lib.es6.d.ts",
-		"lib/app.ts"
-	],
-	"compileOnSave": false,
-	"buildOnSave": false
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "ngx-webstorage/*": [
+        "dist/ngx-webstorage/*"
+      ]
+    }
+  }
 }
