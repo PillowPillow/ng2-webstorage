@@ -2,7 +2,7 @@ import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Subject} from 'rxjs';
 import {Inject, Injectable, Optional} from '@angular/core';
 import {STORAGE_STRATEGIES} from '../strategies';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 
 export const StrategyAlreadyRegiteredError = 'strategy_already_registered';
 export const InvalidStrategyError = 'invalid_strategy';
@@ -15,14 +15,14 @@ export class StrategyIndex {
 	protected indexed: boolean = false;
 
 	constructor(@Optional() @Inject(STORAGE_STRATEGIES) protected strategies: StorageStrategy<any>[]) {
-		if(!this.strategies) this.strategies = [];
+		if (!this.strategies) this.strategies = [];
 	}
 
 	static get(name: string): StorageStrategy<any> {
 		if (!this.isStrategyRegistered(name)) throw Error(InvalidStrategyError);
 		let strategy: StorageStrategy<any> = StrategyIndex.index[name];
 		if (!strategy.isAvailable) {
-			strategy = StrategyIndex.index[StorageStrategyType.InMemory];
+			strategy = StrategyIndex.index[StorageStrategies.InMemory];
 		}
 		return strategy;
 	}
@@ -51,17 +51,15 @@ export class StrategyIndex {
 	public indexStrategies(force?: boolean) {
 		if (this.indexed && force !== true) return;
 		StrategyIndex.clear();
-		this.strategies.forEach((strategy: StorageStrategy<any>) =>
-			this.register(strategy.name, strategy)
-		);
+		this.strategies.forEach((strategy: StorageStrategy<any>) => this.register(strategy.name, strategy, true));
 		this.indexed = true;
 	}
 
-	public register(name: string, strategy: StorageStrategy<any>, throwIfExists: boolean = true) {
-		if (!StrategyIndex.isStrategyRegistered(name)) {
+	public register(name: string, strategy: StorageStrategy<any>, overrideIfExists: boolean = false) {
+		if (!StrategyIndex.isStrategyRegistered(name) || overrideIfExists) {
 			StrategyIndex.set(name, strategy);
 			this.registration$.next(name);
-		} else if (throwIfExists) {
+		} else {
 			throw Error(StrategyAlreadyRegiteredError);
 		}
 	}

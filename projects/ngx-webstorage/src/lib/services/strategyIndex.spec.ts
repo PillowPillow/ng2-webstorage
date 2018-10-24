@@ -4,7 +4,7 @@ import {InvalidStrategyError, StrategyAlreadyRegiteredError, StrategyIndex} from
 import {StorageStrategyStub, StorageStrategyStubName} from '../../stubs/storageStrategy.stub';
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {InMemoryStorageStrategy} from '../strategies/inMemory';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 
 describe('Services : StrategyIndex', () => {
 
@@ -29,7 +29,7 @@ describe('Services : StrategyIndex', () => {
 			let strategy: StorageStrategy<any> = new StorageStrategyStub();
 			index.register(StorageStrategyStubName, strategy);
 			expect(() => index.register(StorageStrategyStubName, strategy)).toThrowError(StrategyAlreadyRegiteredError);
-			expect(() => index.register(StorageStrategyStubName, strategy, false)).not.toThrowError();
+			expect(() => index.register(StorageStrategyStubName, strategy, true)).not.toThrowError();
 
 			strategy = index.getStrategy(StorageStrategyStubName);
 			expect(strategy).toBeDefined();
@@ -41,7 +41,7 @@ describe('Services : StrategyIndex', () => {
 		[StrategyIndex],
 		(index: StrategyIndex) => {
 			expect(() => index.getStrategy(StorageStrategyStubName)).toThrowError(InvalidStrategyError);
-			expect(() => index.getStrategy(StorageStrategyType.InMemory)).toThrowError(InvalidStrategyError);
+			expect(() => index.getStrategy(StorageStrategies.InMemory)).toThrowError(InvalidStrategyError);
 
 			index.indexStrategies();
 
@@ -49,13 +49,13 @@ describe('Services : StrategyIndex', () => {
 			expect(strategy).toBeDefined();
 			expect(strategy.name).toEqual(StorageStrategyStubName);
 
-			strategy = index.getStrategy(StorageStrategyType.InMemory);
+			strategy = index.getStrategy(StorageStrategies.InMemory);
 			expect(strategy).toBeDefined();
-			expect(strategy.name).toEqual(StorageStrategyType.InMemory);
+			expect(strategy.name).toEqual(StorageStrategies.InMemory);
 
 			const strategyNames: string[] = Object.keys(StrategyIndex.index);
 			expect(strategyNames.length).toEqual(2);
-			expect(strategyNames).toContain(StorageStrategyType.InMemory);
+			expect(strategyNames).toContain(StorageStrategies.InMemory);
 			expect(strategyNames).toContain(StorageStrategyStubName);
 		})
 	);
@@ -71,7 +71,7 @@ describe('Services : StrategyIndex', () => {
 		it('should clear the index', () => {
 			expect(Object.keys(StrategyIndex.index).length).toEqual(2);
 
-			StrategyIndex.clear(StorageStrategyType.InMemory);
+			StrategyIndex.clear(StorageStrategies.InMemory);
 			expect(Object.keys(StrategyIndex.index).length).toEqual(1);
 			expect(StrategyIndex.index[StorageStrategyStubName]).toBeDefined();
 
@@ -87,9 +87,9 @@ describe('Services : StrategyIndex', () => {
 				expect(strategy).toBeDefined();
 				expect(strategy.name).toEqual(StorageStrategyStubName);
 
-				strategy = StrategyIndex.get(StorageStrategyType.InMemory);
+				strategy = StrategyIndex.get(StorageStrategies.InMemory);
 				expect(strategy).toBeDefined();
-				expect(strategy.name).toEqual(StorageStrategyType.InMemory);
+				expect(strategy.name).toEqual(StorageStrategies.InMemory);
 
 			})
 		);
@@ -100,9 +100,9 @@ describe('Services : StrategyIndex', () => {
 
 				const stub: StorageStrategy<any> = index.getStrategy(StorageStrategyStubName);
 
-				StrategyIndex.set(StorageStrategyType.InMemory, stub);
+				StrategyIndex.set(StorageStrategies.InMemory, stub);
 
-				const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategyType.InMemory);
+				const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategies.InMemory);
 				expect(strategy).toBeDefined();
 				expect(strategy.name).toEqual(StorageStrategyStubName);
 			})
@@ -117,7 +117,7 @@ describe('Services : StrategyIndex', () => {
 
 				const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategyStubName);
 				expect(strategy).toBeDefined();
-				expect(strategy.name).toEqual(StorageStrategyType.InMemory);
+				expect(strategy.name).toEqual(StorageStrategies.InMemory);
 			})
 		);
 	});

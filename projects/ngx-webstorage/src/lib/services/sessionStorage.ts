@@ -2,12 +2,12 @@ import {FactoryProvider} from '@angular/core';
 import {SyncStorage} from '../core/templates/syncStorage';
 import {StrategyIndex} from './strategyIndex';
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 
 export class SessionStorageService extends SyncStorage {}
 
 export function buildService(index: StrategyIndex) {
-	const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategyType.Session);
+	const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategies.Session);
 	return new SyncStorage(strategy);
 }
 

@@ -8,7 +8,7 @@ import {StorageStub} from '../stubs/storage.stub';
 import {StrategyIndex} from './services/strategyIndex';
 import {StorageKeyManager} from './helpers/storageKeyManager';
 import {StrategyCacheService} from './core/strategyCache';
-import {StorageStrategyType} from './constants/strategy';
+import {StorageStrategies} from './constants/strategy';
 import {SessionStorageStrategy} from './strategies/sessionStorage';
 
 describe('Decorators', () => {
@@ -67,7 +67,7 @@ describe('Decorators', () => {
 		});
 		
 		it('should use the cache if possible', () => {
-			strategyCache.set(StorageStrategyType.Local, StorageKeyManager.normalize('prop'), 'foobar');
+			strategyCache.set(StorageStrategies.Local, StorageKeyManager.normalize('prop'), 'foobar');
 			expect(testComponent.prop).toEqual('foobar');
 			expect(storage.getItem(StorageKeyManager.normalize('prop'))).toBeNull();
 		});
@@ -85,19 +85,19 @@ describe('Decorators', () => {
 			
 			const key: string = StorageKeyManager.normalize('prop_def');
 			expect(storage.getItem(key)).toBeNull();
-			expect(strategyCache.get(StorageStrategyType.Local, key)).toBeUndefined();
+			expect(strategyCache.get(StorageStrategies.Local, key)).toBeUndefined();
 			
 			const obj: any = {attr: 42};
 			testComponent.prop3 = obj;
 			expect(testComponent.prop3).toEqual(obj);
 			expect(storage.getItem(key)).toEqual(JSON.stringify(obj));
-			expect(strategyCache.get(StorageStrategyType.Local, key)).toEqual(obj);
+			expect(strategyCache.get(StorageStrategies.Local, key)).toEqual(obj);
 			
 			// Shouldnt fallback to the default value if we set to null the property
 			testComponent.prop3 = null;
 			expect(testComponent.prop3).toBeNull();
 			expect(storage.getItem(key)).toEqual('null');
-			expect(strategyCache.get(StorageStrategyType.Local, key)).toBeNull();
+			expect(strategyCache.get(StorageStrategies.Local, key)).toBeNull();
 			
 		});
 		
@@ -157,7 +157,7 @@ describe('Decorators', () => {
 		});
 		
 		it('should use the cache if possible', () => {
-			strategyCache.set(StorageStrategyType.Session, StorageKeyManager.normalize('prop'), 'foobar');
+			strategyCache.set(StorageStrategies.Session, StorageKeyManager.normalize('prop'), 'foobar');
 			expect(testComponent.prop).toEqual('foobar');
 			expect(storage.getItem(StorageKeyManager.normalize('prop'))).toBeNull();
 		});
@@ -175,19 +175,19 @@ describe('Decorators', () => {
 			
 			const key: string = StorageKeyManager.normalize('prop_def');
 			expect(storage.getItem(key)).toBeNull();
-			expect(strategyCache.get(StorageStrategyType.Session, key)).toBeUndefined();
+			expect(strategyCache.get(StorageStrategies.Session, key)).toBeUndefined();
 			
 			const obj: any = {attr: 42};
 			testComponent.prop3 = obj;
 			expect(testComponent.prop3).toEqual(obj);
 			expect(storage.getItem(key)).toEqual(JSON.stringify(obj));
-			expect(strategyCache.get(StorageStrategyType.Session, key)).toEqual(obj);
+			expect(strategyCache.get(StorageStrategies.Session, key)).toEqual(obj);
 			
 			// Shouldnt fallback to the default value if we set to null the property
 			testComponent.prop3 = null;
 			expect(testComponent.prop3).toBeNull();
 			expect(storage.getItem(key)).toEqual('null');
-			expect(strategyCache.get(StorageStrategyType.Session, key)).toBeNull();
+			expect(strategyCache.get(StorageStrategies.Session, key)).toBeNull();
 			
 		});
 		

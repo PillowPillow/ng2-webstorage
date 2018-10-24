@@ -3,7 +3,7 @@ import {STORAGE_STRATEGIES} from './index';
 import {InMemoryStorageStrategy} from './inMemory';
 import {StrategyIndex} from '../services/strategyIndex';
 import {StrategyCacheService} from '../core/strategyCache';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 import {noop} from '../helpers/noop';
 
 describe('Strategies : InMemory', () => {
@@ -24,18 +24,18 @@ describe('Strategies : InMemory', () => {
 		index.indexStrategies();
 		strategyIndex = index;
 		strategyCache = cache;
-		strategy = index.getStrategy(StorageStrategyType.InMemory) as InMemoryStorageStrategy;
+		strategy = index.getStrategy(StorageStrategies.InMemory) as InMemoryStorageStrategy;
 	}));
 	
 	afterEach(() => {
 		StrategyIndex.clear();
-		strategyCache.clear(StorageStrategyType.InMemory);
+		strategyCache.clear(StorageStrategies.InMemory);
 	});
 	
 	it('should set the given key-value pair', () => {
 		
 		strategy.set('prop', 'value').subscribe(noop);
-		expect(strategyCache.get(StorageStrategyType.InMemory, 'prop')).toEqual('value');
+		expect(strategyCache.get(StorageStrategies.InMemory, 'prop')).toEqual('value');
 		expect(strategyCache.get('other', 'prop')).toBeUndefined();
 		
 	});
@@ -56,8 +56,8 @@ describe('Strategies : InMemory', () => {
 		strategy.set('prop2', 'value2').subscribe(noop);
 		strategy.del('prop2').subscribe(noop);
 		
-		expect(strategyCache.get(StorageStrategyType.InMemory, 'prop')).toEqual('value');
-		expect(strategyCache.get(StorageStrategyType.InMemory, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.InMemory, 'prop')).toEqual('value');
+		expect(strategyCache.get(StorageStrategies.InMemory, 'prop2')).toBeUndefined();
 		
 	});
 	
@@ -67,8 +67,8 @@ describe('Strategies : InMemory', () => {
 		strategy.set('prop2', 'value2').subscribe(noop);
 		strategy.clear().subscribe(noop);
 		
-		expect(strategyCache.get(StorageStrategyType.InMemory, 'prop')).toBeUndefined();
-		expect(strategyCache.get(StorageStrategyType.InMemory, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.InMemory, 'prop')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.InMemory, 'prop2')).toBeUndefined();
 		
 	});
 });

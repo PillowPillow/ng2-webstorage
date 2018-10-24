@@ -3,7 +3,7 @@ import {STORAGE_STRATEGIES} from './index';
 import {LocalStorageStrategy} from './localStorage';
 import {StrategyIndex} from '../services/strategyIndex';
 import {StrategyCacheService} from '../core/strategyCache';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 import {noop} from '../helpers/noop';
 import {LOCAL_STORAGE} from '../core/nativeStorage';
 import {StorageStub} from '../../stubs/storage.stub';
@@ -29,19 +29,19 @@ describe('Strategies : LocalStorage', () => {
 		index.indexStrategies();
 		strategyIndex = index;
 		strategyCache = cache;
-		strategy = index.getStrategy(StorageStrategyType.Local) as LocalStorageStrategy;
+		strategy = index.getStrategy(StorageStrategies.Local) as LocalStorageStrategy;
 	}));
 	
 	afterEach(() => {
 		StrategyIndex.clear();
-		strategyCache.clear(StorageStrategyType.Local);
+		strategyCache.clear(StorageStrategies.Local);
 	});
 	
 	it('should set the given key-value pair', () => {
 		
 		strategy.set('prop', 42).subscribe(noop);
 		expect(storage.getItem('prop')).toEqual('42');
-		expect(strategyCache.get(StorageStrategyType.Local, 'prop')).toEqual(42);
+		expect(strategyCache.get(StorageStrategies.Local, 'prop')).toEqual(42);
 		expect(strategyCache.get('other', 'prop')).toBeUndefined();
 		
 	});
@@ -64,8 +64,8 @@ describe('Strategies : LocalStorage', () => {
 		
 		expect(storage.getItem('prop')).toEqual('"value"');
 		expect(storage.getItem('prop2')).toBeNull();
-		expect(strategyCache.get(StorageStrategyType.Local, 'prop')).toEqual('value');
-		expect(strategyCache.get(StorageStrategyType.Local, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Local, 'prop')).toEqual('value');
+		expect(strategyCache.get(StorageStrategies.Local, 'prop2')).toBeUndefined();
 		
 	});
 	
@@ -77,8 +77,8 @@ describe('Strategies : LocalStorage', () => {
 		
 		expect(storage.getItem('prop')).toBeNull();
 		expect(storage.getItem('prop2')).toBeNull();
-		expect(strategyCache.get(StorageStrategyType.Local, 'prop')).toBeUndefined();
-		expect(strategyCache.get(StorageStrategyType.Local, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Local, 'prop')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Local, 'prop2')).toBeUndefined();
 		
 	});
 	

@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {SESSION_STORAGE, SessionStorageProvider} from '../core/nativeStorage';
 import {SessionStorageService, SessionStorageServiceProvider} from './sessionStorage';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 import {SessionStorageStrategy} from '../strategies/sessionStorage';
 import {STORAGE_STRATEGIES} from '../strategies';
 import {StrategyIndex} from './strategyIndex';
@@ -33,7 +33,7 @@ describe('Services : SessionStorageService', () => {
 		[SessionStorageService],
 		(storage: SessionStorageService) => {
 			expect(storage).toBeDefined();
-			expect(storage.getStrategyName()).toEqual(StorageStrategyType.Session);
+			expect(storage.getStrategyName()).toEqual(StorageStrategies.Session);
 		})
 	);
 	

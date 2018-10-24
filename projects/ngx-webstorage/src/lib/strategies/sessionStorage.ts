@@ -2,12 +2,13 @@ import {StrategyCacheService} from '../core/strategyCache';
 import {BaseSyncStorageStrategy} from './baseSyncStorage';
 import {Inject, NgZone, PLATFORM_ID} from '@angular/core';
 import {SESSION_STORAGE} from '../core/nativeStorage';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 import {isPlatformBrowser} from '@angular/common';
 
 export class SessionStorageStrategy extends BaseSyncStorageStrategy {
-	readonly name: string = StorageStrategyType.Session;
-	
+	static readonly strategyName: string = StorageStrategies.Session;
+	readonly name: string = SessionStorageStrategy.strategyName;
+
 	constructor(@Inject(SESSION_STORAGE) protected storage: Storage,
 	            protected cache: StrategyCacheService,
 	            @Inject(PLATFORM_ID) protected platformId: any,
@@ -15,7 +16,7 @@ export class SessionStorageStrategy extends BaseSyncStorageStrategy {
 		super(storage, cache);
 		if (isPlatformBrowser(this.platformId)) this.listenExternalChanges();
 	}
-	
+
 	protected listenExternalChanges() {
 		window.addEventListener('storage', (event: StorageEvent) => this.zone.run(() => {
 			if (event.storageArea !== this.storage) return;
@@ -23,5 +24,5 @@ export class SessionStorageStrategy extends BaseSyncStorageStrategy {
 			else this.cache.clear(this.name);
 		}));
 	}
-	
+
 }

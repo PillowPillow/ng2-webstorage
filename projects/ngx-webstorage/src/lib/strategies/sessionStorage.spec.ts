@@ -3,7 +3,7 @@ import {STORAGE_STRATEGIES} from './index';
 import {SessionStorageStrategy} from './sessionStorage';
 import {StrategyIndex} from '../services/strategyIndex';
 import {StrategyCacheService} from '../core/strategyCache';
-import {StorageStrategyType} from '../constants/strategy';
+import {StorageStrategies} from '../constants/strategy';
 import {noop} from '../helpers/noop';
 import {SESSION_STORAGE} from '../core/nativeStorage';
 import {StorageStub} from '../../stubs/storage.stub';
@@ -29,19 +29,19 @@ describe('Strategies : SessionStorage', () => {
 		index.indexStrategies();
 		strategyIndex = index;
 		strategyCache = cache;
-		strategy = index.getStrategy(StorageStrategyType.Session) as SessionStorageStrategy;
+		strategy = index.getStrategy(StorageStrategies.Session) as SessionStorageStrategy;
 	}));
 	
 	afterEach(() => {
 		StrategyIndex.clear();
-		strategyCache.clear(StorageStrategyType.Session);
+		strategyCache.clear(StorageStrategies.Session);
 	});
 	
 	it('should set the given key-value pair', () => {
 		
 		strategy.set('prop', 42).subscribe(noop);
 		expect(storage.getItem('prop')).toEqual('42');
-		expect(strategyCache.get(StorageStrategyType.Session, 'prop')).toEqual(42);
+		expect(strategyCache.get(StorageStrategies.Session, 'prop')).toEqual(42);
 		expect(strategyCache.get('other', 'prop')).toBeUndefined();
 		
 	});
@@ -64,8 +64,8 @@ describe('Strategies : SessionStorage', () => {
 		
 		expect(storage.getItem('prop')).toEqual('"value"');
 		expect(storage.getItem('prop2')).toBeNull();
-		expect(strategyCache.get(StorageStrategyType.Session, 'prop')).toEqual('value');
-		expect(strategyCache.get(StorageStrategyType.Session, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Session, 'prop')).toEqual('value');
+		expect(strategyCache.get(StorageStrategies.Session, 'prop2')).toBeUndefined();
 		
 	});
 	
@@ -77,8 +77,8 @@ describe('Strategies : SessionStorage', () => {
 		
 		expect(storage.getItem('prop')).toBeNull();
 		expect(storage.getItem('prop2')).toBeNull();
-		expect(strategyCache.get(StorageStrategyType.Session, 'prop')).toBeUndefined();
-		expect(strategyCache.get(StorageStrategyType.Session, 'prop2')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Session, 'prop')).toBeUndefined();
+		expect(strategyCache.get(StorageStrategies.Session, 'prop2')).toBeUndefined();
 		
 	});
 	
