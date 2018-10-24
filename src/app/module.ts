@@ -5,6 +5,7 @@ import {Components} from './_components';
 import {SharedModule} from './shared/module';
 
 import {NgxWebstorageModule} from './lib';
+import {Routing} from './routing';
 
 @NgModule({
 	declarations: [
@@ -13,6 +14,7 @@ import {NgxWebstorageModule} from './lib';
 	imports: [
 		BrowserModule,
 		SharedModule,
+		Routing,
 		NgxWebstorageModule.forRoot({
 			prefix: 'prefix',
 			separator: '--'
