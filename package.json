@@ -12,7 +12,9 @@
 		"build:lib:watch": "ng build ngx-webstorage --watch",
 		"test:lib": "ng test ngx-webstorage --watch false --progress=false",
 		"test:lib:watch": "ng test ngx-webstorage --watch true --progress=false",
-		"test:lib:coverage": "ng test ngx-webstorage --watch false --progress=false --code-coverage"
+		"test:lib:coverage": "ng test ngx-webstorage --watch false --progress=false --code-coverage",
+		"test:lib:headless": "ng test ngx-webstorage --browsers chrome_headless --watch false --progress=false",
+		"test:lib:headless:coverage": "ng test ngx-webstorage --browsers chrome_headless --code-coverage --watch false --progress=false"
 	},
 	"private": true,
 	"dependencies": {

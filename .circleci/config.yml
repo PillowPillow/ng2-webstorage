@@ -1,0 +1,57 @@
+version: 2
+
+anchor_1: &defaults
+  working_directory: ~/app
+anchor_2: &attach_options
+  at: ~/app
+anchor_3: &ignore_tags
+  filters:
+    tags:
+      ignore: /.*/
+
+jobs:
+  install_dependencies:
+    docker:
+      - image: circleci/node:10
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace: *attach_options
+      - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+        name: Setup Dependencies
+        command: npm install
+      - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+          - ./node_modules
+      - persist_to_workspace:
+        root: .
+        paths: node_modules
+
+  unit_test:
+    docker:
+      - image: circleci/node:10-browsers
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace: *attach_options
+
+      - run:
+        name: Run Test and Coverage
+        command: npm run test:lib:headless:coverage
+
+      - store_artifacts:
+        path: ./coverage
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - install_dependencies:
+        <<: *ignore_tags
+      - unit_test:
+        <<: *ignore_tags
+        requires:
+          - install_dependencies
