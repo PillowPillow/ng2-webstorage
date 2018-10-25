@@ -1,4 +1,4 @@
-import {Inject, InjectionToken, ModuleWithProviders, NgModule, Optional} from '@angular/core';
+import {APP_INITIALIZER, Inject, InjectionToken, ModuleWithProviders, NgModule, Optional} from '@angular/core';
 import {LocalStorageProvider, SessionStorageProvider} from './core/nativeStorage';
 import {Services} from './services/index';
 import {Strategies} from './strategies/index';
@@ -14,7 +14,7 @@ export class NgxWebstorageModule {
 	constructor(index: StrategyIndex, @Optional() @Inject(LIB_CONFIG) config: NgxWebstorageConfiguration) {
 		if (config) StorageKeyManager.consumeConfiguration(config);
 		else console.error('NgxWebstorage : Possible misconfiguration (The forRoot method usage is mandatory since the 3.0.0)');
-		index.indexStrategies();
+
 	}
 
 	static forRoot(config: NgxWebstorageConfiguration = {}): ModuleWithProviders {
@@ -28,7 +28,16 @@ export class NgxWebstorageModule {
 				LocalStorageProvider,
 				SessionStorageProvider,
 				...Services,
-				...Strategies
+				...Strategies,
+				{
+					provide: APP_INITIALIZER,
+					useFactory: (index: StrategyIndex) => {
+						index.indexStrategies();
+						return () => StrategyIndex.index;
+					},
+					deps: [StrategyIndex],
+					multi: true
+				}
 			]
 		};
 	}

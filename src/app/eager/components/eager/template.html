@@ -1,0 +1,12 @@
+<div>
+	<h5>Eager module</h5>
+
+	<article>
+		<div>local storage: {{localBind}}</div>
+		<div><input type="text" [value]="localBind" (input)="localBind = $event.target.value"></div>
+	</article>
+	<article>
+		<div>session storage: {{sessionBind}}</div>
+		<div><input type="text" [value]="sessionBind" (input)="sessionBind = $event.target.value"></div>
+	</article>
+</div>

@@ -4,8 +4,9 @@ import {RootComponent} from './_components/root/root';
 import {Components} from './_components';
 import {SharedModule} from './shared/module';
 
-import {NgxWebstorageModule} from './lib';
+import {LocalStorageService, LocalStorageStrategy, NgxWebstorageModule, STORAGE_STRATEGIES, StorageStrategyStub} from './lib';
 import {Routing} from './routing';
+import {EagerModule} from './eager/module';
 
 @NgModule({
 	declarations: [
@@ -15,12 +16,16 @@ import {Routing} from './routing';
 		BrowserModule,
 		SharedModule,
 		Routing,
+		EagerModule,
 		NgxWebstorageModule.forRoot({
 			prefix: 'prefix',
 			separator: '--'
 		})
 	],
-	providers: [],
+	providers: [
+		//{provide: STORAGE_STRATEGIES, useFactory: () => new StorageStrategyStub(LocalStorageStrategy.strategyName), multi: true}
+	],
 	bootstrap: [RootComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
