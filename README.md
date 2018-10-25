@@ -1,8 +1,10 @@
 # ngx-webstorage
+
 ### Local and session storage - Angular service
 This library provides an easy to use service to manage the web storages (local and session) from your Angular application.
 It provides also two decorators to synchronize the component attributes and the web storages.
 
+[![CircleCI](https://circleci.com/gh/PillowPillow/ng2-webstorage/tree/master.svg?style=svg)](https://circleci.com/gh/PillowPillow/ng2-webstorage/tree/master)
 ------------
 
 #### Index:
