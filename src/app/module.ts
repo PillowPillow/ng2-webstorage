@@ -4,7 +4,7 @@ import {RootComponent} from './_components/root/root';
 import {Components} from './_components';
 import {SharedModule} from './shared/module';
 
-import {LocalStorageService, LocalStorageStrategy, NgxWebstorageModule, STORAGE_STRATEGIES, StorageStrategyStub} from './lib';
+import {NgxWebstorageModule, STORAGE_STRATEGIES, StorageStrategyStub, LocalStorageStrategy} from './lib';
 import {Routing} from './routing';
 import {EagerModule} from './eager/module';
 

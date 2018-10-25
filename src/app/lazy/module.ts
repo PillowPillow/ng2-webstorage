@@ -7,7 +7,7 @@ import {NgxWebstorageModule} from '../lib';
 @NgModule({
 	imports: [
 		SharedModule,
-		Routing
+		Routing,
 	],
 	exports: [],
 	declarations: [...Components],
