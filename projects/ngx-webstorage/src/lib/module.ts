@@ -8,13 +8,17 @@ import {StorageKeyManager} from './helpers/storageKeyManager';
 
 export const LIB_CONFIG: InjectionToken<Storage> = new InjectionToken<Storage>('ngx_webstorage_config');
 
+export function appInit(index: StrategyIndex) {
+	index.indexStrategies();
+	return () => StrategyIndex.index;
+}
+
 @NgModule({})
 export class NgxWebstorageModule {
 
 	constructor(index: StrategyIndex, @Optional() @Inject(LIB_CONFIG) config: NgxWebstorageConfiguration) {
 		if (config) StorageKeyManager.consumeConfiguration(config);
 		else console.error('NgxWebstorage : Possible misconfiguration (The forRoot method usage is mandatory since the 3.0.0)');
-
 	}
 
 	static forRoot(config: NgxWebstorageConfiguration = {}): ModuleWithProviders {
@@ -31,10 +35,7 @@ export class NgxWebstorageModule {
 				...Strategies,
 				{
 					provide: APP_INITIALIZER,
-					useFactory: (index: StrategyIndex) => {
-						index.indexStrategies();
-						return () => StrategyIndex.index;
-					},
+					useFactory: appInit,
 					deps: [StrategyIndex],
 					multi: true
 				}
