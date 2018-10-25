@@ -18,17 +18,17 @@ jobs:
       - checkout
       - attach_workspace: *attach_options
       - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-        name: Setup Dependencies
-        command: npm install
+          name: Setup Dependencies
+          command: npm install
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - persist_to_workspace:
-        root: .
-        paths: node_modules
+          root: .
+          paths: node_modules
 
   unit_test:
     docker:
@@ -37,21 +37,19 @@ jobs:
     steps:
       - checkout
       - attach_workspace: *attach_options
-
       - run:
-        name: Run Test and Coverage
-        command: npm run test:lib:headless:coverage
-
+          name: Run Test and Coverage
+          command: npm run test:lib:headless:coverage
       - store_artifacts:
-        path: ./coverage
+          path: ./coverage
 
 workflows:
   version: 2
   ci:
     jobs:
       - install_dependencies:
-        <<: *ignore_tags
+          <<: *ignore_tags
       - unit_test:
-        <<: *ignore_tags
-        requires:
-          - install_dependencies
+          <<: *ignore_tags
+          requires:
+            - install_dependencies
