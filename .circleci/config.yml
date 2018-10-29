@@ -43,7 +43,7 @@ jobs:
       - store_artifacts:
           path: ./coverage
       - store_test_results:
-          path: ~/junit
+          path: ./junit
 
 workflows:
   version: 2
