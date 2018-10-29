@@ -1,7 +1,7 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {SharedModule} from '../shared/module';
 import {Components} from './components';
-import {LocalStorageService} from '../lib';
+import {LocalStorageService, SessionStorageService, StrategyIndex} from '../lib';
 
 @NgModule({
 	imports: [
@@ -9,10 +9,10 @@ import {LocalStorageService} from '../lib';
 	],
 	exports: [...Components],
 	declarations: [...Components],
+	providers: []
 })
 export class EagerModule {
 	constructor(storage: LocalStorageService) {
-		console.log(storage);
 	}
 
 	static forRoot(): ModuleWithProviders {

@@ -7,7 +7,7 @@ import {StorageStrategies} from '../constants/strategy';
 export class LocalStorageService extends SyncStorage {}
 
 export function buildService(index: StrategyIndex) {
-	const strategy: StorageStrategy<any> = index.getStrategy(StorageStrategies.Local);
+	const strategy: StorageStrategy<any> = index.indexStrategy(StorageStrategies.Local);
 	return new SyncStorage(strategy);
 }
 

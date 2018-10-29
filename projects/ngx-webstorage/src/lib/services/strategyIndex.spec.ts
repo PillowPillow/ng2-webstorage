@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {STORAGE_STRATEGIES} from '../strategies';
-import {InvalidStrategyError, StrategyAlreadyRegiteredError, StrategyIndex} from './strategyIndex';
+import {InvalidStrategyError, StrategyIndex} from './strategyIndex';
 import {StorageStrategyStub, StorageStrategyStubName} from '../../stubs/storageStrategy.stub';
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {InMemoryStorageStrategy} from '../strategies/inMemory';
@@ -28,7 +28,6 @@ describe('Services : StrategyIndex', () => {
 
 			let strategy: StorageStrategy<any> = new StorageStrategyStub();
 			index.register(StorageStrategyStubName, strategy);
-			expect(() => index.register(StorageStrategyStubName, strategy)).toThrowError(StrategyAlreadyRegiteredError);
 			expect(() => index.register(StorageStrategyStubName, strategy, true)).not.toThrowError();
 
 			strategy = index.getStrategy(StorageStrategyStubName);
