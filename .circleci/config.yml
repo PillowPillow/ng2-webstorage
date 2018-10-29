@@ -42,6 +42,8 @@ jobs:
           command: npm run test:lib:headless:coverage
       - store_artifacts:
           path: ./coverage
+      - store_test_results:
+          path: ~/junit
 
 workflows:
   version: 2

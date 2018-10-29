@@ -2,6 +2,9 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function(config) {
+	const options = config.buildWebpack.options || {};
+	const reporters = options.codeCoverage ? ['junit', 'progress', 'kjhtml'] : ['progress', 'kjhtml'];
+
 	config.set({
 		basePath: '',
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -10,6 +13,7 @@ module.exports = function(config) {
 			require('karma-chrome-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-coverage-istanbul-reporter'),
+			require('karma-junit-reporter'),
 			require('@angular-devkit/build-angular/plugins/karma')
 		],
 		client: {
@@ -31,7 +35,12 @@ module.exports = function(config) {
 				],
 			}
 		},
-		reporters: ['progress', 'kjhtml'],
+		junitReporter: {
+			outputDir: require('path').join(__dirname, '../../junit'),
+			outputFile: 'junit.xml',
+			useBrowserName: false,
+		},
+		reporters,
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
