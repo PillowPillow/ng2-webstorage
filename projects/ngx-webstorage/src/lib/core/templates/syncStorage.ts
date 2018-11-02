@@ -8,26 +8,26 @@ import {distinctUntilChanged, filter, shareReplay, switchMap} from 'rxjs/operato
 export class SyncStorage implements StorageService {
 	constructor(protected strategy: StorageStrategy<any>) {
 	}
-	
+
 	retrieve(key: string): any {
 		let value: any;
-		this.strategy.get(StorageKeyManager.normalize(key)).subscribe((result) => value = result || null);
+		this.strategy.get(StorageKeyManager.normalize(key)).subscribe((result) => value = typeof result === 'undefined' ? null : result);
 		return value;
 	}
-	
+
 	store(key: string, value: any): any {
 		this.strategy.set(StorageKeyManager.normalize(key), value).subscribe(noop);
 		return value;
 	}
-	
+
 	clear(key?: string): void {
 		if (key !== undefined)
 			this.strategy.del(StorageKeyManager.normalize(key)).subscribe(noop);
 		else this.strategy.clear().subscribe(noop);
 	}
-	
+
 	getStrategyName(): string {return this.strategy.name; }
-	
+
 	observe(key: string): Observable<any> {
 		key = StorageKeyManager.normalize(key);
 		return this.strategy.keyChanges.pipe(
@@ -37,5 +37,5 @@ export class SyncStorage implements StorageService {
 			shareReplay()
 		);
 	}
-	
+
 }

@@ -22,6 +22,15 @@ describe('Core/Templates : SyncStorage', () => {
 		expect(storage.retrieve('prop')).toEqual('value');
 		expect(storage.retrieve('prop2')).toEqual(null);
 	});
+
+	it('should store and retrieve falsy values', () => {
+		storage.store('false', false);
+		storage.store('null', null);
+		storage.store('0', 0);
+		expect(storage.retrieve('false')).toBe(false);
+		expect(storage.retrieve('null')).toBe(null);
+		expect(storage.retrieve('0')).toBe(0);
+	});
 	
 	it('should store the given value to the strategy storage', () => {
 		storage.store('prop', 'value');

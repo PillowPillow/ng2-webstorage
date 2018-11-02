@@ -29,6 +29,27 @@ describe('Core/Templates : AsyncStorage', () => {
 		storage.retrieve('prop2').subscribe((result) => data = result);
 		expect(data).toEqual(null);
 	});
+
+
+	it('should store and retrieve falsy values', () => {
+		storage.store('false', false).subscribe(noop);
+		storage.store('null', null).subscribe(noop);
+		storage.store('0', 0).subscribe(noop);
+
+
+		let data: any;
+		storage.retrieve('false').subscribe((result) => data = result);
+		expect(data).toBe(false);
+
+
+		data = undefined;
+		storage.retrieve('null').subscribe((result) => data = result);
+		expect(data).toBe(null);
+
+		data = undefined;
+		storage.retrieve('0').subscribe((result) => data = result);
+		expect(data).toBe(0);
+	});
 	
 	it('should store the given value to the strategy storage', () => {
 		storage.store('prop', 'value').subscribe(noop);
