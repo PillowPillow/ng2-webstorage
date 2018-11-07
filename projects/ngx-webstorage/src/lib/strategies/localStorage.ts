@@ -4,12 +4,13 @@ import {Inject, NgZone, PLATFORM_ID} from '@angular/core';
 import {LOCAL_STORAGE} from '../core/nativeStorage';
 import {StorageStrategies} from '../constants/strategy';
 import {isPlatformBrowser} from '@angular/common';
+import {WebStorage} from '../core/interfaces/webStorage';
 
 export class LocalStorageStrategy extends BaseSyncStorageStrategy {
 	static readonly strategyName: string = StorageStrategies.Local;
 	readonly name: string = LocalStorageStrategy.strategyName;
 
-	constructor(@Inject(LOCAL_STORAGE) protected storage: Storage,
+	constructor(@Inject(LOCAL_STORAGE) protected storage: WebStorage,
 	            protected cache: StrategyCacheService,
 	            @Inject(PLATFORM_ID) protected platformId: any,
 	            protected zone: NgZone) {

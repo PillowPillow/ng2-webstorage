@@ -1,9 +1,10 @@
 import {CompatHelper} from './compat';
 import {StorageStub} from '../../stubs/storage.stub';
+import {WebStorage} from '../core/interfaces/webStorage';
 
 describe('Helpers : CompatHelper', () => {
 	
-	let storage: Storage;
+	let storage: WebStorage;
 	
 	beforeEach(() => {
 		storage = new StorageStub();

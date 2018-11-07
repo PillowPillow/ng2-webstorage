@@ -10,6 +10,7 @@ import {StorageKeyManager} from './helpers/storageKeyManager';
 import {StrategyCacheService} from './core/strategyCache';
 import {StorageStrategies} from './constants/strategy';
 import {SessionStorageStrategy} from './strategies/sessionStorage';
+import {WebStorage} from './core/interfaces/webStorage';
 
 describe('Decorators', () => {
 	
@@ -27,7 +28,7 @@ describe('Decorators', () => {
 		let testFixture: ComponentFixture<LocalMockComponent>;
 		let testComponent: LocalMockComponent;
 		let strategyCache: StrategyCacheService;
-		let storage: Storage;
+		let storage: WebStorage;
 		
 		beforeEach(() => {
 			storage = new StorageStub();
@@ -117,7 +118,7 @@ describe('Decorators', () => {
 		let testFixture: ComponentFixture<SessionMockComponent>;
 		let testComponent: SessionMockComponent;
 		let strategyCache: StrategyCacheService;
-		let storage: Storage;
+		let storage: WebStorage;
 		
 		beforeEach(() => {
 			storage = new StorageStub();

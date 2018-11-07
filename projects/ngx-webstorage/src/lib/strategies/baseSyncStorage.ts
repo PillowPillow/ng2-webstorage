@@ -2,11 +2,12 @@ import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {CompatHelper} from '../helpers/compat';
+import {WebStorage} from '../core/interfaces/webStorage';
 
 export abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 	readonly keyChanges: Subject<string> = new Subject();
 	
-	constructor(protected storage: Storage, protected cache: StrategyCacheService) {}
+	constructor(protected storage: WebStorage, protected cache: StrategyCacheService) {}
 	
 	protected _isAvailable: boolean;
 	

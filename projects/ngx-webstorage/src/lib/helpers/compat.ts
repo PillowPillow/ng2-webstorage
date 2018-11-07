@@ -1,6 +1,8 @@
+import {WebStorage} from '../core/interfaces/webStorage';
+
 export class CompatHelper {
 
-	static isStorageAvailable(storage: Storage): boolean {
+	static isStorageAvailable(storage: WebStorage): boolean {
 		let available = true;
 		try {
 			if (typeof storage === 'object') {

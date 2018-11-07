@@ -7,13 +7,14 @@ import {StorageStrategies} from '../constants/strategy';
 import {noop} from '../helpers/noop';
 import {LOCAL_STORAGE} from '../core/nativeStorage';
 import {StorageStub} from '../../stubs/storage.stub';
+import {WebStorage} from '../core/interfaces/webStorage';
 
 describe('Strategies : LocalStorage', () => {
 	
 	let strategyCache: StrategyCacheService;
 	let strategyIndex: StrategyIndex;
 	let strategy: LocalStorageStrategy;
-	let storage: Storage;
+	let storage: WebStorage;
 	
 	beforeEach(() => {
 		storage = new StorageStub();
