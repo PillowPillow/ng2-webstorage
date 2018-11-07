@@ -21,8 +21,10 @@ export class SessionStorageStrategy extends BaseSyncStorageStrategy {
 	protected listenExternalChanges() {
 		window.addEventListener('storage', (event: StorageEvent) => this.zone.run(() => {
 			if (event.storageArea !== this.storage) return;
+			const key: string = event.key;
 			if (event.key !== null) this.cache.del(this.name, event.key);
 			else this.cache.clear(this.name);
+			this.keyChanges.next(key);
 		}));
 	}
 

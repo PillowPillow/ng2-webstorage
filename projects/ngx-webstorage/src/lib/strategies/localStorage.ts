@@ -21,8 +21,10 @@ export class LocalStorageStrategy extends BaseSyncStorageStrategy {
 	protected listenExternalChanges() {
 		window.addEventListener('storage', (event: StorageEvent) => this.zone.run(() => {
 			if (event.storageArea !== this.storage) return;
-			if (event.key !== null) this.cache.del(this.name, event.key);
+			const key: string = event.key;
+			if (key !== null) this.cache.del(this.name, event.key);
 			else this.cache.clear(this.name);
+			this.keyChanges.next(key);
 		}));
 	}
 
