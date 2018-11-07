@@ -6,7 +6,7 @@ import {StrategyIndex} from './services/strategyIndex';
 import {NgxWebstorageConfiguration} from './config';
 import {StorageKeyManager} from './helpers/storageKeyManager';
 
-export const LIB_CONFIG: InjectionToken<Storage> = new InjectionToken<Storage>('ngx_webstorage_config');
+export const LIB_CONFIG: InjectionToken<NgxWebstorageConfiguration> = new InjectionToken<NgxWebstorageConfiguration>('ngx_webstorage_config');
 
 export function appInit(index: StrategyIndex) {
 	index.indexStrategies();
