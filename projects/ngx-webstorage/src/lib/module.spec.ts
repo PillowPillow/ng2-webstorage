@@ -39,7 +39,7 @@ describe('Module', () => {
 		testComponent = testFixture.debugElement.componentInstance;
 	});
 
-	// The StrategyIndexer will skip indexation at the next beforeEach call if you dont clear the index
+	// The StrategyIndexer will skip indexing at the next beforeEach call if you dont clear the index
 	afterEach(() => StrategyIndex.clear());
 
 	it('should index the storage strategies', inject([], () => {
