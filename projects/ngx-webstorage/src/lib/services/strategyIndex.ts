@@ -13,7 +13,7 @@ export class StrategyIndex {
 	readonly registration$: Subject<string> = new Subject();
 
 	constructor(@Optional() @Inject(STORAGE_STRATEGIES) protected strategies: StorageStrategy<any>[]) {
-		if (!this.strategies) this.strategies = [];
+		if (!strategies) strategies = [];
 		this.strategies = strategies.reverse()
 			.map((strategy: StorageStrategy<any>, index, arr) => strategy.name)
 			.map((name: string, index, arr) => arr.indexOf(name) === index ? index : null)
