@@ -201,33 +201,6 @@ export class FooComponent {
 
 }
 ````
-------------
-
-#### IsStorageAvailable():`boolean`
-
-##### Usage:
-````typescript
-import {Component, OnInit} from '@angular/core';
-import {LocalStorageService, LocalStorage} from 'ngx-webstorage';
-
-@Component({
-	selector: 'foo',
-	template: `...`,
-})
-export class FooComponent implements OnInit {
-
-    @LocalStorage('boundValue')
-    boundAttribute;
-
-    constructor(private storage:LocalStorageService) {}
-
-    ngOnInit() {
-      let isAvailable = this.storage.isStorageAvailable();
-      console.log(isAvailable);
-    }
-
-}
-````
 
 ------------
 
