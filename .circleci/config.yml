@@ -6,7 +6,7 @@ anchor_2: &ignore_tags
   filters:
     tags:
       ignore: /.*/
-anchor_4: &publish_workflow_filters
+anchor_3: &publish_workflow_filters
   filters:
     branches:
       ignore: /.*/
