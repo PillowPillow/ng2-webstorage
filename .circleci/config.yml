@@ -113,7 +113,7 @@ workflows:
   deploy:
     jobs:
     - install_dependencies:
-      <<: *publish_workflow_filters
+        <<: *publish_workflow_filters
 
     - unit_test:
         <<: *publish_workflow_filters
