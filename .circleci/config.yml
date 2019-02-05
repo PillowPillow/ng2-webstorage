@@ -97,7 +97,7 @@ jobs:
 workflows:
   ci:
     jobs:
-    - install_dependencies:
+    - install_dependencies
     - unit_test:
         project: ngx-webstorage
         requires:
