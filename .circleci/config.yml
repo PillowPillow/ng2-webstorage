@@ -6,6 +6,12 @@ anchor_2: &ignore_tags
   filters:
     tags:
       ignore: /.*/
+anchor_4: &publish_workflow_filters
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v\d+\.\d+\.\d+.*$/
 
 executors:
   node:
@@ -111,7 +117,7 @@ workflows:
         - install_dependencies
 
     - publish:
-        <<: *ignore_tags
+        <<: *publish_workflow_filters
         context: "open source"
         project: ngx-webstorage
         requires:
