@@ -2,11 +2,7 @@ version: 2.1
 
 anchor_1: &wdir
   working_directory: ~/app
-anchor_2: &ignore_tags
-  filters:
-    tags:
-      ignore: /.*/
-anchor_3: &publish_workflow_filters
+anchor_2: &publish_workflow_filters
   filters:
     branches:
       ignore: /.*/
@@ -102,20 +98,14 @@ workflows:
   ci:
     jobs:
     - install_dependencies:
-        <<: *ignore_tags
-
     - unit_test:
-        <<: *ignore_tags
         project: ngx-webstorage
         requires:
         - install_dependencies
-
     - build:
-        <<: *ignore_tags
         project: ngx-webstorage
         requires:
         - install_dependencies
-
     - publish:
         <<: *publish_workflow_filters
         context: "open source"
