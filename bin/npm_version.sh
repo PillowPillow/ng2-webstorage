@@ -29,5 +29,5 @@ echo "new version : $pkg_version"
 
 git tag $pkg_version
 git add $wdir/package.json
-git commit -a -m "bump to $pkg_version"
+git commit -m "bump to $pkg_version"
 
