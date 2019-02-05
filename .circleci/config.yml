@@ -11,7 +11,7 @@ anchor_4: &publish_workflow_filters
     branches:
       ignore: /.*/
     tags:
-      only: /^v\d+\.\d+\.\d+.*$/
+      only: /^\d+\.\d+\.\d+.*$/
 
 executors:
   node:
