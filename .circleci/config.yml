@@ -95,17 +95,38 @@ jobs:
         command: sh bin/npm_publish.sh << parameters.project >>
 
 workflows:
+
   ci:
     jobs:
     - install_dependencies
+
     - unit_test:
         project: ngx-webstorage
         requires:
         - install_dependencies
+
     - build:
         project: ngx-webstorage
         requires:
         - install_dependencies
+
+  deploy:
+    jobs:
+    - install_dependencies:
+      <<: *publish_workflow_filters
+
+    - unit_test:
+        <<: *publish_workflow_filters
+        project: ngx-webstorage
+        requires:
+        - install_dependencies
+
+    - build:
+        <<: *publish_workflow_filters
+        project: ngx-webstorage
+        requires:
+        - install_dependencies
+
     - publish:
         <<: *publish_workflow_filters
         context: "open source"
