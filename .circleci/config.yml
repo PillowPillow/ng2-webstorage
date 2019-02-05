@@ -93,7 +93,6 @@ jobs:
         command: sh bin/npm_publish.sh << parameters.project >>
 
 workflows:
-
   ci:
     jobs:
     - install_dependencies:
