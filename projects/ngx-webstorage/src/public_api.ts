@@ -4,6 +4,8 @@
 
 export * from './lib/constants/strategy';
 
+export * from './lib/helpers/compat';
+
 export * from './lib/core/templates/syncStorage';
 export * from './lib/core/templates/asyncStorage';
 export * from './lib/core/strategyCache';
