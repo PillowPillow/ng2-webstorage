@@ -1,57 +1,120 @@
-version: 2
+version: 2.1
 
-anchor_1: &defaults
+anchor_1: &wdir
   working_directory: ~/app
-anchor_2: &attach_options
-  at: ~/app
-anchor_3: &ignore_tags
+anchor_2: &ignore_tags
   filters:
     tags:
       ignore: /.*/
 
+executors:
+  node:
+    <<: *wdir
+    docker:
+    - image: circleci/node:10
+  node-browsers:
+    <<: *wdir
+    docker:
+    - image: circleci/node:10-browsers
+
 jobs:
   install_dependencies:
-    docker:
-      - image: circleci/node:10
-    <<: *defaults
+    executor: node
     steps:
-      - checkout
-      - attach_workspace: *attach_options
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Setup Dependencies
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-      - persist_to_workspace:
-          root: .
-          paths: node_modules
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: Setup Dependencies
+        command: npm install --silent
+    - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+        - ./node_modules
+    - persist_to_workspace:
+        root: .
+        paths: node_modules
 
   unit_test:
-    docker:
-      - image: circleci/node:10-browsers
-    <<: *defaults
+    executor: node-browsers
+    description: Start the unit tests for the given project
+    parameters:
+      project:
+        description: angular project's name
+        type: string
     steps:
-      - checkout
-      - attach_workspace: *attach_options
-      - run:
-          name: Run Test and Coverage
-          command: npm run test:lib:headless:coverage
-      - store_artifacts:
-          path: ./coverage
-      - store_test_results:
-          path: ./junit
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run:
+        name: Run unit tests
+        command: npm run test -- "<< parameters.project >>" --browsers chrome_headless --watch=false --code-coverage --progress=false
+    - store_test_results:
+        path: ./junit
+    - store_artifacts:
+        path: ./coverage
+
+  build:
+    executor: node
+    description: Build an angular project
+    parameters:
+      project:
+        description: angular project's name
+        type: string
+    steps:
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run:
+        name: Build app
+        command: npm run build -- "<< parameters.project >>"
+    - persist_to_workspace:
+        root: .
+        paths: dist
+
+  publish:
+    executor: node
+    description: Npm publish if the local & remote's versions mismatch
+    parameters:
+      project:
+        description: angular project's name
+        type: string
+    steps:
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run:
+        name: Authenticate with registry
+        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/app/.npmrc
+    - run:
+        name: Publish package
+        command: sh bin/npm_publish.sh << parameters.project >>
 
 workflows:
-  version: 2
+
   ci:
     jobs:
-      - install_dependencies:
-          <<: *ignore_tags
-      - unit_test:
-          <<: *ignore_tags
-          requires:
-            - install_dependencies
+    - install_dependencies:
+        <<: *ignore_tags
+
+    - unit_test:
+        <<: *ignore_tags
+        project: ngx-webstorage
+        requires:
+        - install_dependencies
+
+    - build:
+        <<: *ignore_tags
+        project: ngx-webstorage
+        requires:
+        - install_dependencies
+
+    - publish:
+        <<: *ignore_tags
+        context: "open source"
+        project: ngx-webstorage
+        requires:
+        - unit_test
+        - build
