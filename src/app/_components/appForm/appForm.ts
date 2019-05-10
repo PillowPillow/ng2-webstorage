@@ -18,6 +18,9 @@ export class AppFormComponent implements OnInit {
 	constructor(private fb: FormBuilder, private sessionS: SessionStorageService, private localS: LocalStorageService) {}
 
 	ngOnInit() {
+
+		this.localS.store('object', {prop: 0});
+
 		this.form = this.fb.group({
 			text: this.fb.control(this.sessionS.retrieve('variable'), Validators.required)
 		});
@@ -29,6 +32,12 @@ export class AppFormComponent implements OnInit {
 
 	submit(value, valid) {
 		this.sessionS.store('variable', value.text);
+	}
+
+	randomizeBoundObjectProperty() {
+		const obj = this.localS.retrieve('object');
+		obj.prop = Math.random() * 1000 | 0;
+		this.localS.store('object', obj);
 	}
 
 	clear() {
