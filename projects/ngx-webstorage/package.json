@@ -1,6 +1,6 @@
 {
 	"name": "ngx-webstorage",
-	"version": "3.0.2",
+	"version": "4.0.0",
 	"peerDependencies": {
 		"@angular/common": "^7.2.3",
 		"@angular/core": "^7.2.3"
@@ -12,7 +12,7 @@
 	"keywords": [
 		"typescript",
 		"angular",
-		"angular7",
+		"angular8",
 		"ng",
 		"localstorage",
 		"sessionStorage"
