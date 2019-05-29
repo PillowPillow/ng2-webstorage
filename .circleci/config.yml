@@ -30,7 +30,7 @@ jobs:
         key: dependency-cache-{{ checksum "package.json" }}
     - run:
         name: Setup Dependencies
-        command: npm install --silent
+        command: npm install --silent --ignore-scripts
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
