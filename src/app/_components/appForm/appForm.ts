@@ -36,8 +36,10 @@ export class AppFormComponent implements OnInit {
 
 	randomizeBoundObjectProperty() {
 		const obj = this.localS.retrieve('object');
+		console.log(obj);
 		obj.prop = Math.random() * 1000 | 0;
 		this.localS.store('object', obj);
+
 	}
 
 	clear() {

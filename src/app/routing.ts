@@ -7,7 +7,7 @@ export const ROUTES: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: './lazy/module#LazyModule'
+				loadChildren: () => import('./lazy/module').then(m => m.LazyModule)
 			},
 			{
 				path: '**',
