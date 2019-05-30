@@ -10,4 +10,6 @@ export class AppViewComponent {
 	public sessionBind;
 	@LocalStorage('variable')
 	public localBind;
+	@LocalStorage('object')
+	public objectLocalBind;
 }
