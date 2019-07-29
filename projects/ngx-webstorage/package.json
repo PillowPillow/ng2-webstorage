@@ -1,6 +1,6 @@
 {
 	"name": "ngx-webstorage",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"peerDependencies": {
 		"@angular/common": "^8.0.0",
 		"@angular/core": "^8.0.0"

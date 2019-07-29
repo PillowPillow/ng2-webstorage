@@ -2,8 +2,9 @@ import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {StorageStrategies} from '../constants/strategy';
-import {Inject} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 
+@Injectable()
 export class InMemoryStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = StorageStrategies.InMemory;
 	readonly keyChanges: Subject<string> = new Subject();
