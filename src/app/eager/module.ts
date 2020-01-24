@@ -15,7 +15,7 @@ export class EagerModule {
 	constructor(storage: LocalStorageService) {
 	}
 
-	static forRoot(): ModuleWithProviders {
+	static forRoot(): ModuleWithProviders<EagerModule> {
 		return {
 			ngModule: EagerModule,
 			providers: []

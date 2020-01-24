@@ -21,7 +21,7 @@ export class NgxWebstorageModule {
 		else console.error('NgxWebstorage : Possible misconfiguration (The forRoot method usage is mandatory since the 3.0.0)');
 	}
 
-	static forRoot(config: NgxWebstorageConfiguration = {}): ModuleWithProviders {
+	static forRoot(config: NgxWebstorageConfiguration = {}): ModuleWithProviders<NgxWebstorageModule> {
 		return {
 			ngModule: NgxWebstorageModule,
 			providers: [
