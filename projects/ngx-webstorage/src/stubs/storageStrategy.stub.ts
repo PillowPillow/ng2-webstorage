@@ -1,10 +1,8 @@
 import {Observable, of, Subject} from 'rxjs';
 import {StorageStrategy} from '../lib/core/interfaces/storageStrategy';
-import {Injectable, Optional} from '@angular/core';
 
 export const StorageStrategyStubName: string = 'stub_strategy';
 
-@Injectable()
 export class StorageStrategyStub implements StorageStrategy<any> {
 
 	readonly keyChanges: Subject<string> = new Subject();
@@ -12,7 +10,7 @@ export class StorageStrategyStub implements StorageStrategy<any> {
 	public _available: boolean = true;
 	readonly name: string;
 
-	constructor(@Optional() name?: string) {
+	constructor(name?: string) {
 		this.name = name || StorageStrategyStubName;
 	}
 

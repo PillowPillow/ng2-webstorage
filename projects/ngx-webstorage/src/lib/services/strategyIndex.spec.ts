@@ -7,12 +7,14 @@ import {InMemoryStorageStrategy} from '../strategies/inMemory';
 import {StorageStrategies} from '../constants/strategy';
 
 describe('Services : StrategyIndex', () => {
-
+	let strategyStub: StorageStrategyStub;
 	beforeEach(() => {
+
+		strategyStub = new StorageStrategyStub();
 		TestBed.configureTestingModule({
 			providers: [
 				{provide: STORAGE_STRATEGIES, useClass: InMemoryStorageStrategy, multi: true},
-				{provide: STORAGE_STRATEGIES, useClass: StorageStrategyStub, multi: true},
+				{provide: STORAGE_STRATEGIES, useFactory: () => strategyStub, multi: true},
 			]
 		});
 	});
