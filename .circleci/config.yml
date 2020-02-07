@@ -71,7 +71,7 @@ jobs:
         at: ~/app
     - run:
         name: Build app
-        command: npm run build -- "<< parameters.project >>"
+        command: npm run build -- "<< parameters.project >>" --prod
     - persist_to_workspace:
         root: .
         paths: dist
