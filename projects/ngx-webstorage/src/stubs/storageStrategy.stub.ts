@@ -1,9 +1,10 @@
 import {Observable, of, Subject} from 'rxjs';
 import {StorageStrategy} from '../lib/core/interfaces/storageStrategy';
-import {Optional} from '@angular/core';
+import {Injectable, Optional} from '@angular/core';
 
 export const StorageStrategyStubName: string = 'stub_strategy';
 
+@Injectable()
 export class StorageStrategyStub implements StorageStrategy<any> {
 
 	readonly keyChanges: Subject<string> = new Subject();

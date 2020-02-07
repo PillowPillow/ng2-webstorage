@@ -23,28 +23,28 @@ export class StrategyIndex {
 
 	static get(name: string): StorageStrategy<any> {
 		if (!this.isStrategyRegistered(name)) throw Error(InvalidStrategyError);
-		let strategy: StorageStrategy<any> = StrategyIndex.index[name];
+		let strategy: StorageStrategy<any> = this.index[name];
 		if (!strategy.isAvailable) {
-			strategy = StrategyIndex.index[StorageStrategies.InMemory];
+			strategy = this.index[StorageStrategies.InMemory];
 		}
 		return strategy;
 	}
 
 	static set(name: string, strategy): void {
-		StrategyIndex.index[name] = strategy;
+		this.index[name] = strategy;
 	}
 
 	static clear(name?: string): void {
-		if (name !== undefined) delete StrategyIndex.index[name];
-		else StrategyIndex.index = {};
+		if (name !== undefined) delete this.index[name];
+		else this.index = {};
 	}
 
 	static isStrategyRegistered(name: string): boolean {
-		return name in StrategyIndex.index;
+		return name in this.index;
 	}
 
 	static hasRegistredStrategies(): boolean {
-		return Object.keys(StrategyIndex.index).length > 0;
+		return Object.keys(this.index).length > 0;
 	}
 
 	public getStrategy(name: string): StorageStrategy<any> {
