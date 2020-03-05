@@ -7,7 +7,7 @@ anchor_2: &publish_workflow_filters
     branches:
       ignore: /.*/
     tags:
-      only: /^\d+\.\d+\.\d+.*$/
+      only: /^\w+@\d+\.\d+\.\d+.*$/
 
 executors:
   node:
