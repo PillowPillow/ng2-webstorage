@@ -25,9 +25,9 @@ cd $dir
 
 pkg_version=$(sh $basedir/package_info.sh $1 "version" "projects")
 
-echo "new version : $pkg_version"
+echo "new version : $project@$pkg_version"
 
-git tag $pkg_version
+git tag "$project@$pkg_version"
 git add $wdir/package.json
-git commit -m "bump to $pkg_version"
+git commit -m "bump $project to $pkg_version"
 
