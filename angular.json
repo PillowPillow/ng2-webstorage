@@ -178,6 +178,46 @@
           }
         }
       }
+    },
+    "ngx-webstorage-cross-storage": {
+      "projectType": "library",
+      "root": "projects/ngx-webstorage-cross-storage",
+      "sourceRoot": "projects/ngx-webstorage-cross-storage/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-webstorage-cross-storage/tsconfig.lib.json",
+            "project": "projects/ngx-webstorage-cross-storage/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-webstorage-cross-storage/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-webstorage-cross-storage/src/test.ts",
+            "tsConfig": "projects/ngx-webstorage-cross-storage/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-webstorage-cross-storage/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-webstorage-cross-storage/tsconfig.lib.json",
+              "projects/ngx-webstorage-cross-storage/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-webstorage-sandbox"
