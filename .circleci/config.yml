@@ -139,14 +139,14 @@ workflows:
         name: "test (ngx-webstorage-cross-storage)"
         project: ngx-webstorage-cross-storage
         requires:
-        - install_dependencies
+        - "build_lib (ngx-webstorage)"
 
     - build:
         <<: *publish_workflow_filters
         name: "build_lib (ngx-webstorage-cross-storage)"
         project: ngx-webstorage-cross-storage
         requires:
-        - install_dependencies
+        - "build_lib (ngx-webstorage)"
 
     - publish:
         <<: *publish_workflow_filters
