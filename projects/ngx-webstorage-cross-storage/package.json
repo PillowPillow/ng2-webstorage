@@ -7,5 +7,11 @@
 		"ngx-webstorage": "^5.0.0",
 		"cross-storage": "^1.0.0",
 		"tslib": "^1.10.0"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/PillowPillow/ng2-webstorage.git"
+	},
+	"author": "Nicolas Gaignoux <https://github.com/PillowPillow>",
+	"license": "MIT",
 }
