@@ -110,6 +110,11 @@ workflows:
         requires:
         - install_dependencies
 
+    - unit_test:
+        project: ngx-webstorage-cross-storage
+        requires:
+        - build
+
   deploy:
     jobs:
     - install_dependencies:
@@ -123,14 +128,32 @@ workflows:
 
     - build:
         <<: *publish_workflow_filters
+        name: "build_lib (ngx-webstorage)"
         project: ngx-webstorage
+        requires:
+        - install_dependencies
+
+    - build:
+        <<: *publish_workflow_filters
+        name: "build_lib (ngx-webstorage-cross-storage)"
+        project: ngx-webstorage-cross-storage
         requires:
         - install_dependencies
 
     - publish:
         <<: *publish_workflow_filters
+        name: "publish (ngx-webstorage)"
         context: "open source"
         project: ngx-webstorage
         requires:
         - unit_test
-        - build
+        - "build_lib (ngx-webstorage)"
+
+    - publish:
+        <<: *publish_workflow_filters
+        name: "publish (ngx-webstorage-cross-storage)"
+        context: "open source"
+        project: ngx-webstorage-cross-storage
+        requires:
+        - unit_test
+        - "build_lib (ngx-webstorage-cross-storage)"
