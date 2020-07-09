@@ -1,31 +1,32 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "ngx-webstorage": [
-        "dist/ngx-webstorage/ngx-webstorage",
-        "dist/ngx-webstorage"
-      ],
-      "ngx-webstorage-cross-storage": [
-        "dist/ngx-webstorage-cross-storage/ngx-webstorage-cross-storage",
-        "dist/ngx-webstorage-cross-storage"
-      ]
+  "files": [],
+  "references": [
+    {
+      "path": "./src/tsconfig.app.json"
+    },
+    {
+      "path": "./src/tsconfig.spec.json"
+    },
+    {
+      "path": "./e2e/tsconfig.e2e.json"
+    },
+    {
+      "path": "./projects/ngx-webstorage/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-webstorage/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-webstorage-cross-storage/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-webstorage-cross-storage/tsconfig.spec.json"
     }
-  }
+  ]
 }

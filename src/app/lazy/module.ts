@@ -13,10 +13,4 @@ import {Components} from './components';
 	providers: [],
 })
 export class LazyModule {
-	static forRoot(): ModuleWithProviders<LazyModule> {
-		return {
-			ngModule: LazyModule,
-			providers: []
-		};
-	}
 }
