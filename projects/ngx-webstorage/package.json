@@ -1,9 +1,9 @@
 {
 	"name": "ngx-webstorage",
-	"version": "5.0.0",
+	"version": "6.0.0",
 	"peerDependencies": {
-		"@angular/common": "^9.0.0",
-		"@angular/core": "^9.0.0"
+		"@angular/common": "^10.0.0",
+		"@angular/core": "^10.0.0"
 	},
 	"repository": {
 		"type": "git",
@@ -22,8 +22,8 @@
 	"bugs": {
 		"url": "https://github.com/PillowPillow/ng2-webstorage/issues"
 	},
-	"homepage": "https://github.com/PillowPillow/ng2-webstorage#readme",
-  "dependencies": {
-    "tslib": "^2.0.0"
-  }
+	"homepage": "https://github.com/PillowPillow/ng2-webstorage#readme",
+	"dependencies": {
+		"tslib": "^2.0.0"
+	}
 }
