@@ -1,19 +1,19 @@
 {
 	"name": "ngx-webstorage-cross-storage",
-	"version": "1.0.3",
+	"version": "2.0.0",
 	"peerDependencies": {
-		"@angular/common": "^9.0.5",
-		"@angular/core": "^9.0.5",
-		"ngx-webstorage": "^5.0.0",
+		"@angular/common": "^10.0.0",
+		"@angular/core": "^10.0.0",
+		"ngx-webstorage": "^6.0.0",
 		"cross-storage": "^1.0.0"
-},
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/PillowPillow/ng2-webstorage.git"
 	},
 	"author": "Nicolas Gaignoux <https://github.com/PillowPillow>",
-	"license": "MIT",
-  "dependencies": {
-    "tslib": "^2.0.0"
-  }
+	"license": "MIT",
+	"dependencies": {
+		"tslib": "^2.0.0"
+	}
 }
