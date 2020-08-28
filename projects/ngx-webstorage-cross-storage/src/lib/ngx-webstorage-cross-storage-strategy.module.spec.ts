@@ -6,7 +6,7 @@ import {LocalStorage, LocalStorageStrategy, NgxWebstorageModule, SessionStorageS
 import {CrossStorageStrategy} from './strategies/cross-storage';
 import {CrossStorageService} from './services/cross-storage';
 import {CROSS_STORAGE_CONFIG, CrossStorageConfig} from './config';
-import {CROSS_STORAGE_CLIENT} from './cross-storage-client';
+import {CROSS_STORAGE_CLIENT} from './utils/cross-storage-client';
 
 describe('NgxWebstorageCrossStorageStrategyModule', () => {
 
@@ -73,10 +73,4 @@ describe('NgxWebstorageCrossStorageStrategyModule', () => {
 		}),
 	);
 
-	it('should use the client stub',
-		inject([StrategyIndex], (index: StrategyIndex) => {
-			const strategy: CrossStorageStrategy = index.getStrategy(CrossStorageStrategy.strategyName) as CrossStorageStrategy;
-			expect(strategy.client).toEqual(clientStub);
-		}),
-	);
 });

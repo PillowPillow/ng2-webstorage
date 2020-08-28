@@ -1,8 +1,8 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {NgxWebstorageModule, StrategyCacheService, StrategyIndex} from 'ngx-webstorage';
-import {CROSS_STORAGE_CLIENT} from '../cross-storage-client';
 import {CrossStorageClientStub} from '../stubs/cross-storage-client.stub';
 import {CrossStorageStrategy, CrossStorageStrategyProvider} from './cross-storage';
+import {CROSS_STORAGE, CrossStorageClientFacade} from '../utils/cross-storage-facade';
 
 describe('Strategies : CrossStorage', () => {
 
@@ -16,7 +16,7 @@ describe('Strategies : CrossStorage', () => {
 		TestBed.configureTestingModule({
 			imports: [NgxWebstorageModule.forRoot()],
 			providers: [
-				{provide: CROSS_STORAGE_CLIENT, useFactory: () => client},
+				{provide: CROSS_STORAGE, useFactory: () => new CrossStorageClientFacade(client)},
 				CrossStorageStrategyProvider
 			],
 		});

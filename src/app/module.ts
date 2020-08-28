@@ -21,6 +21,9 @@ import {EagerModule} from './eager/module';
 			prefix: 'prefix',
 			separator: '--'
 		}),
+		// NgxWebstorageCrossStorageStrategyModule.forRoot({
+		// 	host: 'http://localhost.crosstorage'
+		// })
 	],
 	providers: [
 		{

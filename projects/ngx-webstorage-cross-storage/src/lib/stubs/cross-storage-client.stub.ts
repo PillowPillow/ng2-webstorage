@@ -1,4 +1,4 @@
-import {CrossStorageClientI} from '../cross-storage-client';
+import {CrossStorageClientI} from '../utils/cross-storage-client';
 
 export class CrossStorageClientStub implements CrossStorageClientI {
 

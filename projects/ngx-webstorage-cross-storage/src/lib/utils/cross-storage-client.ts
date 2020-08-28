@@ -1,6 +1,6 @@
 import {FactoryProvider, InjectionToken} from '@angular/core';
 import {CrossStorageClient} from 'cross-storage';
-import {CROSS_STORAGE_CONFIG, CrossStorageConfig} from './config';
+import {CROSS_STORAGE_CONFIG, CrossStorageConfig} from '../config';
 
 export interface CrossStorageClientI {
 
