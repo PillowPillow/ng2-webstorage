@@ -8,6 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+	"clean-node_modules": "rimraf ./node_modules",
+    "check-outdated-libs": "npm outdated",
     "build:lib": "ng build ngx-webstorage",
     "build:lib:watch": "ng build ngx-webstorage --watch",
     "test:lib": "ng test ngx-webstorage --watch false --progress=false",
@@ -52,6 +54,7 @@
     "karma-junit-reporter": "^1.2.0",
     "ng-packagr": "^10.0.0",
     "protractor": "~7.0.0",
+    "rimraf": "^3.0.2",
     "ts-node": "~8.2.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.6"
