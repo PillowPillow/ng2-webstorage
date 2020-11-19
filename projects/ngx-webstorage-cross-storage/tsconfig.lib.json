@@ -8,7 +8,7 @@
     "types": [],
     "lib": [
       "dom",
-      "es2018"
+      "es2019"
     ]
   },
   "angularCompilerOptions": {
