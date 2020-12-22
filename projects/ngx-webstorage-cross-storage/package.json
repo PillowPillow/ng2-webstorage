@@ -2,9 +2,9 @@
 	"name": "ngx-webstorage-cross-storage",
 	"version": "4.0.0",
 	"peerDependencies": {
-		"@angular/common": "^10.0.0",
-		"@angular/core": "^10.0.0",
-		"ngx-webstorage": "^6.0.0",
+		"@angular/common": "^11.0.0",
+		"@angular/core": "^11.0.0",
+		"ngx-webstorage": "^7.0.0",
 		"cross-storage": "^1.0.0"
 	},
 	"repository": {
