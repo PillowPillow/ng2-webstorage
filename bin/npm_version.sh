@@ -31,6 +31,10 @@ pkg_version=$(sh $basedir/package_info.sh $1 "version" "projects")
 echo "new version : $project@$pkg_version"
 
 git tag "$project@$pkg_version"
-git add $wdir/package.json
-git commit -m "bump $project to $pkg_version"
+
+if [ "$version_command" != "none" ];
+then
+  git add $wdir/package.json
+  git commit -m "bump $project to $pkg_version"
+fi
 
