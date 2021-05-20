@@ -19,9 +19,12 @@ then
 fi
 
 
-cd $wdir;
-npm version $version_command
-cd $dir
+if [ "$version_command" != "none" ];
+then
+  cd $wdir;
+  npm version $version_command
+  cd $dir
+fi
 
 pkg_version=$(sh $basedir/package_info.sh $1 "version" "projects")
 
