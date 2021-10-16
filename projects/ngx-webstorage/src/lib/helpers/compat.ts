@@ -16,5 +16,11 @@ export class CompatHelper {
 		return available;
 	}
 
+	static getUTCTime(): number {
+		const d = new Date()
+		return (d.getTime() + d.getTimezoneOffset()*60*1000)/1000;
+	}	
+
 }
+
 

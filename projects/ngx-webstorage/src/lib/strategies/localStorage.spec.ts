@@ -8,6 +8,7 @@ import {noop} from '../helpers/noop';
 import {LOCAL_STORAGE} from '../core/nativeStorage';
 import {StorageStub} from '../../stubs/storage.stub';
 import {WebStorage} from '../core/interfaces/webStorage';
+import {CompatHelper} from '../helpers/compat';
 
 describe('Strategies : LocalStorage', () => {
 	
@@ -45,6 +46,22 @@ describe('Strategies : LocalStorage', () => {
 		expect(strategyCache.get(StorageStrategies.Local, 'prop')).toEqual(42);
 		expect(strategyCache.get('other', 'prop')).toBeUndefined();
 		
+	});
+
+	it('should set the given key-value pair with expiration as not expired yet', () => {
+		
+		strategy.set('prop', 42, 10).subscribe(noop);
+		expect(storage.getItem('prop')).toEqual('42');
+		const cacheValue = strategyCache.get(StorageStrategies.Local, 'prop');
+		expect(cacheValue._v).toEqual(42);
+	});
+
+	it('should set the given key-value pair as already expired', () => {
+		
+		strategy.set('prop', 42, -10).subscribe(noop);
+		expect(storage.getItem('prop')).toEqual('42');
+		const cacheValue = strategyCache.get(StorageStrategies.Local, 'prop');
+		expect(cacheValue._e_in < CompatHelper.getUTCTime()).toBeTruthy();
 	});
 	
 	it('should retrieve a value for the given key', () => {
