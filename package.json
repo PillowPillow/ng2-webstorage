@@ -1,10 +1,12 @@
 {
   "name": "ngx-webstorage-env",
   "version": "1.0.0",
+  "main": "dist/index.js",
   "scripts": {
     "ng": "ng",
+    "prepare": "npm run build",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "webpack src/index.js dist/index.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
