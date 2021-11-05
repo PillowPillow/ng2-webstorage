@@ -99,18 +99,6 @@
               "src/assets"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -129,15 +117,6 @@
             "production": {
               "devServerTarget": "ngx-webstorage-sandbox:serve:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -167,18 +146,6 @@
             "tsConfig": "projects/ngx-webstorage/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-webstorage/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-webstorage/tsconfig.lib.json",
-              "projects/ngx-webstorage/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -206,18 +173,6 @@
             "main": "projects/ngx-webstorage-cross-storage/src/test.ts",
             "tsConfig": "projects/ngx-webstorage-cross-storage/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-webstorage-cross-storage/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-webstorage-cross-storage/tsconfig.lib.json",
-              "projects/ngx-webstorage-cross-storage/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
