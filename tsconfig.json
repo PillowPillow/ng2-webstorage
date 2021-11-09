@@ -1,30 +1,37 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "es2020",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "ngx-webstorage": [
-        "dist/ngx-webstorage/ngx-webstorage",
-        "dist/ngx-webstorage"
-      ],
-      "ngx-webstorage-cross-storage": [
-        "dist/ngx-webstorage-cross-storage/ngx-webstorage-cross-storage",
-        "dist/ngx-webstorage-cross-storage"
-      ]
-    }
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2017",
+		"module": "es2020",
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"lib": [
+		  "es2020",
+		  "dom"
+		],
+		"paths": {
+			"ngx-webstorage": [
+				"dist/ngx-webstorage/ngx-webstorage",
+				"dist/ngx-webstorage"
+			],
+			"ngx-webstorage-cross-storage": [
+				"dist/ngx-webstorage-cross-storage/ngx-webstorage-cross-storage",
+				"dist/ngx-webstorage-cross-storage"
+			]
+		}
+	},
+	"angularCompilerOptions": {
+	  "enableI18nLegacyMessageIdFormat": false,
+	  "strictInjectionParameters": true,
+	  "strictInputAccessModifiers": true,
+	  "strictTemplates": true
+	}
 }

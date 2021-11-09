@@ -1,0 +1,12 @@
+<div>
+	<h5>Lazy module</h5>
+
+	<article>
+		<div>local storage: {{localBind}}</div>
+		<div><input type="text" [value]="localBind" (input)="setLocalBind($event)"></div>
+	</article>
+	<article>
+		<div>session storage: {{sessionBind}}</div>
+		<div><input type="text" [value]="sessionBind" (input)="setSessionBind($event)"></div>
+	</article>
+</div>

@@ -1,0 +1,14 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"ngx-webstorage": [
+				"projects/ngx-webstorage/src/public-api.ts"
+			],
+			"ngx-webstorage-cross-storage": [
+				"projects/ngx-webstorage-cross-storage/src/public-api.ts"
+			]
+		}
+	}
+}
