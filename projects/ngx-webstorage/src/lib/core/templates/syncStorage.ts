@@ -34,7 +34,7 @@ export class SyncStorage implements StorageService {
 			filter((changed: string) => changed === null || changed === key),
 			switchMap(() => this.strategy.get(key)),
 			distinctUntilChanged(),
-			shareReplay({refCount: 1, bufferSize: 1})
+			shareReplay({refCount: true, bufferSize: 1})
 		);
 	}
 
