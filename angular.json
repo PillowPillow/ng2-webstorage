@@ -158,6 +158,5 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "ngx-webstorage-sandbox"
+  }
 }

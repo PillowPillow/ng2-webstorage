@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {LocalStorage, LocalStorageService, SessionStorage, SessionStorageService} from '../../lib';
 
 @Component({
@@ -8,14 +8,14 @@ import {LocalStorage, LocalStorageService, SessionStorage, SessionStorageService
 })
 export class AppFormComponent implements OnInit {
 
-	form: FormGroup;
+	form: UntypedFormGroup;
 
 	@SessionStorage('variable')
 	public sessionBind;
 	@LocalStorage('variable', 'default value')
 	public localBind;
 
-	constructor(private fb: FormBuilder, private sessionS: SessionStorageService, private localS: LocalStorageService) {}
+	constructor(private fb: UntypedFormBuilder, private sessionS: SessionStorageService, private localS: LocalStorageService) {}
 
 	ngOnInit() {
 
