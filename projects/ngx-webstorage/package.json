@@ -2,8 +2,8 @@
 	"name": "ngx-webstorage",
 	"version": "11.1.1",
 	"peerDependencies": {
-		"@angular/common": "^15.0.0",
-		"@angular/core": "^15.0.0"
+		"@angular/common": "^16.0.0",
+		"@angular/core": "^16.0.0"
 	},
 	"repository": {
 		"type": "git",
