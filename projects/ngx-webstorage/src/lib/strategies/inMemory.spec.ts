@@ -5,6 +5,7 @@ import {StrategyIndex} from '../services/strategyIndex';
 import {StrategyCacheService} from '../core/strategyCache';
 import {StorageStrategies} from '../constants/strategy';
 import {noop} from '../helpers/noop';
+import {CompatHelper} from '../helpers/compat';
 
 describe('Strategies : InMemory', () => {
 	
@@ -70,5 +71,19 @@ describe('Strategies : InMemory', () => {
 		expect(strategyCache.get(StorageStrategies.InMemory, 'prop')).toBeUndefined();
 		expect(strategyCache.get(StorageStrategies.InMemory, 'prop2')).toBeUndefined();
 		
+	});
+
+	it('should set the given key-value pair with expiration as not expired yet', () => {
+		
+		strategy.set('prop', 'value', 10).subscribe(noop);
+		const cacheValue = strategyCache.get(StorageStrategies.InMemory, 'prop');
+		expect(cacheValue._v).toEqual('value');
+	});
+
+	it('should set the given key-value pair as already expired', () => {
+		
+		strategy.set('prop', 'value', -10).subscribe(noop);
+		const cacheValue = strategyCache.get(StorageStrategies.InMemory, 'prop');
+		expect(cacheValue._e_in < CompatHelper.getUTCTime()).toBeTruthy();
 	});
 });

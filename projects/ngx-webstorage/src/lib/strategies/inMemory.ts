@@ -1,8 +1,10 @@
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
+import {CompatHelper} from '../helpers/compat';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {StorageStrategies} from '../constants/strategy';
 import {Inject, Injectable} from '@angular/core';
+import {ValueWithExpiration} from '../helpers/valueWithExpiration';
 
 @Injectable()
 export class InMemoryStorageStrategy implements StorageStrategy<any> {
@@ -14,11 +16,25 @@ export class InMemoryStorageStrategy implements StorageStrategy<any> {
 	constructor(@Inject(StrategyCacheService) protected cache: StrategyCacheService) {}
 
 	get(key: string): Observable<any> {
-		return of(this.cache.get(this.name, key));
+		let d =this.cache.get(this.name, key);
+		if (d && d._e_in) {
+			const valueWithExpiration = new ValueWithExpiration(d);
+			if (valueWithExpiration.isExpired()) {
+				return of(null);
+			}
+			d = valueWithExpiration.getRealValue();
+		}
+		return of(d);
 	}
 
-	set(key: string, value: any): Observable<any> {
-		this.cache.set(this.name, key, value);
+	set(key: string, value: any, expiresIn?: number): Observable<any> {
+		let v = value;
+		if (expiresIn) {
+			const valueWithExpiration = new ValueWithExpiration(value);
+			valueWithExpiration.setExpiration(expiresIn);
+			v = valueWithExpiration.getValueForStorage();
+		}
+		this.cache.set(this.name, key, v);
 		this.keyChanges.next(key);
 		return of(value);
 	}
