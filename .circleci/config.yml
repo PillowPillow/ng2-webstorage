@@ -13,11 +13,11 @@ executors:
   node:
     <<: *wdir
     docker:
-    - image: circleci/node:17
+    - image: cimg/node:20.9
   node-browsers:
     <<: *wdir
     docker:
-    - image: circleci/node:17-browsers
+    - image: cimg/node:20.9-browsers
 
 jobs:
   install_dependencies:
