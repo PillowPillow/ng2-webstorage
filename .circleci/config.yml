@@ -8,6 +8,8 @@ anchor_2: &publish_workflow_filters
       ignore: /.*/
     tags:
       only: /^[\w-]+@\d+\.\d+\.\d+.*$/
+orbs:
+  browser-tools: circleci/browser-tools@1.4.6
 
 executors:
   node:
@@ -18,6 +20,9 @@ executors:
     <<: *wdir
     docker:
     - image: cimg/node:20.9-browsers
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
 
 jobs:
   install_dependencies:
