@@ -9,6 +9,9 @@ anchor_2: &publish_workflow_filters
     tags:
       only: /^[\w-]+@\d+\.\d+\.\d+.*$/
 
+orbs:
+  browser-tools: circleci/browser-tools@1.4.6
+
 executors:
   node:
     <<: *wdir
@@ -48,6 +51,8 @@ jobs:
         type: string
     steps:
     - checkout
+    - browser-tools/install-chrome
+    - browser-tools/install-chromedriver
     - attach_workspace:
         at: ~/app
     - run:
