@@ -5,12 +5,15 @@ import {Strategies} from './strategies/index';
 import {StrategyIndex} from './services/strategyIndex';
 import {NgxWebstorageConfiguration} from './config';
 import {StorageKeyManager} from './helpers/storageKeyManager';
+import {StorageStrategy} from './core/interfaces/storageStrategy';
 
 export const LIB_CONFIG: InjectionToken<NgxWebstorageConfiguration> = new InjectionToken<NgxWebstorageConfiguration>('ngx_webstorage_config');
 
 export function appInit(index: StrategyIndex) {
 	index.indexStrategies();
-	return () => StrategyIndex.index;
+	return (): { [name: string]: StorageStrategy<any> } => {
+		return StrategyIndex.index;
+	};
 }
 
 @NgModule({})
