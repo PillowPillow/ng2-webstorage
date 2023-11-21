@@ -4,7 +4,7 @@ import {StrategyCacheService} from '../core/strategyCache';
 import {CompatHelper} from '../helpers/compat';
 import {WebStorage} from '../core/interfaces/webStorage';
 
-export abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
+abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 	readonly keyChanges: Subject<string> = new Subject();
 	abstract readonly name: string;
 
@@ -16,7 +16,7 @@ export abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 		if (this._isAvailable === undefined) this._isAvailable = CompatHelper.isStorageAvailable(this.storage);
 		return this._isAvailable;
 	}
-	
+
 	get(key: string): Observable<any> {
 		let data: any = this.cache.get(this.name, key);
 		if (data !== undefined) return of(data);
@@ -57,3 +57,5 @@ export abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 	}
 
 }
+
+export {BaseSyncStorageStrategy};

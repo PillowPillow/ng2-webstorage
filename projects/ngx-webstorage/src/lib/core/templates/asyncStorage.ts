@@ -4,7 +4,7 @@ import {StorageService} from '../interfaces/storageService';
 import {StorageKeyManager} from '../../helpers/storageKeyManager';
 import {distinctUntilChanged, filter, map, shareReplay, switchMap} from 'rxjs/operators';
 
-export class AsyncStorage implements StorageService {
+class AsyncStorage implements StorageService {
 
 	constructor(protected strategy: StorageStrategy<any>) {
 	}
@@ -35,3 +35,4 @@ export class AsyncStorage implements StorageService {
 		);
 	}
 }
+export {AsyncStorage};

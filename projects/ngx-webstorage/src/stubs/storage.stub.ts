@@ -1,6 +1,6 @@
 import {WebStorage} from '../lib/core/interfaces/webStorage';
 
-export class StorageStub implements WebStorage {
+class StorageStub implements WebStorage {
 	[name: string]: any;
 
 	public store: { [prop: string]: any } = {};
@@ -30,3 +30,4 @@ export class StorageStub implements WebStorage {
 	}
 
 }
+export {StorageStub};

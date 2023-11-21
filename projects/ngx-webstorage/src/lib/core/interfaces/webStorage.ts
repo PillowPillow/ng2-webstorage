@@ -1,4 +1,4 @@
-export interface WebStorage {
+interface WebStorage {
 	readonly length: number;
 
 	clear(): void;
@@ -13,3 +13,5 @@ export interface WebStorage {
 
 	[name: string]: any;
 }
+
+export {WebStorage};

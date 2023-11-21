@@ -5,7 +5,7 @@ import {StorageStrategies} from '../constants/strategy';
 import {Inject, Injectable} from '@angular/core';
 
 @Injectable()
-export class InMemoryStorageStrategy implements StorageStrategy<any> {
+class InMemoryStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = StorageStrategies.InMemory;
 	readonly keyChanges: Subject<string> = new Subject();
 	isAvailable: boolean = true;
@@ -36,3 +36,5 @@ export class InMemoryStorageStrategy implements StorageStrategy<any> {
 	}
 
 }
+
+export {InMemoryStorageStrategy};

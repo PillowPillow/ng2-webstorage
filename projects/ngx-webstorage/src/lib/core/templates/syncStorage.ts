@@ -5,7 +5,7 @@ import {StorageKeyManager} from '../../helpers/storageKeyManager';
 import {Observable} from 'rxjs';
 import {distinctUntilChanged, filter, shareReplay, switchMap} from 'rxjs/operators';
 
-export class SyncStorage implements StorageService {
+class SyncStorage implements StorageService {
 	constructor(protected strategy: StorageStrategy<any>) {
 	}
 
@@ -39,3 +39,5 @@ export class SyncStorage implements StorageService {
 	}
 
 }
+
+export {SyncStorage};

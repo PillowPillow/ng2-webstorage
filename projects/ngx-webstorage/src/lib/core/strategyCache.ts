@@ -5,7 +5,7 @@ export interface StrategyCache {
 }
 
 @Injectable({providedIn: 'root'})
-export class StrategyCacheService {
+class StrategyCacheService {
 
 	protected caches: { [name: string]: StrategyCache } = {};
 
@@ -30,3 +30,5 @@ export class StrategyCacheService {
 		return this.caches[strategyName] = {} as StrategyCache;
 	}
 }
+
+export {StrategyCacheService};

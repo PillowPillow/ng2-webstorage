@@ -7,14 +7,14 @@ import {isPlatformBrowser} from '@angular/common';
 import {WebStorage} from '../core/interfaces/webStorage';
 
 @Injectable()
-export class LocalStorageStrategy extends BaseSyncStorageStrategy {
+class LocalStorageStrategy extends BaseSyncStorageStrategy {
 	static readonly strategyName: string = StorageStrategies.Local;
 	readonly name: string = LocalStorageStrategy.strategyName;
 
 	constructor(@Inject(LOCAL_STORAGE) protected storage: WebStorage,
-	            protected cache: StrategyCacheService,
-	            @Inject(PLATFORM_ID) protected platformId: any,
-	            protected zone: NgZone) {
+				protected cache: StrategyCacheService,
+				@Inject(PLATFORM_ID) protected platformId: any,
+				protected zone: NgZone) {
 		super(storage, cache);
 		if (isPlatformBrowser(this.platformId)) this.listenExternalChanges();
 	}
@@ -30,3 +30,5 @@ export class LocalStorageStrategy extends BaseSyncStorageStrategy {
 	}
 
 }
+
+export {LocalStorageStrategy};

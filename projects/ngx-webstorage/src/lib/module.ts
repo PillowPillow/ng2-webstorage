@@ -17,7 +17,7 @@ export function appInit(index: StrategyIndex) {
 }
 
 @NgModule({})
-export class NgxWebstorageModule {
+class NgxWebstorageModule {
 
 	constructor(index: StrategyIndex, @Optional() @Inject(LIB_CONFIG) config: NgxWebstorageConfiguration) {
 		if (config) StorageKeyManager.consumeConfiguration(config);
@@ -47,3 +47,5 @@ export class NgxWebstorageModule {
 	}
 
 }
+
+export {NgxWebstorageModule};

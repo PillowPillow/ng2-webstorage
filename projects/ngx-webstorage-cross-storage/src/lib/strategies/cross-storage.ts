@@ -1,10 +1,9 @@
 import {FactoryProvider} from '@angular/core';
-import {CrossStorageClient} from 'cross-storage';
 import {STORAGE_STRATEGIES, StorageStrategy, StrategyCacheService} from 'ngx-webstorage';
 import {from, Observable, of, Subject} from 'rxjs';
 import {CROSS_STORAGE, CrossStorageClientFacade} from '../utils/cross-storage-facade';
 
-export class CrossStorageStrategy implements StorageStrategy<any> {
+class CrossStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = 'cross-storage';
 
 	readonly keyChanges: Subject<string> = new Subject();
@@ -66,6 +65,8 @@ export class CrossStorageStrategy implements StorageStrategy<any> {
 	}
 
 }
+
+export {CrossStorageStrategy};
 
 export function buildStrategy(client: CrossStorageClientFacade, cache: StrategyCacheService) {
 	return new CrossStorageStrategy(client, cache);

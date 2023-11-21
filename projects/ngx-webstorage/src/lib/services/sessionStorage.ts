@@ -4,7 +4,9 @@ import {StrategyIndex} from './strategyIndex';
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {StorageStrategies} from '../constants/strategy';
 
-export class SessionStorageService extends SyncStorage {}
+class SessionStorageService extends SyncStorage {}
+
+export {SessionStorageService};
 
 export function buildService(index: StrategyIndex) {
 	const strategy: StorageStrategy<any> = index.indexStrategy(StorageStrategies.Session);

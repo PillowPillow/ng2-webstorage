@@ -2,7 +2,7 @@ import {FactoryProvider, InjectionToken} from '@angular/core';
 import {CROSS_STORAGE_CLIENT, CrossStorageClientI} from './cross-storage-client';
 import {CROSS_STORAGE_LOCAL_STORAGE_FALLBACK} from './cross-storage-local-storage-fallback';
 
-export class CrossStorageClientFacade implements CrossStorageClientI {
+class CrossStorageClientFacade implements CrossStorageClientI {
 	client: CrossStorageClientI;
 
 	constructor(protected _client: CrossStorageClientI, protected _fallback?: CrossStorageClientI) {}
@@ -25,6 +25,8 @@ export class CrossStorageClientFacade implements CrossStorageClientI {
 	del(key?: string): Promise<any> {return this.onConnect().then((client) => client.del(key)); }
 
 }
+
+export {CrossStorageClientFacade};
 
 export const CROSS_STORAGE: InjectionToken<CrossStorageClientI> = new InjectionToken<CrossStorageClientI>('cross_storage_facade');
 

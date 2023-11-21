@@ -2,7 +2,7 @@ import {FactoryProvider, InjectionToken} from '@angular/core';
 import {LOCAL_STORAGE} from 'ngx-webstorage';
 import {CrossStorageClientI} from './cross-storage-client';
 
-export class CrossStorageLocalStorageFallback implements CrossStorageClientI {
+class CrossStorageLocalStorageFallback implements CrossStorageClientI {
 
 	constructor(protected storage: any) {}
 
@@ -21,6 +21,7 @@ export class CrossStorageLocalStorageFallback implements CrossStorageClientI {
 
 	del(key?: string): Promise<any> {return this.onConnect().then(() => this.storage.removeItem(key)); }
 }
+export {CrossStorageLocalStorageFallback};
 
 export const CROSS_STORAGE_LOCAL_STORAGE_FALLBACK: InjectionToken<CrossStorageClientI> = new InjectionToken<CrossStorageClientI>('cross_storage_local_storage_fallback');
 

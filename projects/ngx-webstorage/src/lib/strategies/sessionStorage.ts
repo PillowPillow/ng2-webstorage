@@ -7,7 +7,7 @@ import {isPlatformBrowser} from '@angular/common';
 import {WebStorage} from '../core/interfaces/webStorage';
 
 @Injectable()
-export class SessionStorageStrategy extends BaseSyncStorageStrategy {
+ class SessionStorageStrategy extends BaseSyncStorageStrategy {
 	static readonly strategyName: string = StorageStrategies.Session;
 	readonly name: string = SessionStorageStrategy.strategyName;
 
@@ -30,3 +30,5 @@ export class SessionStorageStrategy extends BaseSyncStorageStrategy {
 	}
 
 }
+
+export {SessionStorageStrategy};

@@ -10,7 +10,7 @@ import {CrossStorageLocalStorageFallbackProvider} from './utils/cross-storage-lo
 @NgModule({
 	imports: [CommonModule],
 })
-export class NgxWebstorageCrossStorageStrategyModule {
+class NgxWebstorageCrossStorageStrategyModule {
 	static forRoot(config: CrossStorageConfig): ModuleWithProviders<NgxWebstorageCrossStorageStrategyModule> {
 		return {
 			ngModule: NgxWebstorageCrossStorageStrategyModule,
@@ -25,3 +25,5 @@ export class NgxWebstorageCrossStorageStrategyModule {
 		};
 	}
 }
+
+export {NgxWebstorageCrossStorageStrategyModule};

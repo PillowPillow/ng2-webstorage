@@ -3,7 +3,7 @@ import {StorageStrategy} from '../lib/core/interfaces/storageStrategy';
 
 export const StorageStrategyStubName: string = 'stub_strategy';
 
-export class StorageStrategyStub implements StorageStrategy<any> {
+class StorageStrategyStub implements StorageStrategy<any> {
 
 	readonly keyChanges: Subject<string> = new Subject();
 	public store: any = {};
@@ -41,3 +41,5 @@ export class StorageStrategyStub implements StorageStrategy<any> {
 	}
 
 }
+
+export {StorageStrategyStub};

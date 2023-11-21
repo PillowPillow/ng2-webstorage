@@ -1,6 +1,6 @@
 import {CrossStorageClientI} from '../utils/cross-storage-client';
 
-export class CrossStorageClientStub implements CrossStorageClientI {
+class CrossStorageClientStub implements CrossStorageClientI {
 
 	public storage: any = {};
 
@@ -33,3 +33,4 @@ export class CrossStorageClientStub implements CrossStorageClientI {
 	}
 
 }
+export {CrossStorageClientStub};

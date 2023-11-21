@@ -72,3 +72,4 @@ export class StrategyIndex {
 
 }
 
+export {StorageStrategy};

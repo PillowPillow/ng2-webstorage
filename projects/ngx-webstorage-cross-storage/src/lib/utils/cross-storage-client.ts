@@ -2,7 +2,7 @@ import {FactoryProvider, InjectionToken} from '@angular/core';
 import {CrossStorageClient} from 'cross-storage';
 import {CROSS_STORAGE_CONFIG, CrossStorageConfig} from '../config';
 
-export interface CrossStorageClientI {
+interface CrossStorageClientI {
 
 	onConnect(): Promise<any>;
 
@@ -15,6 +15,8 @@ export interface CrossStorageClientI {
 	del(key?: string): Promise<any>;
 
 }
+
+export {CrossStorageClientI};
 
 export const CROSS_STORAGE_CLIENT: InjectionToken<CrossStorageClientI> = new InjectionToken<CrossStorageClientI>('cross_storage_client');
 
