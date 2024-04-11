@@ -11,3 +11,5 @@ export const Strategies: Provider[] = [
 	{provide: STORAGE_STRATEGIES, useClass: LocalStorageStrategy, multi: true},
 	{provide: STORAGE_STRATEGIES, useClass: SessionStorageStrategy, multi: true},
 ];
+
+export const [InMemoryStorageStrategyProvider, LocalStorageStrategyProvider, SessionStorageStrategyProvider] = Strategies;
