@@ -32,7 +32,14 @@ It provides also two decorators to synchronize the component attributes and the 
 
 1. Update your project to Angular 18+
 2. Rename the module usages by <b>provideNgxWebstorage()</b> *(before: NgxWebstorageModule.forRoot())*
-
+3. Add the new provider functions to configure the library
+```typescript
+	provideNgxWebstorage(
+		withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
+		withLocalStorage(),
+		withSessionStorage()
+	)
+```
 ------------
 
 ### <a name="gstart">Getting Started</a>
