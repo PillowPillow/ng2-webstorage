@@ -28,7 +28,7 @@ It provides also two decorators to synchronize the component attributes and the 
 > The forRoot is now mandatory in the root module even if you don't need to configure the library
 
 
-### Migrate from v13.x to the v14
+### Migrate from v13.x to the v18
 
 1. Update your project to Angular 18+
 2. Rename the module usages by <b>provideNgxWebstorage()</b> *(before: NgxWebstorageModule.forRoot())*
