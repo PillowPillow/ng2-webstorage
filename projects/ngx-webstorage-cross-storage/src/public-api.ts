@@ -1,4 +1,4 @@
-export {NgxWebstorageCrossStorageStrategyModule} from './lib/ngx-webstorage-cross-storage-strategy.module';
+export {provideNgxWebstorageCrossStorage} from './lib/ngx-webstorage-cross-storage-strategy.module';
 
 export {CrossStorageServiceProvider, CrossStorageService} from './lib/services/cross-storage';
 export {CrossStorageStrategyProvider, CrossStorageStrategy} from './lib/strategies/cross-storage';

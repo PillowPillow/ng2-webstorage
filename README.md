@@ -26,6 +26,12 @@ It provides also two decorators to synchronize the component attributes and the 
 2. Rename the module usages by <b>NgxWebstorageModule.forRoot()</b> *(before: Ng2Webstorage)*
 > The forRoot is now mandatory in the root module even if you don't need to configure the library
 
+
+### Migrate from v13.x to the v14
+
+1. Update your project to Angular 18+
+2. Rename the module usages by <b>provideNgxWebstorage()</b> *(before: NgxWebstorageModule.forRoot())*
+
 ------------
 
 ### <a name="gstart">Getting Started</a>
@@ -36,20 +42,22 @@ It provides also two decorators to synchronize the component attributes and the 
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
-	import {NgxWebstorageModule} from 'ngx-webstorage';
+	import {provideNgxWebstorage} from 'ngx-webstorage';
 
 	@NgModule({
 		declarations: [...],
 		imports: [
-			BrowserModule,
-			NgxWebstorageModule.forRoot(),
-			//NgxWebstorageModule.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
-			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
+			BrowserModule
+		],
+		providers: [
+			provideNgxWebstorage(),
+			//provideNgxWebstorage({ prefix: 'custom', separator: '.', caseSensitive:true }) 
+			// The config allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
 			// prefix: "ngx-webstorage"
 			// separator: "|"
-			// caseSensitive: false
-		],
+			// caseSensitive: false 
+		]
 		bootstrap: [...]
 	})
 	export class AppModule {

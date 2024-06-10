@@ -1,8 +1,8 @@
 import {ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {NgxWebstorageCrossStorageStrategyModule} from './ngx-webstorage-cross-storage-strategy.module';
+import {provideNgxWebstorageCrossStorage} from './ngx-webstorage-cross-storage-strategy.module';
 import {Component} from '@angular/core';
 import {CrossStorageClientStub} from './stubs/cross-storage-client.stub';
-import {LocalStorage, LocalStorageStrategy, NgxWebstorageModule, SessionStorageStrategy, StrategyIndex} from 'ngx-webstorage';
+import {LocalStorage, LocalStorageStrategy, provideNgxWebstorage, SessionStorageStrategy, StrategyIndex} from 'ngx-webstorage';
 import {CrossStorageStrategy} from './strategies/cross-storage';
 import {CrossStorageService} from './services/cross-storage';
 import {CROSS_STORAGE_CONFIG, CrossStorageConfig} from './config';
@@ -22,13 +22,11 @@ describe('NgxWebstorageCrossStorageStrategyModule', () => {
 	beforeEach(() => {
 		clientStub = new CrossStorageClientStub();
 		TestBed.configureTestingModule({
-			imports: [
-				NgxWebstorageModule.forRoot(),
-				NgxWebstorageCrossStorageStrategyModule.forRoot({
+			providers: [
+				provideNgxWebstorage(),
+				provideNgxWebstorageCrossStorage({
 					host: 'http://foo.bar',
 				}),
-			],
-			providers: [
 				{provide: CROSS_STORAGE_CLIENT, useValue: clientStub},
 			],
 			declarations: [
