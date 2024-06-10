@@ -5,7 +5,7 @@ import {Components} from './_components';
 import {SharedModule} from './shared/module';
 
 // import {LocalStorageService, provideNgxWebstorage} from 'ngx-webstorage';
-import {LocalStorageService, provideNgxWebstorage} from './lib';
+import {LocalStorageService, provideNgxWebstorage, withLocalStorage, withNgxWebstorageConfig, withSessionStorage} from './lib';
 import {Routing} from './routing';
 import {EagerModule} from './eager/module';
 
@@ -18,21 +18,25 @@ import {EagerModule} from './eager/module';
 		SharedModule,
 		Routing,
 		EagerModule,
-		// NgxWebstorageCrossStorageStrategyModule.forRoot({
-		// 	host: 'http://localhost.crosstorage'
-		// })
 	],
 	providers: [
-		provideNgxWebstorage({
-			prefix: 'prefix',
-			separator: '--'
-		}),
+		provideNgxWebstorage(
+			withNgxWebstorageConfig({
+				prefix: 'prefix',
+				separator: '--'
+			}),
+			withSessionStorage(),
+			withLocalStorage(),
+			// withCrossStorage({
+			// 	host: 'http://localhost.crosstorage'
+			// })
+		),
 		{
 			provide: APP_INITIALIZER,
-			useFactory: (session: LocalStorageService) => {
+			useFactory: (storage: LocalStorageService) => {
 				console.log('app init');
 				return () => {
-					console.log(session);
+					console.log(storage);
 				};
 			},
 			deps: [LocalStorageService],

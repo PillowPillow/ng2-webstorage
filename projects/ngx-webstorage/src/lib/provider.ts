@@ -1,21 +1,24 @@
-import {APP_INITIALIZER,inject,makeEnvironmentProviders,Provider} from "@angular/core";
-import {NgxWebstorageConfiguration} from "./config";
-import {LIB_CONFIG} from "./module";
-import {StrategyIndex} from "../public_api";
-import {InMemoryStorageStrategyProvider,LocalStorageStrategyProvider,SessionStorageStrategyProvider} from "./strategies";
-import {LocalStorageProvider,SessionStorageProvider} from "./core/nativeStorage";
-import {LocalStorageServiceProvider} from "./services/localStorage";
-import {SessionStorageServiceProvider} from "./services/sessionStorage";
-import {DefaultIsCaseSensitive, DefaultPrefix, DefaultSeparator} from "./constants/config";
-import {StorageKeyManager} from "./helpers/storageKeyManager";
+import {APP_INITIALIZER, inject, InjectionToken, makeEnvironmentProviders, Provider} from '@angular/core';
+import {NgxWebstorageConfiguration} from './config';
+import {StrategyIndex} from '../public_api';
+import {InMemoryStorageStrategyProvider, LocalStorageStrategyProvider, SessionStorageStrategyProvider} from './strategies';
+import {LocalStorageProvider, SessionStorageProvider} from './core/nativeStorage';
+import {LocalStorageServiceProvider} from './services/localStorage';
+import {SessionStorageServiceProvider} from './services/sessionStorage';
+import {DefaultIsCaseSensitive, DefaultPrefix, DefaultSeparator} from './constants/config';
+import {StorageKeyManager} from './helpers/storageKeyManager';
 
-enum NgxWebstorageFeatureKind {
-	Config,
-	LocalStorage,
-	SessionStorage,
+export const LIB_CONFIG: InjectionToken<NgxWebstorageConfiguration> = new InjectionToken<NgxWebstorageConfiguration>('ngx_webstorage_config');
+
+export enum InternalNgxWebstorageFeatureKind {
+	Config = 1,
+	LocalStorage = 2,
+	SessionStorage = 3,
 }
 
-type NgxWebstorageFeature<FeatureKind extends NgxWebstorageFeatureKind> = {
+export type NgxWebstorageFeatureKind = string | InternalNgxWebstorageFeatureKind;
+
+export type NgxWebstorageFeature<FeatureKind extends NgxWebstorageFeatureKind> = {
 	kind: FeatureKind;
 	providers: Provider[];
 };
@@ -39,11 +42,11 @@ function appInit() {
  * @default config { prefix: 'ngx-webstorage', separator: '|', caseSensitive: false }
  */
 export function provideNgxWebstorage(...features: NgxWebstorageFeature<NgxWebstorageFeatureKind>[]) {
-	const { configProvider, featureProviders } = parseFeatures(features);
- 	return makeEnvironmentProviders([
+	const {configProvider, featureProviders} = parseFeatures(features);
+	return makeEnvironmentProviders([
 		configProvider,
 		InMemoryStorageStrategyProvider,
-		{ provide: APP_INITIALIZER, useFactory: appInit, multi: true },
+		{provide: APP_INITIALIZER, useFactory: appInit, multi: true},
 		...featureProviders,
 	]);
 }
@@ -52,31 +55,38 @@ function parseFeatures(features: NgxWebstorageFeature<NgxWebstorageFeatureKind>[
 	let configProvider: Provider;
 	const featureProviders: Provider[] = [];
 
+	const parsedFeatures = new Set<NgxWebstorageFeatureKind>();
+
 	for (const feature of features) {
-		if (feature.kind === NgxWebstorageFeatureKind.Config) configProvider = feature.providers[0];
-		else featureProviders.push(...feature.providers);
+		if (parsedFeatures.has(feature.kind)) throw new Error(`Feature ${feature.kind} is already provided.`);
+
+		if (feature.kind === InternalNgxWebstorageFeatureKind.Config) {
+			configProvider = feature.providers[0];
+		} else featureProviders.push(...feature.providers);
+
+		parsedFeatures.add(feature.kind);
 	}
 
 	return {
 		configProvider: configProvider ?? {
 			provide: LIB_CONFIG,
-			useValue: { prefix: DefaultPrefix, separator: DefaultSeparator, caseSensitive: DefaultIsCaseSensitive }
+			useValue: {prefix: DefaultPrefix, separator: DefaultSeparator, caseSensitive: DefaultIsCaseSensitive}
 		},
 		featureProviders
 	};
 }
 
-function makeNgxWebstorageFeature<FeatureKind extends NgxWebstorageFeatureKind>(kind: FeatureKind, providers: Provider[]): NgxWebstorageFeature<FeatureKind> {
-	return { kind, providers };
+export function makeNgxWebstorageFeature<FeatureKind extends NgxWebstorageFeatureKind>(kind: FeatureKind, providers: Provider[]): NgxWebstorageFeature<FeatureKind> {
+	return {kind, providers};
 }
 
 export function withNgxWebstorageConfig(config: NgxWebstorageConfiguration) {
-	return makeNgxWebstorageFeature(NgxWebstorageFeatureKind.Config, [{ provide: LIB_CONFIG, useValue: config }]);
+	return makeNgxWebstorageFeature(InternalNgxWebstorageFeatureKind.Config, [{provide: LIB_CONFIG, useValue: config}]);
 }
 
 /** Provides everything necessary to use the `LocalStorage` features. */
 export function withLocalStorage() {
-	return makeNgxWebstorageFeature(NgxWebstorageFeatureKind.LocalStorage, [
+	return makeNgxWebstorageFeature(InternalNgxWebstorageFeatureKind.LocalStorage, [
 		LocalStorageProvider,
 		LocalStorageServiceProvider,
 		LocalStorageStrategyProvider,
@@ -84,7 +94,7 @@ export function withLocalStorage() {
 }
 
 export function withSessionStorage() {
-	return makeNgxWebstorageFeature(NgxWebstorageFeatureKind.SessionStorage, [
+	return makeNgxWebstorageFeature(InternalNgxWebstorageFeatureKind.SessionStorage, [
 		SessionStorageProvider,
 		SessionStorageServiceProvider,
 		SessionStorageStrategyProvider,

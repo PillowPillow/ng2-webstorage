@@ -9,6 +9,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 #### Index:
 * [Getting Started](#gstart)
+    * [Provider Function](#provider_fn)
 * [Services](#services):
 	* [LocalStorageService](#s_localstorage)
 	* [SessionStorageService](#s_sessionstorage)
@@ -42,7 +43,7 @@ It provides also two decorators to synchronize the component attributes and the 
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
-	import {provideNgxWebstorage} from 'ngx-webstorage';
+	import {provideNgxWebstorage, withNgxWebstorageConfig} from 'ngx-webstorage';
 
 	@NgModule({
 		declarations: [...],
@@ -51,7 +52,9 @@ It provides also two decorators to synchronize the component attributes and the 
 		],
 		providers: [
 			provideNgxWebstorage(),
-			//provideNgxWebstorage({ prefix: 'custom', separator: '.', caseSensitive:true }) 
+			//provideNgxWebstorage(
+			//  withNgxWebstorageConfig({ prefix: 'custom', separator: '.', caseSensitive:true }) 
+			//)
 			// The config allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
 			// prefix: "ngx-webstorage"
@@ -102,6 +105,31 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	}
 	```
+
+### <a name="provider_fn">Provider Function</a>
+
+Since the new standalone API and angular v15+, provider functions are now the way to go to configure your application ([learn more](https://angular.dev/reference/migrations/standalone)).
+
+1. From now on to setup your project, you can use the `provideNgxWebstorage` function.
+
+2. You can independently add the (you can of course add them both together):
+   - `localStorage` features with `withLocalStorage`
+   - `sessionStorage` features with `withLocalStorage`
+
+3. You can add a custom configuration with `withNgxWebstorageConfig`
+   
+```ts
+bootstrapApplication(AppComponent, {
+	providers: [
+		// ...
+		provideNgxWebstorage(
+			withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
+			withLocalStorage(),
+			withSessionStorage()
+		)
+	]
+})
+```
 
 ### <a name="services">Services</a>
 --------------------
@@ -205,6 +233,33 @@ export class FooComponent {
     clearItem() {
       this.storage.clear('boundValue');
       //this.storage.clear(); //clear all the managed storage items
+    }
+
+}
+````
+------------
+
+#### IsStorageAvailable():`boolean`
+
+##### Usage:
+````typescript
+import {Component, OnInit} from '@angular/core';
+import {LocalStorageService, LocalStorage} from 'ngx-webstorage';
+
+@Component({
+	selector: 'foo',
+	template: `...`,
+})
+export class FooComponent implements OnInit {
+
+    @LocalStorage('boundValue')
+    boundAttribute;
+
+    constructor(private storage:LocalStorageService) {}
+
+    ngOnInit() {
+      let isAvailable = this.storage.isStorageAvailable();
+      console.log(isAvailable);
     }
 
 }
