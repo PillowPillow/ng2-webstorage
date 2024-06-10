@@ -10,7 +10,7 @@ anchor_2: &publish_workflow_filters
       only: /^[\w-]+@\d+\.\d+\.\d+.*$/
 
 orbs:
-  browser-tools: circleci/browser-tools@1.4.6
+  browser-tools: circleci/browser-tools@1.4.8
 
 executors:
   node:
