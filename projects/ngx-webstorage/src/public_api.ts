@@ -25,6 +25,7 @@ export {SessionStorageService} from './lib/services/sessionStorage';
 export * from './lib/core/interfaces/storageStrategy';
 export * from './lib/decorators';
 export * from './lib/module';
+export * from './lib/provider';
 
 
 

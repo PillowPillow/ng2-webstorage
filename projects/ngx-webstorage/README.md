@@ -7,6 +7,7 @@ It provides also two decorators to synchronize the component attributes and the 
 
 #### Index:
 * [Getting Started](#gstart)
+    * [Provider Function](#provider_fn)
 * [Services](#services):
 	* [LocalStorageService](#s_localstorage)
 	* [SessionStorageService](#s_sessionstorage)
@@ -92,6 +93,31 @@ It provides also two decorators to synchronize the component attributes and the 
 
 	}
 	```
+
+### <a name="provider_fn">Provider Function</a>
+
+Since the new standalone API and angular v15+, provider functions are now the way to go to configure your application ([learn more](https://angular.dev/reference/migrations/standalone)).
+
+1. From now on to setup your project, you can use the `provideNgxWebstorage` function.
+
+2. You can independently add the (you can of course add them both together):
+   - `localStorage` features with `withLocalStorage`
+   - `sessionStorage` features with `withLocalStorage`
+
+3. You can add a custom configuration with `withNgxWebstorageConfig`
+   
+```ts
+bootstrapApplication(AppComponent, {
+	providers: [
+		// ...
+		provideNgxWebstorage(
+			withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
+			withLocalStorage(),
+			withSessionStorage()
+		)
+	]
+})
+```
 
 ### <a name="services">Services</a>
 --------------------
