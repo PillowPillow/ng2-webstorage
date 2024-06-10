@@ -1,8 +1,10 @@
 # ngx-webstorage
+
 ### Local and session storage - Angular service
 This library provides an easy to use service to manage the web storages (local and session) from your Angular application.
 It provides also two decorators to synchronize the component attributes and the web storages.
 
+[![CircleCI](https://circleci.com/gh/PillowPillow/ng2-webstorage/tree/master.svg?style=svg)](https://circleci.com/gh/PillowPillow/ng2-webstorage/tree/master)
 ------------
 
 #### Index:
@@ -25,6 +27,19 @@ It provides also two decorators to synchronize the component attributes and the 
 2. Rename the module usages by <b>NgxWebstorageModule.forRoot()</b> *(before: Ng2Webstorage)*
 > The forRoot is now mandatory in the root module even if you don't need to configure the library
 
+
+### Migrate from v13.x to the v18
+
+1. Update your project to Angular 18+
+2. Rename the module usages by <b>provideNgxWebstorage()</b> *(before: NgxWebstorageModule.forRoot())*
+3. Add the new provider functions to configure the library
+```typescript
+	provideNgxWebstorage(
+		withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
+		withLocalStorage(),
+		withSessionStorage()
+	)
+```
 ------------
 
 ### <a name="gstart">Getting Started</a>
@@ -35,20 +50,24 @@ It provides also two decorators to synchronize the component attributes and the 
 	```typescript
 	import {NgModule} from '@angular/core';
 	import {BrowserModule} from '@angular/platform-browser';
-	import {NgxWebstorageModule} from 'ngx-webstorage';
+	import {provideNgxWebstorage, withNgxWebstorageConfig} from 'ngx-webstorage';
 
 	@NgModule({
 		declarations: [...],
 		imports: [
-			BrowserModule,
-			NgxWebstorageModule.forRoot(),
-			//NgxWebstorageModule.forRoot({ prefix: 'custom', separator: '.', caseSensitive:true }) 
-			// The forRoot method allows to configure the prefix, the separator and the caseSensitive option used by the library
+			BrowserModule
+		],
+		providers: [
+			provideNgxWebstorage(),
+			//provideNgxWebstorage(
+			//  withNgxWebstorageConfig({ prefix: 'custom', separator: '.', caseSensitive:true }) 
+			//)
+			// The config allows to configure the prefix, the separator and the caseSensitive option used by the library
 			// Default values:
 			// prefix: "ngx-webstorage"
 			// separator: "|"
-			// caseSensitive: false
-		],
+			// caseSensitive: false 
+		]
 		bootstrap: [...]
 	})
 	export class AppModule {
