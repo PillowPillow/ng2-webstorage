@@ -14,7 +14,10 @@ describe('Provider', () => {
 
 	let strategyStub: StorageStrategy<any>;
 
-	@Component({selector: 'lib-mock', template: ''})
+	@Component({
+    selector: 'lib-mock', template: '',
+    standalone: false
+})
 	class LocalMockComponent {
 		@LocalStorage() prop: string;
 	}

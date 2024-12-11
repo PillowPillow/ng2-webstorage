@@ -3,8 +3,9 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {LocalStorage, LocalStorageService, SessionStorage, SessionStorageService} from '../../lib';
 
 @Component({
-	selector: 'app-form',
-	templateUrl: './template.html'
+    selector: 'app-form',
+    templateUrl: './template.html',
+    standalone: false
 })
 export class AppFormComponent implements OnInit {
 

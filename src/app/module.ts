@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import {RootComponent} from './_components/root/root';
 import {Components} from './_components';
 import {SharedModule} from './shared/module';
@@ -31,17 +31,15 @@ import {EagerModule} from './eager/module';
 			// 	host: 'http://localhost.crosstorage'
 			// })
 		),
-		{
-			provide: APP_INITIALIZER,
-			useFactory: (storage: LocalStorageService) => {
+		provideAppInitializer(() => {
+        const initializerFn = ((storage: LocalStorageService) => {
 				console.log('app init');
 				return () => {
 					console.log(storage);
 				};
-			},
-			deps: [LocalStorageService],
-			multi: true
-		},
+			})(inject(LocalStorageService));
+        return initializerFn();
+      }),
 		//{provide: STORAGE_STRATEGIES, useFactory: () => new StorageStrategyStub(LocalStorageStrategy.strategyName), multi: true}
 	],
 	bootstrap: [RootComponent]

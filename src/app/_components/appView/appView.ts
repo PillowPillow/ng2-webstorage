@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {LocalStorage, SessionStorage} from '../../lib';
 
 @Component({
-	selector: 'app-view',
-	templateUrl: './template.html',
+    selector: 'app-view',
+    templateUrl: './template.html',
+    standalone: false
 })
 export class AppViewComponent {
 	@SessionStorage('variable', 'default value')

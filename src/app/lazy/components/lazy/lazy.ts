@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {LocalStorage, SessionStorage} from '../../../lib';
 
 @Component({
-	selector: 'lazy',
-	templateUrl: './lazy.html',
-	//changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'lazy',
+    templateUrl: './lazy.html',
+    standalone: false
 })
 export class LazyComponent {
 	@SessionStorage('variable', 'default value')

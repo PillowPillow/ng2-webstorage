@@ -16,7 +16,10 @@ describe('Decorators', () => {
 	
 	describe('LocalStorage', () => {
 		
-		@Component({selector: 'mock', template: ''})
+		@Component({
+    selector: 'mock', template: '',
+    standalone: false
+})
 		class LocalMockComponent {
 			@LocalStorage() prop: string;
 			
@@ -106,7 +109,10 @@ describe('Decorators', () => {
 	
 	describe('SessionStorage', () => {
 		
-		@Component({selector: 'mock', template: ''})
+		@Component({
+    selector: 'mock', template: '',
+    standalone: false
+})
 		class SessionMockComponent {
 			@SessionStorage() prop: string;
 			

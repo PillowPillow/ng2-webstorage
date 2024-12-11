@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, inject, InjectionToken, makeEnvironmentProviders, Provider} from '@angular/core';
+import { inject, InjectionToken, makeEnvironmentProviders, Provider, provideAppInitializer } from '@angular/core';
 import {NgxWebstorageConfiguration} from './config';
 import {StrategyIndex} from '../public_api';
 import {InMemoryStorageStrategyProvider, LocalStorageStrategyProvider, SessionStorageStrategyProvider} from './strategies';
@@ -46,7 +46,10 @@ export function provideNgxWebstorage(...features: NgxWebstorageFeature<NgxWebsto
 	return makeEnvironmentProviders([
 		configProvider,
 		InMemoryStorageStrategyProvider,
-		{provide: APP_INITIALIZER, useFactory: appInit, multi: true},
+		provideAppInitializer(() => {
+        const initializerFn = (appInit)();
+        return initializerFn();
+      }),
 		...featureProviders,
 	]);
 }

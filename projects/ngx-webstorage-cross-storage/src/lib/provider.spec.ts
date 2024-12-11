@@ -12,7 +12,10 @@ import {CROSS_STORAGE_CLIENT} from './utils/cross-storage-client';
 
 describe('NgxWebstorageCrossStorageStrategyModule', () => {
 
-	@Component({selector: 'mock', template: ''})
+	@Component({
+    selector: 'mock', template: '',
+    standalone: false
+})
 	class LocalMockComponent {
 		@LocalStorage() prop: string;
 	}
