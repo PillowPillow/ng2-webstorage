@@ -4,6 +4,7 @@ import {LocalStorage, SessionStorage} from '../../../lib';
 @Component({
     selector: 'lazy',
     templateUrl: './lazy.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LazyComponent {

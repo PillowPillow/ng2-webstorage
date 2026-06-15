@@ -17,7 +17,7 @@ describe('Decorators', () => {
 	describe('LocalStorage', () => {
 		
 		@Component({
-    selector: 'mock', template: '',
+    selector: 'lib-mock', template: '',
     standalone: false
 })
 		class LocalMockComponent {
@@ -110,7 +110,7 @@ describe('Decorators', () => {
 	describe('SessionStorage', () => {
 		
 		@Component({
-    selector: 'mock', template: '',
+    selector: 'lib-mock', template: '',
     standalone: false
 })
 		class SessionMockComponent {

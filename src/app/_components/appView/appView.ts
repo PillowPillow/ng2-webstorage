@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {LocalStorage, SessionStorage} from '../../lib';
 
 @Component({
     selector: 'app-view',
     templateUrl: './template.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppViewComponent {

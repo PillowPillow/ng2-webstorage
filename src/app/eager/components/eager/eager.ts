@@ -4,6 +4,7 @@ import {LocalStorage, SessionStorage} from '../../../lib';
 @Component({
     selector: 'eager',
     templateUrl: './eager.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EagerComponent {
