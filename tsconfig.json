@@ -2,6 +2,8 @@
 	"compileOnSave": false,
 	"compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
+    "strict": false,
     "outDir": "./dist/out-tsc",
     "esModuleInterop": true,
     "sourceMap": true,

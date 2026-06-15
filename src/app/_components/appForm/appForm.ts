@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {LocalStorage, LocalStorageService, SessionStorage, SessionStorageService} from '../../lib';
 
 @Component({
     selector: 'app-form',
     templateUrl: './template.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppFormComponent implements OnInit {
