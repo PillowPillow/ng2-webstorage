@@ -19,27 +19,8 @@ It provides also two decorators to synchronize the component attributes and the 
 * [Known issues](#knownissues)
 * [Modify and build](#modifBuild)
 
-------------
+Release notes: [CHANGELOG.md](./CHANGELOG.md) — Upgrade guides: [MIGRATION.md](./MIGRATION.md)
 
-### Migrate from v2.x to the v3
-
-1. Update your project to Angular 7+
-2. Rename the module usages by <b>NgxWebstorageModule.forRoot()</b> *(before: Ng2Webstorage)*
-> The forRoot is now mandatory in the root module even if you don't need to configure the library
-
-
-### Migrate from v13.x to the v18
-
-1. Update your project to Angular 18+
-2. Rename the module usages by <b>provideNgxWebstorage()</b> *(before: NgxWebstorageModule.forRoot())*
-3. Add the new provider functions to configure the library
-```typescript
-	provideNgxWebstorage(
-		withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
-		withLocalStorage(),
-		withSessionStorage()
-	)
-```
 ------------
 
 ### <a name="gstart">Getting Started</a>

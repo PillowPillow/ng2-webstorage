@@ -1,3 +1,38 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+The major version tracks the Angular major version: `ngx-webstorage` v*N* targets Angular v*N*,
+so this project does **not** follow [Semantic Versioning](https://semver.org/) for its major digit.
+
+Step-by-step upgrade instructions with before/after code live in [MIGRATION.md](./MIGRATION.md).
+
+> **History gap:** releases from v1.8.0 to v20.x are not recorded in this file.
+> For those versions, see the [commit history](https://github.com/PillowPillow/ng2-webstorage/commits/master)
+> and the [tag list](https://github.com/PillowPillow/ng2-webstorage/tags).
+> The 1.x entries are kept at the bottom under [Legacy](#legacy-ng2-webstorage-1x).
+
+## [Unreleased]
+
+## [21.0.1] - 2025-11-24
+
+### Changed
+
+* **ngx-webstorage:** republished with no source change (version bump only).
+
+## [21.0.0] - 2025-11-24
+
+### Changed
+
+* **ngx-webstorage / ngx-webstorage-cross-storage:** peer dependencies raised to `@angular/common@^21.0.0` and `@angular/core@^21.0.0`.
+
+---
+
+## Legacy (ng2-webstorage 1.x)
+
+The package was named `ng2-webstorage` until v2.0.0. The entries below are kept for users still on that line.
+
 <a name="1.8.0">v1.8.0</a>
 
 ### Features 
