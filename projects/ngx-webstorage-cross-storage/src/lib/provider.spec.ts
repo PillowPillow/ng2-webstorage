@@ -17,7 +17,7 @@ describe('NgxWebstorageCrossStorageStrategyModule', () => {
     standalone: false
 })
 	class LocalMockComponent {
-		@LocalStorage() prop: string;
+		@LocalStorage() prop!: string;
 	}
 
 	let testFixture: ComponentFixture<LocalMockComponent>;

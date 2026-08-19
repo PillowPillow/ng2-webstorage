@@ -1,4 +1,5 @@
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
+import {KEY_CLEARED} from '../constants/keyChanges';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {CompatHelper} from '../helpers/compat';
@@ -10,7 +11,7 @@ abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 
 	constructor(protected storage: WebStorage, protected cache: StrategyCacheService) {}
 
-	protected _isAvailable: boolean;
+	protected _isAvailable: boolean | undefined;
 
 	get isAvailable(): boolean {
 		if (this._isAvailable === undefined) this._isAvailable = CompatHelper.isStorageAvailable(this.storage);
@@ -46,14 +47,14 @@ abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 		this.storage.removeItem(key);
 		this.cache.del(this.name, key);
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.storage.clear();
 		this.cache.clear(this.name);
-		this.keyChanges.next(null);
-		return of(null);
+		this.keyChanges.next(KEY_CLEARED);
+		return of(void 0);
 	}
 
 }

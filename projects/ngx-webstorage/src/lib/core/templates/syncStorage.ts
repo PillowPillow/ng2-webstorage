@@ -1,4 +1,5 @@
 import {StorageStrategy} from '../interfaces/storageStrategy';
+import {KEY_CLEARED} from '../../constants/keyChanges';
 import {noop} from '../../helpers/noop';
 import {StorageService} from '../interfaces/storageService';
 import {StorageKeyManager} from '../../helpers/storageKeyManager';
@@ -31,7 +32,7 @@ class SyncStorage implements StorageService {
 	observe(key: string): Observable<any> {
 		key = StorageKeyManager.normalize(key);
 		return this.strategy.keyChanges.pipe(
-			filter((changed: string) => changed === null || changed === key),
+			filter((changed: string | null) => changed === KEY_CLEARED || changed === key),
 			switchMap(() => this.strategy.get(key)),
 			distinctUntilChanged(),
 			shareReplay({refCount: true, bufferSize: 1})

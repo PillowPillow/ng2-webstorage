@@ -3,15 +3,16 @@ import {CROSS_STORAGE_CLIENT, CrossStorageClientI} from './cross-storage-client'
 import {CROSS_STORAGE_LOCAL_STORAGE_FALLBACK} from './cross-storage-local-storage-fallback';
 
 class CrossStorageClientFacade implements CrossStorageClientI {
-	client: CrossStorageClientI;
+	client: CrossStorageClientI | undefined;
 
 	constructor(protected _client: CrossStorageClientI, protected _fallback?: CrossStorageClientI) {}
 
 	onConnect(): Promise<CrossStorageClientI> {
-		if (this.client) return this.client.onConnect().then(() => this.client);
+		const connected: CrossStorageClientI | undefined = this.client;
+		if (connected) return connected.onConnect().then(() => connected);
+		// Both branches assign, so the chain always resolves to a client.
 		return this._client.onConnect()
-			.then(() => this.client = this._client, () => this.client = this._fallback ?? this._client)
-			.then(() => this.client);
+			.then(() => this.client = this._client, () => this.client = this._fallback ?? this._client);
 	}
 
 	set(key: string, value: any): Promise<any> {

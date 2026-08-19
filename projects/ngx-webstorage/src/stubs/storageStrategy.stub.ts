@@ -1,5 +1,6 @@
 import {Observable, of, Subject} from 'rxjs';
 import {StorageStrategy} from '../lib/core/interfaces/storageStrategy';
+import {KEY_CLEARED} from '../lib/constants/keyChanges';
 
 export const StorageStrategyStubName: string = 'stub_strategy';
 
@@ -31,13 +32,13 @@ class StorageStrategyStub implements StorageStrategy<any> {
 	del(key: string): Observable<void> {
 		delete this.store[key];
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.store = {};
-		this.keyChanges.next(null);
-		return of(null);
+		this.keyChanges.next(KEY_CLEARED);
+		return of(void 0);
 	}
 
 }

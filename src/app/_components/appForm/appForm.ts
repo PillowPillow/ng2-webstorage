@@ -1,20 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {LocalStorage, LocalStorageService, SessionStorage, SessionStorageService} from '../../lib';
 
 @Component({
     selector: 'app-form',
     templateUrl: './template.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppFormComponent implements OnInit {
 
-	form: UntypedFormGroup;
+	form!: UntypedFormGroup;
 
 	@SessionStorage('variable')
-	public sessionBind;
+	public sessionBind!: any;
 	@LocalStorage('variable', 'default value')
-	public localBind;
+	public localBind!: any;
 
 	constructor(private fb: UntypedFormBuilder, private sessionS: SessionStorageService, private localS: LocalStorageService) {}
 
@@ -31,7 +32,7 @@ export class AppFormComponent implements OnInit {
 			.subscribe((data) => console.log('local variable changed : ', data));
 	}
 
-	submit(value, valid) {
+	submit(value: {text: string}, valid: boolean) {
 		this.sessionS.store('variable', value.text);
 	}
 

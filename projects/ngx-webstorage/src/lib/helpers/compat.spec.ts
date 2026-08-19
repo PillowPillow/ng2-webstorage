@@ -17,7 +17,7 @@ describe('Helpers : CompatHelper', () => {
 	
 	it('should determine that the given storage is not available', () => {
 		
-		expect(CompatHelper.isStorageAvailable(null)).toBeFalsy();
+		expect(CompatHelper.isStorageAvailable(null as unknown as WebStorage)).toBeFalsy();
 		
 		spyOn(storage, 'setItem').and.throwError('random_error');
 		expect(CompatHelper.isStorageAvailable(storage)).toBeFalsy();

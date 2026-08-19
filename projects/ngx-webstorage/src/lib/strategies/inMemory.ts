@@ -2,6 +2,7 @@ import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {StorageStrategies} from '../constants/strategy';
+import {KEY_CLEARED} from '../constants/keyChanges';
 import {Inject, Injectable} from '@angular/core';
 
 @Injectable()
@@ -26,13 +27,13 @@ class InMemoryStorageStrategy implements StorageStrategy<any> {
 	del(key: string): Observable<void> {
 		this.cache.del(this.name, key);
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.cache.clear(this.name);
-		this.keyChanges.next(null);
-		return of(null);
+		this.keyChanges.next(KEY_CLEARED);
+		return of(void 0);
 	}
 
 }
