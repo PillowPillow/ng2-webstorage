@@ -1,6 +1,7 @@
-import {signal, WritableSignal} from '@angular/core';
+import {signal, untracked, WritableSignal} from '@angular/core';
 import {StrategyIndex} from '../services/strategyIndex';
 import {StorageStrategies} from '../constants/strategy';
+import {KEY_CLEARED} from '../constants/keyChanges';
 import {StorageKeyManager} from './storageKeyManager';
 import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {noop} from './noop';
@@ -19,8 +20,14 @@ import {noop} from './noop';
  * schedules change detection in zoned and zoneless applications alike, with no
  * change required in consumer code.
  *
- * Keyed by strategy instance (not by name) so that a new bootstrap gets fresh
- * signals and never keeps a subscription to a discarded strategy.
+ * Keyed by strategy instance (not by name) so that a bootstrap registering a
+ * fresh strategy instance gets fresh signals rather than bumping another
+ * instance's. Note this is only about correctness of the fan-out, not about
+ * releasing memory: strategy instances are effectively immortal anyway — the
+ * static StrategyIndex keeps the registered instance, and Local/Session
+ * strategies register a window 'storage' listener that is never removed — so
+ * each instance permanently retains its subscription and its per-key signal
+ * map (one small Map per instance; bounded by the decorated keys ever read).
  */
 const revisions: WeakMap<StorageStrategy<any>, Map<string, WritableSignal<number>>> = new WeakMap();
 
@@ -31,11 +38,15 @@ function revisionOf(strategy: StorageStrategy<any>, storageKey: string): Writabl
 		byKey = created;
 		revisions.set(strategy, created);
 		// One subscription per strategy instance, fanned out to the per-key signals.
-		// A null key means "everything was cleared".
-		strategy.keyChanges.subscribe((changed: string | null) => {
-			if (changed === null) created.forEach((revision: WritableSignal<number>) => revision.update((n: number) => n + 1));
-			else created.get(changed)?.update((n: number) => n + 1);
-		});
+		// A null key (KEY_CLEARED) means "everything was cleared".
+		// The bumps run synchronously inside keyChanges.next(), i.e. inside the
+		// storage WRITE's call stack. `untracked` lifts Angular's reactive-context
+		// write guard so a write issued from a guarded context (a `computed()`, a
+		// template expression) updates the revision instead of throwing NG0600.
+		strategy.keyChanges.subscribe((changed: string | null) => untracked(() => {
+			if (changed === KEY_CLEARED) created.forEach((revision: WritableSignal<number>) => revision.update((n: number) => n + 1));
+			else created.get(changed as string)?.update((n: number) => n + 1);
+		}));
 	}
 
 	let revision: WritableSignal<number> | undefined = byKey.get(storageKey);
