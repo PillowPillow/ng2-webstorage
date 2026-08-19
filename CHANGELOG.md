@@ -13,7 +13,10 @@ Step-by-step upgrade instructions with before/after code live in [MIGRATION.md](
 > and the [tag list](https://github.com/PillowPillow/ng2-webstorage/tags).
 > The 1.x entries are kept at the bottom under [Legacy](#legacy-ng2-webstorage-1x).
 
-## [22.0.0] - unreleased
+## [Unreleased]
+
+## [22.0.0] - TBD
+<!-- set the release date when the v22.0.0 tag is pushed -->
 
 Angular 22 support for `ngx-webstorage` and `ngx-webstorage-cross-storage`.
 Upgrade guide: [MIGRATION.md — v21.x → v22](./MIGRATION.md#v21x--v22).
@@ -39,6 +42,10 @@ Upgrade guide: [MIGRATION.md — v21.x → v22](./MIGRATION.md#v21x--v22).
   `StrategyIndex.set(name, strategy)` `any` → `StorageStrategy<any>`,
   `@LocalStorage` / `@SessionStorage` `propName: any` → `propName: string`.
 * **Node `^22.22.3`** is required to build against Angular 22.
+* **Keep `"useDefineForClassFields": false`** if you set it explicitly. Under ES2022
+  `[[Define]]` semantics, decorated fields become own properties initialised to `undefined`
+  that shadow the accessor, and every binding silently returns `undefined` with no compile
+  error. See [MIGRATION.md](./MIGRATION.md#v21x--v22).
 
 `StorageStrategy.keyChanges` deliberately stays `Subject<string>`, although it emits `null` on
 clear. Widening it breaks every subscriber, not only implementors. Deferred to v23.
@@ -65,8 +72,8 @@ clear. Widening it breaks every subscriber, not only implementors. Deferred to v
 * **Package metadata:** both libraries get a `description`, `ngx-webstorage-cross-storage`
   gets `bugs` and `homepage`, and the stale `angular13` keyword becomes `angular`.
 * **CI** pins `cimg/node:22.22.3`.
-* `npm audit` reports 0 vulnerabilities, down from 74 on v21 (3 critical, 47 high). The unused
-  `protractor` devDependency and the dead `overrides` block are removed.
+* **Dev toolchain:** the unused `protractor` devDependency and the dead `overrides` block are
+  removed. These are build-time dependencies and do not affect consumers.
 
 ### Fixed
 
@@ -80,20 +87,24 @@ clear. Widening it breaks every subscriber, not only implementors. Deferred to v
   made the revision update throw. The bump now runs inside `untracked()`.
 * **`StorageEvent.key` is `null` on clear.** The handlers declared it `string` and then tested
   it against `null`.
-* The static `StrategyIndex` registry is reset between specs; the suite was order-dependent and
-  intermittently red (4 failures in 30 runs, now 0).
 
 ## [21.0.1] - 2025-11-24
 
 ### Changed
 
-* **ngx-webstorage:** republished with no source change (version bump only).
+* **ngx-webstorage:** republished with no source change (version bump only). No git tag was
+  pushed for this release.
 
 ## [21.0.0] - 2025-11-24
 
 ### Changed
 
 * **ngx-webstorage / ngx-webstorage-cross-storage:** peer dependencies raised to `@angular/common@^21.0.0` and `@angular/core@^21.0.0`.
+
+[Unreleased]: https://github.com/PillowPillow/ng2-webstorage/compare/v22.0.0...HEAD
+[22.0.0]: https://github.com/PillowPillow/ng2-webstorage/compare/v21.0.0...v22.0.0
+[21.0.1]: https://github.com/PillowPillow/ng2-webstorage/commit/746f6e1
+[21.0.0]: https://github.com/PillowPillow/ng2-webstorage/compare/v20.0.0...v21.0.0
 
 ---
 
