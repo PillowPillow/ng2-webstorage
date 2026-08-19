@@ -41,10 +41,13 @@ Upgrade guide: [MIGRATION.md — v21.x → v22](./MIGRATION.md#v21x--v22).
   `StrategyIndex.set(name, strategy)` `any` → `StorageStrategy<any>`,
   `@LocalStorage` / `@SessionStorage` `propName: any` → `propName: string`.
 * **Node `^22.22.3`** is required to build against Angular 22.
-* **Keep `"useDefineForClassFields": false`** if you set it explicitly. Under ES2022
-  `[[Define]]` semantics, decorated fields become own properties initialised to `undefined`
-  that shadow the accessor, and every binding silently returns `undefined` with no compile
-  error. See [MIGRATION.md](./MIGRATION.md#v21x--v22).
+* **Set `"useDefineForClassFields": false`.** Every project needs it, not only the ones that
+  already set the flag: the Angular CLI workspace template ships `target: ES2022` without the
+  flag, so it defaults to `true`. Under `[[Define]]` semantics a decorated field is emitted as
+  an own property initialised to `undefined` that shadows the prototype accessor, and every
+  binding silently returns `undefined` with no compile error. See
+  [MIGRATION.md](./MIGRATION.md#v21x--v22) and
+  [#191](https://github.com/PillowPillow/ng2-webstorage/issues/191).
 
 `StorageStrategy.keyChanges` deliberately stays `Subject<string>`, although it emits `null` on
 clear. Widening it breaks every subscriber, not only implementors. Deferred to v23.

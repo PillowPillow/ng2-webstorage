@@ -94,6 +94,11 @@ Release notes: [CHANGELOG.md](./CHANGELOG.md) — Upgrade guides: [MIGRATION.md]
 	}
 	```
 
+	> **Required tsconfig option:** set `"useDefineForClassFields": false`. The Angular CLI
+	> workspace template ships `target: ES2022` without that flag, so it defaults to `true`,
+	> and every decorated binding then silently reads `undefined` with no compile error.
+	> See [#191](https://github.com/PillowPillow/ng2-webstorage/issues/191).
+
 ### <a name="provider_fn">Provider Function</a>
 
 Since the new standalone API and angular v15+, provider functions are now the way to go to configure your application ([learn more](https://angular.dev/reference/migrations/standalone)).
