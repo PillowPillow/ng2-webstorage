@@ -81,7 +81,8 @@ code that **implements or subclasses** the library's primitives. The
 
 > **Set `"useDefineForClassFields": false`** in your tsconfig. Every project needs it, not only
 > the ones that already set the flag: the Angular CLI workspace template ships `target: ES2022`
-> without the flag, so it defaults to `true`.
+> without the flag, so it defaults to `true`. `@angular/build` does fall back to `false`, but
+> only when `target` is unset or below `ES2022` — which the generated template never is.
 >
 > Under `[[Define]]` semantics a decorated field is emitted as an own property initialised to
 > `undefined` that shadows the prototype accessor the decorator installs — including when the
