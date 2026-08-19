@@ -40,6 +40,40 @@ It provides also two decorators to synchronize the component attributes and the 
 		withSessionStorage()
 	)
 ```
+### Migrate from v21.x to the v22
+
+1. Update your project to Angular 22+
+
+2. If your project uses TypeScript's `strict` mode, add a definite assignment
+   assertion to every decorated property:
+
+	```typescript
+	// before
+	@LocalStorage() value: string;
+	// after
+	@LocalStorage() value!: string;
+	```
+	The decorators install a prototype accessor rather than a class field, so the
+	property genuinely has no initializer and TypeScript reports TS2564. This is
+	not new behaviour — TypeScript 6.0 turns `strict` on by default, so more
+	projects now see it.
+
+3. If you implement `StorageStrategy` yourself, widen `keyChanges` to
+   `Subject<string | null>`. It has always emitted `null` to mean "everything
+   was cleared"; the type now says so.
+
+4. Nothing to do for change detection. Angular 22 makes every component OnPush
+   by default, which would otherwise have stopped decorated bindings from
+   repainting when storage changes outside the component — most visibly on the
+   cross-tab `storage` event, and always under zoneless. The decorators are now
+   signal-backed so this keeps working, in zoned and zoneless applications
+   alike, with no change on your side.
+
+> Keep `"useDefineForClassFields": false` in your tsconfig if you set it
+> explicitly. With ES2022 `[[Define]]` semantics, decorated fields become own
+> properties initialised to `undefined` that shadow the accessor, and every
+> binding silently returns `undefined` with no compile error.
+
 ------------
 
 ### <a name="gstart">Getting Started</a>

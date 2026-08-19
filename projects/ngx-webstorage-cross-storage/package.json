@@ -15,5 +15,18 @@
 	"license": "MIT",
 	"dependencies": {
 		"tslib": "^2.0.0"
-	}
+	},
+	"description": "cross-storage strategy for ngx-webstorage",
+	"keywords": [
+		"typescript",
+		"angular",
+		"ng",
+		"localstorage",
+		"sessionStorage",
+		"cross-storage"
+	],
+	"bugs": {
+		"url": "https://github.com/PillowPillow/ng2-webstorage/issues"
+	},
+	"homepage": "https://github.com/PillowPillow/ng2-webstorage#readme"
 }
