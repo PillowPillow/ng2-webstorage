@@ -3,10 +3,10 @@
 	"compilerOptions": {
 		"paths": {
 			"ngx-webstorage": [
-				"./projects/ngx-webstorage/src/public-api.ts"
+				"./projects/ngx-webstorage/src/public_api.ts"
 			],
 			"ngx-webstorage-cross-storage": [
-				"./projects/ngx-webstorage-cross-storage/src/public-api.ts"
+				"./projects/ngx-webstorage-cross-storage/src/public_api.ts"
 			]
 		}
 	}
