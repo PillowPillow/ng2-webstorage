@@ -13,7 +13,75 @@ Step-by-step upgrade instructions with before/after code live in [MIGRATION.md](
 > and the [tag list](https://github.com/PillowPillow/ng2-webstorage/tags).
 > The 1.x entries are kept at the bottom under [Legacy](#legacy-ng2-webstorage-1x).
 
-## [Unreleased]
+## [22.0.0] - unreleased
+
+Angular 22 support for `ngx-webstorage` and `ngx-webstorage-cross-storage`.
+Upgrade guide: [MIGRATION.md — v21.x → v22](./MIGRATION.md#v21x--v22).
+
+### BREAKING CHANGES
+
+* **`strict` mode:** `@LocalStorage() value: string;` now reports `TS2564`. Add a definite
+  assignment assertion: `@LocalStorage() value!: string;`. The decorators install a prototype
+  accessor, so the property has no initializer. TypeScript 6.0 turns `strict` on by default.
+* **`StrategyIndex.get()`** throws `invalid_strategy` when a strategy is registered but
+  unavailable and no in-memory fallback is registered. It previously returned `undefined` and
+  failed later with `cannot read properties of undefined`.
+* **Config values set to `undefined` are ignored** instead of applied. On v21,
+  `withNgxWebstorageConfig({prefix: undefined})` persisted every key as `undefined|<key>`;
+  the same call now keeps the default prefix. Data stored under `undefined|`-prefixed keys
+  needs a manual migration.
+* **`del()` / `clear()` observables emit `undefined`** instead of `null`, matching their
+  declared `Observable<void>`. The `cross-storage` strategy still resolves to `null`.
+* **Type narrowings on the public surface**, from enabling `strict`. They affect only code
+  that implements or subclasses the library's primitives:
+  `StorageService.clear(key?)` `any` → `void`,
+  `BaseSyncStorageStrategy._isAvailable` `boolean` → `boolean | undefined`,
+  `StrategyIndex.set(name, strategy)` `any` → `StorageStrategy<any>`,
+  `@LocalStorage` / `@SessionStorage` `propName: any` → `propName: string`.
+* **Node `^22.22.3`** is required to build against Angular 22.
+
+`StorageStrategy.keyChanges` deliberately stays `Subject<string>`, although it emits `null` on
+clear. Widening it breaks every subscriber, not only implementors. Deferred to v23.
+
+### Changed
+
+* **Peer dependencies:** both packages move to `@angular/common` and `@angular/core`
+  `>=21.0.0 <23.0.0`, and `ngx-webstorage-cross-storage` to `ngx-webstorage >=21.0.0 <23.0.0`.
+  The v22 build therefore serves Angular 21 and Angular 22 applications. This holds while
+  neither library ships a `@Component`, `@Directive` or `@Pipe`: those declarations carry a
+  `minVersion` at the emitting major's floor, which a v21 linker rejects. Treat "no renderable
+  declarations" as a maintained invariant.
+* **Angular 22.1.x** and `@angular/build` replace `@angular-devkit/build-angular`, deprecated
+  at 22.x. All nine builder strings move over; the option blocks are unchanged.
+* **TypeScript ~6.0** with `strict: true`. `baseUrl` is removed and every `paths` entry is
+  `./`-relative, because `baseUrl` is a hard `TS5101` error under TypeScript 6.
+* **ESLint flat config** (`eslint.config.js`) with eslint 10, typescript-eslint 8 and
+  angular-eslint 22. `.eslintrc.json` is dropped.
+* **Karma toolchain:** jasmine-core 6.3, karma-jasmine 5.1, `@angular/build:karma`. The karma
+  configs no longer reach into the webpack builder. JUnit reporting is unconditional.
+* **Library build targets** set `defaultConfiguration: production`, so a local `ng build <lib>`
+  emits partial mode and matches the published artifact. Without it, only CI's explicit
+  `--configuration=production` produced publishable output.
+* **Package metadata:** both libraries get a `description`, `ngx-webstorage-cross-storage`
+  gets `bugs` and `homepage`, and the stale `angular13` keyword becomes `angular`.
+* **CI** pins `cimg/node:22.22.3`.
+* `npm audit` reports 0 vulnerabilities, down from 74 on v21 (3 critical, 47 high). The unused
+  `protractor` devDependency and the dead `overrides` block are removed.
+
+### Fixed
+
+* **Decorated bindings stay reactive under Angular 22.** Angular 22 makes every component
+  `OnPush` by default, which left `@LocalStorage` / `@SessionStorage` bindings stale when
+  storage changed outside the component — most visibly on the cross-tab `storage` event, and
+  always under zoneless. The decorators are now signal-backed: a revision signal per strategy
+  instance and key, read inside the getter and bumped from `keyChanges`. No consumer change.
+* **`NG0600` on writes from a reactive context.** `keyChanges.next()` runs synchronously in the
+  storage write's call stack, so a write issued from a `computed()` or a template expression
+  made the revision update throw. The bump now runs inside `untracked()`.
+* **`StorageEvent.key` is `null` on clear.** The handlers declared it `string` and then tested
+  it against `null`.
+* The static `StrategyIndex` registry is reset between specs; the suite was order-dependent and
+  intermittently red (4 failures in 30 runs, now 0).
 
 ## [21.0.1] - 2025-11-24
 
