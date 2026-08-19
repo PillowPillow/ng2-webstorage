@@ -23,7 +23,11 @@ echo "npm version : $npm_version"
 
 if [ "$pkg_version" != "$npm_version" ];
 then
-	npm publish $wdir
+	if ! npm publish $wdir;
+	then
+		echo "ERROR: npm publish failed for $pkg_name@$pkg_version"
+		exit 1
+	fi
 	echo "$pkg_name@$pkg_version [updated]"
 else
 	echo "$pkg_name@$pkg_version [up_to_date]"
