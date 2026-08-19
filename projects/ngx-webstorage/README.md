@@ -77,6 +77,20 @@ It provides also two decorators to synchronize the component attributes and the 
    "cannot read properties of undefined". If you relied on the silent
    `undefined`, handle the exception.
 
+6. A configuration property explicitly set to `undefined` is now ignored
+   instead of applied. On v21, `withNgxWebstorageConfig({prefix: undefined})`
+   set the prefix to `undefined` and every key was persisted literally as
+   `undefined|<key>`; the same call now keeps the default `ngx-webstorage`
+   prefix. If your v21 app stored data under `undefined|`-prefixed keys
+   (typically a prefix read from an optional source), migrate those entries or
+   pass the literal prefix `'undefined'` to keep reading them.
+
+7. The observables returned by a strategy's `del()` and `clear()` now emit
+   `undefined` instead of `null` (their declared type was always
+   `Observable<void>`). A subscriber comparing the emitted value to `null` —
+   or a test asserting `toBeNull()` on it — must be updated. The
+   `cross-storage` strategy still resolves to `null`.
+
 #### Breaking type changes in v22
 
 Enabling `strict` added types to a public surface that previously had none. All
