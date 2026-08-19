@@ -118,7 +118,8 @@
             "production": {
               "tsConfig": "projects/ngx-webstorage/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular/build:karma",
@@ -155,7 +156,8 @@
             "production": {
               "tsConfig": "projects/ngx-webstorage-cross-storage/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular/build:karma",
