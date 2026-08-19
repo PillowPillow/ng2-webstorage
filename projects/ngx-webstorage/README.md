@@ -58,9 +58,11 @@ It provides also two decorators to synchronize the component attributes and the 
 	not new behaviour — TypeScript 6.0 turns `strict` on by default, so more
 	projects now see it.
 
-3. If you implement `StorageStrategy` yourself, widen `keyChanges` to
-   `Subject<string | null>`. It has always emitted `null` to mean "everything
-   was cleared"; the type now says so.
+3. Nothing to do if you implement `StorageStrategy` yourself. `keyChanges`
+   stays `Subject<string>`. Be aware it emits `null` at runtime to mean
+   "everything was cleared" — the declared type does not say so, because
+   widening it would be a source break for every subscriber, and this release
+   supports Angular 21 consumers.
 
 4. Nothing to do for change detection. Angular 22 makes every component OnPush
    by default, which would otherwise have stopped decorated bindings from
@@ -68,6 +70,12 @@ It provides also two decorators to synchronize the component attributes and the 
    cross-tab `storage` event, and always under zoneless. The decorators are now
    signal-backed so this keeps working, in zoned and zoneless applications
    alike, with no change on your side.
+
+5. `StrategyIndex.get()` now throws `invalid_strategy` when a strategy is
+   registered but unavailable and no in-memory fallback is registered. It
+   previously returned `undefined` and failed later with a confusing
+   "cannot read properties of undefined". If you relied on the silent
+   `undefined`, handle the exception.
 
 > Keep `"useDefineForClassFields": false` in your tsconfig if you set it
 > explicitly. With ES2022 `[[Define]]` semantics, decorated fields become own

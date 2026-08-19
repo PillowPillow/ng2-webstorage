@@ -5,7 +5,7 @@ import {CompatHelper} from '../helpers/compat';
 import {WebStorage} from '../core/interfaces/webStorage';
 
 abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
-	readonly keyChanges: Subject<string | null> = new Subject();
+	readonly keyChanges: Subject<string> = new Subject();
 	abstract readonly name: string;
 
 	constructor(protected storage: WebStorage, protected cache: StrategyCacheService) {}
@@ -52,7 +52,11 @@ abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 	clear(): Observable<void> {
 		this.storage.clear();
 		this.cache.clear(this.name);
-		this.keyChanges.next(null);
+// `null` means "everything was cleared". The public type stays Subject<string>
+		// rather than Subject<string | null>: widening it is a source break for every
+		// consumer that subscribes, not just for third-party strategy implementors,
+		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
+		this.keyChanges.next(null as unknown as string);
 		return of(void 0);
 	}
 

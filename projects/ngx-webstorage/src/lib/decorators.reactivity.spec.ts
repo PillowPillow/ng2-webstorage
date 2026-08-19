@@ -85,6 +85,27 @@ describe('Decorators : change detection', () => {
 		expect(fixture.nativeElement.textContent).toBe('');
 	});
 
+	it('observe() still emits when everything is cleared', async () => {
+		// clear() signals "everything changed" by emitting null on keyChanges, and
+		// SyncStorage.observe() filters on `changed === null`. That null emission is
+		// why the public Subject<string> type is a slight understatement; pin the
+		// behaviour that depends on it.
+		const storage: LocalStorageService = TestBed.inject(LocalStorageService);
+
+		const seen: any[] = [];
+		// keyChanges is a plain Subject, so a subscriber sees subsequent changes only.
+		const sub = storage.observe('reactivity-probe').subscribe((v: any) => seen.push(v));
+
+		storage.store('reactivity-probe', 'value');
+		expect(seen).toEqual(['value']);
+
+		storage.clear();
+		expect(seen.length).toBe(2);
+		expect(seen[1]).toBeUndefined();
+
+		sub.unsubscribe();
+	});
+
 	it('installs the binding as a prototype accessor, not an own field', () => {
 		// Guards tsconfig.json's `useDefineForClassFields: false`. If that flag is
 		// flipped, ES2022 [[Define]] semantics give every decorated field an own

@@ -25,7 +25,9 @@ import {WebStorage} from '../core/interfaces/webStorage';
 			const key: string | null = event.key;
 			if (key !== null) this.cache.del(this.name, key);
 			else this.cache.clear(this.name);
-			this.keyChanges.next(key);
+			// A remote clear() delivers a null key, meaning "everything was cleared".
+			// See the note in baseSyncStorage on why the public type stays string.
+			this.keyChanges.next(key as unknown as string);
 		}));
 	}
 

@@ -5,7 +5,7 @@ export const StorageStrategyStubName: string = 'stub_strategy';
 
 class StorageStrategyStub implements StorageStrategy<any> {
 
-	readonly keyChanges: Subject<string | null> = new Subject();
+	readonly keyChanges: Subject<string> = new Subject();
 	public store: any = {};
 	public _available: boolean = true;
 	readonly name: string;
@@ -36,7 +36,11 @@ class StorageStrategyStub implements StorageStrategy<any> {
 
 	clear(): Observable<void> {
 		this.store = {};
-		this.keyChanges.next(null);
+// `null` means "everything was cleared". The public type stays Subject<string>
+		// rather than Subject<string | null>: widening it is a source break for every
+		// consumer that subscribes, not just for third-party strategy implementors,
+		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
+		this.keyChanges.next(null as unknown as string);
 		return of(void 0);
 	}
 

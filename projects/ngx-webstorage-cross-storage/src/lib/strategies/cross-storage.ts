@@ -6,7 +6,7 @@ import {CROSS_STORAGE, CrossStorageClientFacade} from '../utils/cross-storage-fa
 class CrossStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = 'cross-storage';
 
-	readonly keyChanges: Subject<string | null> = new Subject();
+	readonly keyChanges: Subject<string> = new Subject();
 	public isAvailable: boolean = true;
 	readonly name: string = CrossStorageStrategy.strategyName;
 
@@ -57,7 +57,11 @@ class CrossStorageStrategy implements StorageStrategy<any> {
 		const promise = this.facade.onConnect()
 			.then(() => {
 				this.cache.clear(this.name);
-				this.keyChanges.next(null);
+		// `null` means "everything was cleared". The public type stays Subject<string>
+		// rather than Subject<string | null>: widening it is a source break for every
+		// consumer that subscribes, not just for third-party strategy implementors,
+		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
+		this.keyChanges.next(null as unknown as string);
 				return this.facade.clear();
 			}, (err) => console.warn(err))
 			.then(() => null);
