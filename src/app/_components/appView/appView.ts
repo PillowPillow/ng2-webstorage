@@ -9,9 +9,9 @@ import {LocalStorage, SessionStorage} from '../../lib';
 })
 export class AppViewComponent {
 	@SessionStorage('variable', 'default value')
-	public sessionBind;
+	public sessionBind!: any;
 	@LocalStorage('variable')
-	public localBind;
+	public localBind!: any;
 	@LocalStorage('object')
-	public objectLocalBind;
+	public objectLocalBind!: any;
 }

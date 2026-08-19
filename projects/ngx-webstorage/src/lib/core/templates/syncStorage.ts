@@ -31,7 +31,7 @@ class SyncStorage implements StorageService {
 	observe(key: string): Observable<any> {
 		key = StorageKeyManager.normalize(key);
 		return this.strategy.keyChanges.pipe(
-			filter((changed: string) => changed === null || changed === key),
+			filter((changed: string | null) => changed === null || changed === key),
 			switchMap(() => this.strategy.get(key)),
 			distinctUntilChanged(),
 			shareReplay({refCount: true, bufferSize: 1})

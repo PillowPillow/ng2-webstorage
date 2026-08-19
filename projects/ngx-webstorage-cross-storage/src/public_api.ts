@@ -1,3 +1,4 @@
+/// <reference path="./cross-storage.d.ts" />
 export * from './lib/provider';
 
 export {CrossStorageServiceProvider, CrossStorageService} from './lib/services/cross-storage';

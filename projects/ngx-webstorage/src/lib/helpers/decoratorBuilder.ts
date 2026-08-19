@@ -25,25 +25,27 @@ import {noop} from './noop';
 const revisions: WeakMap<StorageStrategy<any>, Map<string, WritableSignal<number>>> = new WeakMap();
 
 function revisionOf(strategy: StorageStrategy<any>, storageKey: string): WritableSignal<number> {
-	let byKey: Map<string, WritableSignal<number>> = revisions.get(strategy);
+	let byKey: Map<string, WritableSignal<number>> | undefined = revisions.get(strategy);
 	if (byKey === undefined) {
-		byKey = new Map();
-		revisions.set(strategy, byKey);
+		const created: Map<string, WritableSignal<number>> = new Map();
+		byKey = created;
+		revisions.set(strategy, created);
 		// One subscription per strategy instance, fanned out to the per-key signals.
-		strategy.keyChanges.subscribe((changed: string) => {
-			if (changed === null) byKey.forEach((revision: WritableSignal<number>) => revision.update((n: number) => n + 1));
-			else byKey.get(changed)?.update((n: number) => n + 1);
+		// A null key means "everything was cleared".
+		strategy.keyChanges.subscribe((changed: string | null) => {
+			if (changed === null) created.forEach((revision: WritableSignal<number>) => revision.update((n: number) => n + 1));
+			else created.get(changed)?.update((n: number) => n + 1);
 		});
 	}
 
-	let revision: WritableSignal<number> = byKey.get(storageKey);
+	let revision: WritableSignal<number> | undefined = byKey.get(storageKey);
 	if (revision === undefined) byKey.set(storageKey, revision = signal(0));
 	return revision;
 }
 
 class DecoratorBuilder {
 
-	static buildSyncStrategyDecorator(strategyName: string | StorageStrategies, prototype, propName: string, key?: string, defaultValue: any = null) {
+	static buildSyncStrategyDecorator(strategyName: string | StorageStrategies, prototype: any, propName: string, key?: string, defaultValue: any = null) {
 		const rawKey: string = key || propName;
 		let storageKey: string;
 

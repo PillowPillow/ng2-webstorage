@@ -5,7 +5,7 @@ export const StorageStrategyStubName: string = 'stub_strategy';
 
 class StorageStrategyStub implements StorageStrategy<any> {
 
-	readonly keyChanges: Subject<string> = new Subject();
+	readonly keyChanges: Subject<string | null> = new Subject();
 	public store: any = {};
 	public _available: boolean = true;
 	readonly name: string;
@@ -31,13 +31,13 @@ class StorageStrategyStub implements StorageStrategy<any> {
 	del(key: string): Observable<void> {
 		delete this.store[key];
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.store = {};
 		this.keyChanges.next(null);
-		return of(null);
+		return of(void 0);
 	}
 
 }

@@ -21,11 +21,11 @@ describe('Decorators', () => {
     standalone: false
 })
 		class LocalMockComponent {
-			@LocalStorage() prop: string;
+			@LocalStorage() prop!: string;
 			
-			@LocalStorage('prop_num') prop2: number;
+			@LocalStorage('prop_num') prop2!: number;
 			
-			@LocalStorage('prop_def', 'default') prop3: any;
+			@LocalStorage('prop_def', 'default') prop3!: any;
 		}
 		
 		let testFixture: ComponentFixture<LocalMockComponent>;
@@ -114,11 +114,11 @@ describe('Decorators', () => {
     standalone: false
 })
 		class SessionMockComponent {
-			@SessionStorage() prop: string;
+			@SessionStorage() prop!: string;
 			
-			@SessionStorage('prop_num') prop2: number;
+			@SessionStorage('prop_num') prop2!: number;
 			
-			@SessionStorage('prop_def', 'default') prop3: any;
+			@SessionStorage('prop_def', 'default') prop3!: any;
 		}
 		
 		let testFixture: ComponentFixture<SessionMockComponent>;

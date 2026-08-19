@@ -5,12 +5,12 @@ import {CompatHelper} from '../helpers/compat';
 import {WebStorage} from '../core/interfaces/webStorage';
 
 abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
-	readonly keyChanges: Subject<string> = new Subject();
+	readonly keyChanges: Subject<string | null> = new Subject();
 	abstract readonly name: string;
 
 	constructor(protected storage: WebStorage, protected cache: StrategyCacheService) {}
 
-	protected _isAvailable: boolean;
+	protected _isAvailable: boolean | undefined;
 
 	get isAvailable(): boolean {
 		if (this._isAvailable === undefined) this._isAvailable = CompatHelper.isStorageAvailable(this.storage);
@@ -46,14 +46,14 @@ abstract class BaseSyncStorageStrategy implements StorageStrategy<any> {
 		this.storage.removeItem(key);
 		this.cache.del(this.name, key);
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.storage.clear();
 		this.cache.clear(this.name);
 		this.keyChanges.next(null);
-		return of(null);
+		return of(void 0);
 	}
 
 }

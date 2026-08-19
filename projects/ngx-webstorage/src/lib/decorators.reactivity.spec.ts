@@ -15,7 +15,7 @@ describe('Decorators : change detection', () => {
 
 	@Component({selector: 'lib-reactive-host', template: '{{ bound }}'})
 	class ReactiveHostComponent {
-		@LocalStorage('reactivity-probe') bound;
+		@LocalStorage('reactivity-probe') bound!: string;
 	}
 
 	beforeEach(() => {
@@ -90,7 +90,7 @@ describe('Decorators : change detection', () => {
 		// flipped, ES2022 [[Define]] semantics give every decorated field an own
 		// property initialised to undefined, shadowing this accessor, and every
 		// binding silently returns undefined with no compile error.
-		const descriptor = Object.getOwnPropertyDescriptor(ReactiveHostComponent.prototype, 'bound');
+		const descriptor = Object.getOwnPropertyDescriptor(ReactiveHostComponent.prototype, 'bound')!;
 		expect(descriptor).toBeDefined();
 		expect(typeof descriptor.get).toBe('function');
 		expect(Object.prototype.hasOwnProperty.call(new ReactiveHostComponent(), 'bound')).toBe(false);

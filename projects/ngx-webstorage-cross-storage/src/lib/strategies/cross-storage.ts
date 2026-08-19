@@ -6,7 +6,7 @@ import {CROSS_STORAGE, CrossStorageClientFacade} from '../utils/cross-storage-fa
 class CrossStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = 'cross-storage';
 
-	readonly keyChanges: Subject<string> = new Subject();
+	readonly keyChanges: Subject<string | null> = new Subject();
 	public isAvailable: boolean = true;
 	readonly name: string = CrossStorageStrategy.strategyName;
 

@@ -29,9 +29,9 @@ class StorageKeyManager {
 	}
 
 	static consumeConfiguration(config: NgxWebstorageConfiguration) {
-		if ('prefix' in config) this.setPrefix(config.prefix);
-		if ('separator' in config) this.setSeparator(config.separator);
-		if ('caseSensitive' in config) this.setCaseSensitive(config.caseSensitive);
+		if (config.prefix !== undefined) this.setPrefix(config.prefix);
+		if (config.separator !== undefined) this.setSeparator(config.separator);
+		if (config.caseSensitive !== undefined) this.setCaseSensitive(config.caseSensitive);
 	}
 }
 

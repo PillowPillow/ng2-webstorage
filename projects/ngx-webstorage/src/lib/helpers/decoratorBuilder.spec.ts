@@ -20,7 +20,7 @@ describe('Helpers : DecoratorBuilder', () => {
 
 		DecoratorBuilder.buildSyncStrategyDecorator(storageStrategy.name, obj, 'prop');
 
-		const descriptor = Object.getOwnPropertyDescriptor(obj, 'prop');
+		const descriptor = Object.getOwnPropertyDescriptor(obj, 'prop')!;
 		expect(descriptor.hasOwnProperty('get')).toBeTruthy();
 		expect(descriptor.hasOwnProperty('set')).toBeTruthy();
 	});

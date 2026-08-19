@@ -9,15 +9,15 @@ import {LocalStorage, SessionStorage} from '../../../lib';
 })
 export class LazyComponent {
 	@SessionStorage('variable', 'default value')
-	public sessionBind;
+	public sessionBind!: any;
 	@LocalStorage('variable')
-	public localBind;
+	public localBind!: any;
 
-	public setLocalBind(event) {
+	public setLocalBind(event: Event) {
 		const target = event.target as HTMLInputElement;
 		this.localBind = target.value
 	}
-	public setSessionBind(event) {
+	public setSessionBind(event: Event) {
 		const target = event.target as HTMLInputElement;
 		this.sessionBind = target.value
 	}

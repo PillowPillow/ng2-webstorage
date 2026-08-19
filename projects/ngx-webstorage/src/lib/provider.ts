@@ -55,7 +55,7 @@ export function provideNgxWebstorage(...features: NgxWebstorageFeature<NgxWebsto
 }
 
 function parseFeatures(features: NgxWebstorageFeature<NgxWebstorageFeatureKind>[]) {
-	let configProvider: Provider;
+	let configProvider: Provider | undefined;
 	const featureProviders: Provider[] = [];
 
 	const parsedFeatures = new Set<NgxWebstorageFeatureKind>();

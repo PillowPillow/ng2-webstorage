@@ -7,7 +7,7 @@ import {Inject, Injectable} from '@angular/core';
 @Injectable()
 class InMemoryStorageStrategy implements StorageStrategy<any> {
 	static readonly strategyName: string = StorageStrategies.InMemory;
-	readonly keyChanges: Subject<string> = new Subject();
+	readonly keyChanges: Subject<string | null> = new Subject();
 	isAvailable: boolean = true;
 	readonly name: string = InMemoryStorageStrategy.strategyName;
 
@@ -26,13 +26,13 @@ class InMemoryStorageStrategy implements StorageStrategy<any> {
 	del(key: string): Observable<void> {
 		this.cache.del(this.name, key);
 		this.keyChanges.next(key);
-		return of(null);
+		return of(void 0);
 	}
 
 	clear(): Observable<void> {
 		this.cache.clear(this.name);
 		this.keyChanges.next(null);
-		return of(null);
+		return of(void 0);
 	}
 
 }

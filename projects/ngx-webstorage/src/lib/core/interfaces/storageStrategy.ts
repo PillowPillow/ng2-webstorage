@@ -2,7 +2,7 @@ import {Observable, Subject} from 'rxjs';
 
 interface StorageStrategy<T> {
 
-	readonly keyChanges: Subject<string>;
+	readonly keyChanges: Subject<string | null>;
 	readonly isAvailable: boolean;
 	readonly name: string;
 
