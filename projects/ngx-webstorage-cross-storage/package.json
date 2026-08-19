@@ -1,10 +1,10 @@
 {
 	"name": "ngx-webstorage-cross-storage",
-	"version": "21.0.0",
+	"version": "22.0.0",
 	"peerDependencies": {
-		"@angular/common": "^21.0.0",
-		"@angular/core": "^21.0.0",
-		"ngx-webstorage": "^21.0.0",
+		"@angular/common": ">=21.0.0 <23.0.0",
+		"@angular/core": ">=21.0.0 <23.0.0",
+		"ngx-webstorage": ">=21.0.0 <23.0.0",
 		"cross-storage": "^1.0.0"
 	},
 	"repository": {
@@ -15,5 +15,18 @@
 	"license": "MIT",
 	"dependencies": {
 		"tslib": "^2.0.0"
-	}
+	},
+	"description": "cross-storage strategy for ngx-webstorage",
+	"keywords": [
+		"typescript",
+		"angular",
+		"ng",
+		"localstorage",
+		"sessionStorage",
+		"cross-storage"
+	],
+	"bugs": {
+		"url": "https://github.com/PillowPillow/ng2-webstorage/issues"
+	},
+	"homepage": "https://github.com/PillowPillow/ng2-webstorage#readme"
 }

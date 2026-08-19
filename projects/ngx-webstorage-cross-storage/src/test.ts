@@ -12,3 +12,9 @@ getTestBed().initTestEnvironment(
     teardown: { destroyAfterEach: false }
 }
 );
+
+// See the equivalent note in projects/ngx-webstorage/src/test.ts: the strategy
+// registry is static, so it must be reset between specs.
+import {StrategyIndex} from 'ngx-webstorage';
+
+beforeEach(() => StrategyIndex.clear());

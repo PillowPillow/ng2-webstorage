@@ -57,7 +57,9 @@ class CrossStorageStrategy implements StorageStrategy<any> {
 		const promise = this.facade.onConnect()
 			.then(() => {
 				this.cache.clear(this.name);
-				this.keyChanges.next(null);
+				// `null` means "everything was cleared" — see KEY_CLEARED in ngx-webstorage
+				// (lib/constants/keyChanges.ts) for why the public type stays Subject<string>.
+				this.keyChanges.next(null as unknown as string);
 				return this.facade.clear();
 			}, (err) => console.warn(err))
 			.then(() => null);

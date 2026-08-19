@@ -1,11 +1,11 @@
 import {Observable} from 'rxjs';
 
 interface StorageService {
-	retrieve(key: string);
+	retrieve(key: string): any;
 
-	store(key: string, value: any);
+	store(key: string, value: any): any;
 
-	clear(key?: string);
+	clear(key?: string): void;
 
 	getStrategyName(): string;
 

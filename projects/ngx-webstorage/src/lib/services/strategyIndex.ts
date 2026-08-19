@@ -17,7 +17,7 @@ export class StrategyIndex {
 		this.strategies = strategies.reverse()
 			.map((strategy: StorageStrategy<any>, index, arr) => strategy.name)
 			.map((name: string, index, arr) => arr.indexOf(name) === index ? index : null)
-			.filter((index: number) => index !== null)
+			.filter((index: number | null): index is number => index !== null)
 			.map((index: number) => strategies[index]);
 	}
 
@@ -25,12 +25,14 @@ export class StrategyIndex {
 		if (!this.isStrategyRegistered(name)) throw Error(InvalidStrategyError);
 		let strategy: StorageStrategy<any> = this.index[name];
 		if (!strategy.isAvailable) {
-			strategy = this.index[StorageStrategies.InMemory];
+			const fallback: StorageStrategy<any> | undefined = this.index[StorageStrategies.InMemory];
+			if (fallback === undefined) throw Error(InvalidStrategyError);
+			strategy = fallback;
 		}
 		return strategy;
 	}
 
-	static set(name: string, strategy): void {
+	static set(name: string, strategy: StorageStrategy<any>): void {
 		this.index[name] = strategy;
 	}
 
@@ -57,7 +59,7 @@ export class StrategyIndex {
 
 	public indexStrategy(name: string, overrideIfExists: boolean = false): StorageStrategy<any> {
 		if (StrategyIndex.isStrategyRegistered(name) && !overrideIfExists) return StrategyIndex.get(name);
-		const strategy: StorageStrategy<any> = this.strategies.find((strategy: StorageStrategy<any>) => strategy.name === name);
+		const strategy: StorageStrategy<any> | undefined = this.strategies.find((candidate: StorageStrategy<any>) => candidate.name === name);
 		if (!strategy) throw new Error(InvalidStrategyError);
 		this.register(name, strategy, overrideIfExists);
 		return strategy;
