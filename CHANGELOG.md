@@ -15,8 +15,7 @@ Step-by-step upgrade instructions with before/after code live in [MIGRATION.md](
 
 ## [Unreleased]
 
-## [22.0.0] - TBD
-<!-- set the release date when the v22.0.0 tag is pushed -->
+## [22.0.0] - 2026-08-19
 
 Angular 22 support for `ngx-webstorage` and `ngx-webstorage-cross-storage`.
 Upgrade guide: [MIGRATION.md — v21.x → v22](./MIGRATION.md#v21x--v22).
