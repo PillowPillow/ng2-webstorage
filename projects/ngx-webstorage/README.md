@@ -77,6 +77,25 @@ It provides also two decorators to synchronize the component attributes and the 
    "cannot read properties of undefined". If you relied on the silent
    `undefined`, handle the exception.
 
+#### Breaking type changes in v22
+
+Enabling `strict` added types to a public surface that previously had none. All
+of these affect only code that **implements or subclasses** the library's
+primitives — the `LocalStorageService` / `SessionStorageService` / decorator
+paths are unchanged.
+
+| Symbol | v21 | v22 |
+|---|---|---|
+| `StorageService.clear(key?)` | `any` | `void` |
+| `BaseSyncStorageStrategy._isAvailable` (protected) | `boolean` | `boolean \| undefined` |
+| `StrategyIndex.set(name, strategy)` | `strategy: any` | `strategy: StorageStrategy<any>` |
+| `@LocalStorage` / `@SessionStorage` | `propName: any` | `propName: string` |
+
+`StorageStrategy.keyChanges` deliberately stays `Subject<string>`. Widening it to
+`Subject<string | null>` — which would match the `null` it emits on clear — was
+tried and reverted, because it breaks every *subscriber*, not just implementors,
+and this release supports Angular 21 consumers. Deferred to v23.
+
 > Keep `"useDefineForClassFields": false` in your tsconfig if you set it
 > explicitly. With ES2022 `[[Define]]` semantics, decorated fields become own
 > properties initialised to `undefined` that shadow the accessor, and every
