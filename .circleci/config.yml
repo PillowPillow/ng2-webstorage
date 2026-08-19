@@ -93,11 +93,22 @@ jobs:
     - attach_workspace:
         at: ~/app
     - run:
-        name: Authenticate with registry
-        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/app/.npmrc
+        name: Upgrade npm for trusted publishing
+        command: |
+          sudo npm i -g npm@^11.5.1
+          npm_v=$(npm --version)
+          echo "npm $npm_v"
+          case "$npm_v" in
+            1[1-9].*|[2-9][0-9].*) ;;
+            *) echo "ERROR: npm $npm_v < 11.5.1 required by trusted publishing"; exit 1 ;;
+          esac
     - run:
         name: Publish package
-        command: sh bin/npm_publish.sh << parameters.project >>
+        command: |
+          NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud":"npm:registry.npmjs.org"}')
+          [ -n "$NPM_ID_TOKEN" ] || { echo "ERROR: empty OIDC token"; exit 1; }
+          export NPM_ID_TOKEN
+          sh bin/npm_publish.sh << parameters.project >>
 
 workflows:
 
