@@ -79,10 +79,16 @@ code that **implements or subclasses** the library's primitives. The
 | `StrategyIndex.set(name, strategy)` | `strategy: any` | `strategy: StorageStrategy<any>` |
 | `@LocalStorage` / `@SessionStorage` | `propName: any` | `propName: string` |
 
-> **Keep `"useDefineForClassFields": false`** in your tsconfig if you set it explicitly.
-> Under ES2022 `[[Define]]` semantics, decorated fields become own properties initialised to
-> `undefined` that shadow the accessor, and every binding silently returns `undefined` with
-> no compile error.
+> **Set `"useDefineForClassFields": false`** in your tsconfig. Every project needs it, not only
+> the ones that already set the flag: the Angular CLI workspace template ships `target: ES2022`
+> without the flag, so it defaults to `true`. `@angular/build` does fall back to `false`, but
+> only when `target` is unset or below `ES2022` — which the generated template never is.
+>
+> Under `[[Define]]` semantics a decorated field is emitted as an own property initialised to
+> `undefined` that shadows the prototype accessor the decorator installs — including when the
+> field is written `@LocalStorage() value!: string;` with no initializer. Every binding then
+> silently returns `undefined`, with no compile error. Tracked in
+> [#191](https://github.com/PillowPillow/ng2-webstorage/issues/191).
 
 ---
 
