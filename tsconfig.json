@@ -1,8 +1,6 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-    "baseUrl": "./",
-    "ignoreDeprecations": "6.0",
     "strict": false,
     "outDir": "./dist/out-tsc",
     "esModuleInterop": true,
@@ -18,14 +16,18 @@
     ],
     "paths": {
       "ngx-webstorage": [
-        "dist/ngx-webstorage/ngx-webstorage",
-        "dist/ngx-webstorage"
+        "./dist/ngx-webstorage/ngx-webstorage",
+        "./dist/ngx-webstorage"
       ],
       "ngx-webstorage-cross-storage": [
-        "dist/ngx-webstorage-cross-storage/ngx-webstorage-cross-storage",
-        "dist/ngx-webstorage-cross-storage"
+        "./dist/ngx-webstorage-cross-storage/ngx-webstorage-cross-storage",
+        "./dist/ngx-webstorage-cross-storage"
       ]
     },
+    // MUST stay false. With ES2022 [[Define]] semantics the decorated class fields
+    // become own instance properties initialised to undefined, which shadow the
+    // prototype accessors installed by DecoratorBuilder (helpers/decoratorBuilder.ts).
+    // Flipping this silently breaks every @LocalStorage/@SessionStorage binding.
     "useDefineForClassFields": false
   },
 	"angularCompilerOptions": {
