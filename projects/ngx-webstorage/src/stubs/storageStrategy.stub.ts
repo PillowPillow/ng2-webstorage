@@ -1,5 +1,6 @@
 import {Observable, of, Subject} from 'rxjs';
 import {StorageStrategy} from '../lib/core/interfaces/storageStrategy';
+import {KEY_CLEARED} from '../lib/constants/keyChanges';
 
 export const StorageStrategyStubName: string = 'stub_strategy';
 
@@ -36,11 +37,7 @@ class StorageStrategyStub implements StorageStrategy<any> {
 
 	clear(): Observable<void> {
 		this.store = {};
-// `null` means "everything was cleared". The public type stays Subject<string>
-		// rather than Subject<string | null>: widening it is a source break for every
-		// consumer that subscribes, not just for third-party strategy implementors,
-		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
-		this.keyChanges.next(null as unknown as string);
+		this.keyChanges.next(KEY_CLEARED);
 		return of(void 0);
 	}
 

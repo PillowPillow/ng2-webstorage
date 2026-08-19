@@ -2,6 +2,7 @@ import {StorageStrategy} from '../core/interfaces/storageStrategy';
 import {Observable, of, Subject} from 'rxjs';
 import {StrategyCacheService} from '../core/strategyCache';
 import {StorageStrategies} from '../constants/strategy';
+import {KEY_CLEARED} from '../constants/keyChanges';
 import {Inject, Injectable} from '@angular/core';
 
 @Injectable()
@@ -31,11 +32,7 @@ class InMemoryStorageStrategy implements StorageStrategy<any> {
 
 	clear(): Observable<void> {
 		this.cache.clear(this.name);
-// `null` means "everything was cleared". The public type stays Subject<string>
-		// rather than Subject<string | null>: widening it is a source break for every
-		// consumer that subscribes, not just for third-party strategy implementors,
-		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
-		this.keyChanges.next(null as unknown as string);
+		this.keyChanges.next(KEY_CLEARED);
 		return of(void 0);
 	}
 

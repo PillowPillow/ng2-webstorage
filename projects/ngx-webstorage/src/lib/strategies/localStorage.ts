@@ -3,6 +3,7 @@ import {BaseSyncStorageStrategy} from './baseSyncStorage';
 import {Inject, Injectable, NgZone, PLATFORM_ID} from '@angular/core';
 import {LOCAL_STORAGE} from '../core/nativeStorage';
 import {StorageStrategies} from '../constants/strategy';
+import {KEY_CLEARED} from '../constants/keyChanges';
 import {isPlatformBrowser} from '@angular/common';
 import {WebStorage} from '../core/interfaces/webStorage';
 
@@ -26,8 +27,7 @@ class LocalStorageStrategy extends BaseSyncStorageStrategy {
 			if (key !== null) this.cache.del(this.name, key);
 			else this.cache.clear(this.name);
 			// A remote clear() delivers a null key, meaning "everything was cleared".
-			// See the note in baseSyncStorage on why the public type stays string.
-			this.keyChanges.next(key as unknown as string);
+			this.keyChanges.next(key ?? KEY_CLEARED);
 		}));
 	}
 

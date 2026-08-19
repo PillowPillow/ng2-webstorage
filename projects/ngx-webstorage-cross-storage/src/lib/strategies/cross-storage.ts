@@ -57,11 +57,9 @@ class CrossStorageStrategy implements StorageStrategy<any> {
 		const promise = this.facade.onConnect()
 			.then(() => {
 				this.cache.clear(this.name);
-		// `null` means "everything was cleared". The public type stays Subject<string>
-		// rather than Subject<string | null>: widening it is a source break for every
-		// consumer that subscribes, not just for third-party strategy implementors,
-		// and this release deliberately supports Angular 21 consumers. Revisit in v23.
-		this.keyChanges.next(null as unknown as string);
+				// `null` means "everything was cleared" — see KEY_CLEARED in ngx-webstorage
+				// (lib/constants/keyChanges.ts) for why the public type stays Subject<string>.
+				this.keyChanges.next(null as unknown as string);
 				return this.facade.clear();
 			}, (err) => console.warn(err))
 			.then(() => null);
