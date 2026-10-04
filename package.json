@@ -24,7 +24,7 @@
     "@angular/forms": "^22.1.2",
     "@angular/platform-browser": "^22.1.2",
     "@angular/platform-browser-dynamic": "^22.1.2",
-    "@angular/router": "^22.1.2",
+    "@angular/router": "^22.2.0",
     "core-js": "^3.6.5",
     "cross-storage": "^1.0.0",
     "rxjs": "^7.4.0",
